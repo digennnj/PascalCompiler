@@ -1,0 +1,7 @@
+*.swp
+*.o
+pascal
+*.tab.c
+*.tab.h
+*.asm
+*.yy.c

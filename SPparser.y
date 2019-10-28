@@ -186,6 +186,12 @@ void error( const char msg[] )
 void error(const std::string msg) {
     error(msg.c_str());
 }
+void printSymbolTable() {
+    std::cout << "Symbol Table:" << std::endl;
+    for (auto it = symbolTable.begin(); it!=symbolTable.end(); it++) {
+        std::cout << "\t" << it->first << ": " << it->second.type << std::endl;
+    }
+}
 
 void yyerror(const char s[]) {
   std::cout << "EEK, parse error!  Message: " << s << " on line: " << line_no << std::endl;

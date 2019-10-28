@@ -9,12 +9,14 @@ extern char *convert_to_int(const char[]);
 extern char *convert_to_real(const char[]);
 extern std::map<std::string,Variable> symbolTable;
 extern void error(const char msg[]);
+extern void error(const std::string);
+extern void printSymbolTable();
 
 void assign (char target[], char source[])
 {
      /* Generate code for assignment. */
-     if (symbolTable.find(target)==symbolTable.end()) {error("TARGET SYMBOL NOT DEFINED");}
-     else if (symbolTable.find(source)==symbolTable.end()) {error("SOURCE SYMBOL NOT DEFINED");}
+     if (symbolTable.find(target)==symbolTable.end()) {printSymbolTable(); error("TARGET SYMBOL NOT DEFINED: "+std::string(target));}
+     else if (symbolTable.find(source)==symbolTable.end()) {printSymbolTable(); error("SOURCE SYMBOL NOT DEFINED: "+std::string(source));}
      else {
           if (symbolTable[target].type != symbolTable[source].type) {
                if(symbolTable[target].type == REAL && symbolTable[source].type == INT) {

@@ -18,25 +18,30 @@ char * gen_infix(char operandl[], char op[], char operand2[])
   char tempop[8];
   char * op1 = operandl;
   char * op2 = operand2;
-
-  // If type of both operands is INT
+  
   if(symbolTable[op1].type == INT && symbolTable[op2].type == INT) {
         int result = 0;
         if ( strcmp( op, "Add") == 0) {
             strcpy(tempop,"iadd" );
-            result = stoi(symbolTable[op1].val) + stoi(symbolTable[op2].val);
+            result = atoi(symbolTable[op1].val.c_str()) + atoi(symbolTable[op2].val.c_str());
         }
         else if (strcmp( op, "Sub") == 0) {
             strcpy(tempop,"isub" );
-            result = stoi(symbolTable[op1].val) - stoi(symbolTable[op2].val);
+            result = atoi(symbolTable[op1].val.c_str()) - atoi(symbolTable[op2].val.c_str());
         }
         else if (strcmp( op, "Mul") == 0) {
             strcpy(tempop,"imul" );
-            result = stoi(symbolTable[op1].val) * stoi(symbolTable[op2].val);
+            result = atoi(symbolTable[op1].val.c_str()) * atoi(symbolTable[op2].val.c_str());
         }
         else if (strcmp( op, "Div") == 0) {
+            if(0 == atoi(symbolTable[op2].val.c_str())) {error("DIVIDE BY ZERO");}
             strcpy(tempop,"idiv" );
-            result = stoi(symbolTable[op1].val) / stoi(symbolTable[op2].val);
+            result = atoi(symbolTable[op1].val.c_str()) / atoi(symbolTable[op2].val.c_str());
+        }
+        else if (strcmp( op, "Mod") == 0) {
+            if(0 >= atoi(symbolTable[op2].val.c_str())) {error("SECOND OPERAND MUST BE GREATER THAN ZERO");}
+            strcpy(tempop,"imod" );
+            result = atoi(symbolTable[op1].val.c_str()) % atoi(symbolTable[op2].val.c_str());
         }
 
         char *tempname = temp_int();
@@ -49,19 +54,23 @@ char * gen_infix(char operandl[], char op[], char operand2[])
         double result = 0.0;
         if ( strcmp( op, "Add") == 0) {
             strcpy(tempop,"radd" );
-            result = stof(symbolTable[op1].val) + stof(symbolTable[op2].val);
+            result = atof(symbolTable[op1].val.c_str()) + atof(symbolTable[op2].val.c_str());
         } 
         else if ( strcmp( op, "Sub") == 0 ) {
             strcpy(tempop,"rsub" );
-            result = stof(symbolTable[op1].val) - stof(symbolTable[op2].val);
+            result = atof(symbolTable[op1].val.c_str()) + atof(symbolTable[op2].val.c_str());
         } 
         else if ( strcmp( op, "Mul" ) == 0) {
             strcpy(tempop,"rmul" );
-            result = stof(symbolTable[op1].val) * stof(symbolTable[op2].val);
+            result = atof(symbolTable[op1].val.c_str()) + atof(symbolTable[op2].val.c_str());
         } 
         else if (strcmp( op, "Div") == 0) {
+            if(0 == atoi(symbolTable[op2].val.c_str())) {error("DIVIDE BY ZERO");}
             strcpy(tempop,"rdiv" );
-            result = stof(symbolTable[op1].val) / stof(symbolTable[op2].val);
+            result = atof(symbolTable[op1].val.c_str()) + atof(symbolTable[op2].val.c_str());
+        }
+        else if (strcmp( op, "Mod") == 0) {
+            error("OPERANDS MUST BE OF TYPE INT");
         }
 
         char *tempname = temp_real();
@@ -72,29 +81,61 @@ char * gen_infix(char operandl[], char op[], char operand2[])
   // if data types are not the same, run operation then convert
   // For if we need to convert the first operand
   else if (symbolTable[op1].type == INT && symbolTable[op2].type == REAL) {
-        char* convert = convert_to_real(op1);
-        double res = 0.0;
+        char* convert = convert_to_real(symbolTable[op1].val.c_str());
+        double result = 0.0;
         if ( strcmp( op, "Add") == 0 ) {
             strcpy(tempop, "radd");
+            result = atof(symbolTable[op1].val.c_str()) + atof(symbolTable[op2].val.c_str());
         }
-        else if ( strcmp( op, "Sub") == 0 ){
+        else if ( strcmp( op, "Sub") == 0 ) {
             strcpy(tempop,"rsub" );
+            result = atof(symbolTable[op1].val.c_str()) + atof(symbolTable[op2].val.c_str());
         }
+        else if ( strcmp( op, "Mul") == 0 ) {
+            result = atof(symbolTable[op1].val.c_str()) + atof(symbolTable[op2].val.c_str());
+            strcpy(tempop,"rmul" );
+        }
+        else if ( strcmp( op, "Div") == 0 ) {
+            if(0 == atoi(symbolTable[op2].val.c_str())) {error("DIVIDE BY ZERO");}
+            result = atof(symbolTable[op1].val.c_str()) + atof(symbolTable[op2].val.c_str());
+            strcpy(tempop,"rdiv" );
+        }
+        else if (strcmp( op, "Mod") == 0) {
+            error("OPERANDS MUST BE OF TYPE INT");
+        }
+
         char *tempname = temp_real();
+        symbolTable[tempname].val = result;
         outFile << tempop << " " << operandl << ", " << operand2 << ", " << tempname << std::endl;
         return (tempname);
   }
   // If the types differ and we need to convert the second operand:
   else if (symbolTable[op1].type == REAL && symbolTable[op2].type == INT) {
-       if ( strcmp( op, "Add") == 0) {
-           convert_to_real(op2);
-           strcpy(tempop,"radd" );
-       }
-        else {
-           convert_to_real(op2);
-           strcpy(tempop,"rsub" );
+        char* convert = convert_to_real(symbolTable[op2].val.c_str());
+        double result = 0.0;
+        if ( strcmp( op, "Add") == 0 ) {
+            strcpy(tempop,"radd" );
+            result = atof(symbolTable[op1].val.c_str()) + atof(symbolTable[op2].val.c_str());
         }
+        else if ( strcmp( op, "Sub") == 0 ) {
+            strcpy(tempop,"rsub" );
+            result = atof(symbolTable[op1].val.c_str()) + atof(symbolTable[op2].val.c_str());
+        }
+        else if ( strcmp( op, "Mul") == 0 ) {
+            result = atof(symbolTable[op1].val.c_str()) + atof(symbolTable[op2].val.c_str());
+            strcpy(tempop,"rmul" );
+        }
+        else if ( strcmp( op, "Div") == 0 ) {
+            if(0 == atoi(symbolTable[op2].val.c_str())) {error("DIVIDE BY ZERO");}
+            result = atof(symbolTable[op1].val.c_str()) + atof(symbolTable[op2].val.c_str());
+            strcpy(tempop,"rdiv" );
+        }
+        else if (strcmp( op, "Mod") == 0) {
+            error("OPERANDS MUST BE OF TYPE INT");
+        }
+
         char *tempname = temp_real();
+        symbolTable[tempname].val = result;
         outFile << tempop << " " << operandl << ", " << operand2 << ", " << tempname << std::endl;
         return (tempname);
   }

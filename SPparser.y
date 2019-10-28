@@ -43,8 +43,9 @@ void yyerror(const char []);
 %token PROGRAM VAR START END READ WRITE ASSIGNOP INTLITERAL REALLITERAL
 %token INTTYPE REALTYPE CHARTYPE CHARACTER
 %token LPAREN RPAREN COMMA SQUOTE PERIOD SEMICOLON COLON PLUSOP MINUSOP MULTIPLYOP DIVIDEOP ID
+%token SNGLLNCOMMENT MULTILNCOMMENTOPEN MULTILNCOMMENTCLOSE
 
-%left PLUSOP MINUSOP MULTIPLYOP DIVIDEOP
+%left PLUSOP MINUSOP MULTIPLYOP DIVIDEOP MODOP
 
 %type <sval>ident
 %type <sval>expression
@@ -84,7 +85,7 @@ i_list      :   i_decl
 		;
 i_decl    :   ident { decl_id($1, "INTEGER"); }
 		| 	ident ASSIGNOP CHARACTER { error("Cannot convert character to integer"); }
-		|	ident ASSIGNOP REALLITERAL { decl_id($1, "INTEGER"); } {assign_int($1,convert_to_int($3)); }
+		|	ident ASSIGNOP REALLITERAL { decl_id($1, "INTEGER"); } {assign_int($1,$3); }
         |   ident ASSIGNOP expression { decl_id($1, "INTEGER"); } {assign_int($1,$3); }
         ;
 r_list      :   r_decl
@@ -92,12 +93,16 @@ r_list      :   r_decl
 		;
 r_decl    :   ident { decl_id($1, "REAL"); }
 		| 	ident ASSIGNOP CHARACTER { error("Cannot convert character to real"); }
-		|	ident ASSIGNOP INTLITERAL { decl_id($1, "REAL"); } {assign_real($1,convert_to_real($3)); }
+		|	ident ASSIGNOP INTLITERAL { decl_id($1, "REAL"); } {assign_real($1,$3); }
         |   ident ASSIGNOP expression { decl_id($1, "REAL"); } {assign_real($1,$3); }
         ;
-statement_list  :   statement
+statement_list  :  statement
                  | statement_list statement
 		;
+// comment_statement	:	characters '\n' {line_no++;}
+// characters	:	characters CHARACTER
+// 			|	CHARACTER
+// 		;
 statement  : 	ident ASSIGNOP expression {assign($1,$3);} SEMICOLON {line_no++;}
 		|	ident ASSIGNOP INTLITERAL {assign_int($1,$3);} SEMICOLON {line_no++;}
 		|	ident ASSIGNOP REALLITERAL {assign_real($1,$3);} SEMICOLON {line_no++;}
@@ -116,7 +121,7 @@ expr_list  :	expression   {write_expr($1);}
                 | expr_list COMMA expression {write_expr($3);}
 		;
 expression :	expr   {$$=strdup($1);}
-                ;
+                
 expr       :    term {$$=strdup($1);}
 		| expr add_op term {$$=strdup(gen_infix($1,$2,$3));}
 		| {error("EXPRESSION EXPECTED, BUT FOUND");}
@@ -146,6 +151,8 @@ add_op    :	MINUSOP {$$=strdup("Sub");}
 add_op    :	MULTIPLYOP {$$=strdup("Mul");}
 		;
 add_op    :	DIVIDEOP {$$=strdup("Div");}
+		;
+add_op	  : MODOP {$$=strdup("Mod");}
 		;
 ident     :	ID {$$=strdup(yylval.sval);}
 		| {error("IDENTIFIER EXPECTED, BUT FOUND");}

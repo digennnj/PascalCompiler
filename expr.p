@@ -1,8 +1,15 @@
-prOgraM   
-vAr
-   real a := 3, b := 3.2, c := 2.5;
-   inteGER x := 3, y := 3, z := 2;
-Begin
-   x := y / z;
-   a := b/c;
-END.
+prOgraM 
+  vAr 
+      character a, b, c :=a; 
+      Real x := 0, y:=1 ;
+      inteGER k := 1, j := 2.5, m, z := 0, five :=5;
+Begin 
+   Write( x + y, b );
+   x := k- y * j; 
+   m := y + ( j / k ); 
+   a := c;
+  reAd( a, y, k, j ); 
+  k := k mod j;
+  x := 1 + 1;
+  x := z / five;
+END. 

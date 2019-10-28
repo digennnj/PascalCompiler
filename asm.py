@@ -76,5 +76,9 @@ def exec(stmt):
         raise ValueError("statement not recognized: {}".format(stmt))
 
 with open(argv[1], "r") as f:
-    for line in f:
-        exec(parse(line))
+    for lineNum, line in enumerate(f):
+        try: 
+            exec(parse(line))
+        except Exception:
+            print("error on line {}: {}".format(lineNum, line.rstrip()))
+            raise

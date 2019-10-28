@@ -2,7 +2,7 @@
 pfile="$1"; asmfile="${1%%.p}".asm
 echo "=== PASCAL" &&
 cat "$pfile" &&
-./pascal "$pfile"
+./pascal "$pfile" &&
 echo "=== ASM" &&
 cat "$asmfile" &&
 echo "=== exec" &&

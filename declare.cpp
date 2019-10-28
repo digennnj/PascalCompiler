@@ -13,13 +13,13 @@ void decl_id(char identifier[], std::string type) {
         }
         else {
             if (type == "INTEGER") {
-                symbolTable[identifier] = {INT, ""};
+                symbolTable[identifier] = {INT}; //{INT, ""};
                 outFile << "declare " << identifier << ", integer" << std::endl;
             } else if (type == "REAL") {
-                symbolTable[identifier] = {REAL, ""};
+                symbolTable[identifier] = {REAL}; //{REAL, ""};
                 outFile << "declare " << identifier << ", real" << std::endl;
             } else if (type == "CHARACTER") {
-                symbolTable[identifier] = {CHAR, ""};
+                symbolTable[identifier] = {CHAR}; //{CHAR, ""};
                 outFile << "declare " << identifier << ", char" << std::endl;
             }
         }

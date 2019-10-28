@@ -11,8 +11,29 @@ extern char *temp_real();
 extern char *convert_to_int(const char *val);
 extern char *convert_to_real(const char *val);
 extern void error(const char msg[]);
+extern void error(const std::string);
 extern std::map<std::string,Variable> symbolTable;
 
+/*
+float parseFloat(std::string s) {
+    try {
+        return stof(s);
+    }
+    catch (std::invalid_argument &ex) {
+        error("invalid value for float: "+s);
+        return -12.34f; // sentinel value
+    }
+}
+float parseInt(std::string s) {
+    try {
+        return stoi(s);
+    }
+    catch (std::invalid_argument &ex) {
+        error("invalid value for int: "+s);
+        return -1234; // sentinel value
+    }
+}
+*/
 char * gen_infix(char operandl[], char op[], char operand2[])
 {
   char tempop[8];
@@ -24,23 +45,23 @@ char * gen_infix(char operandl[], char op[], char operand2[])
         int result = 0;
         if ( strcmp( op, "Add") == 0) {
             strcpy(tempop,"iadd" );
-            result = stoi(symbolTable[op1].val) + stoi(symbolTable[op2].val);
+            //result = parseInt(symbolTable[op1].val) + parseInt(symbolTable[op2].val);
         }
         else if (strcmp( op, "Sub") == 0) {
             strcpy(tempop,"isub" );
-            result = stoi(symbolTable[op1].val) - stoi(symbolTable[op2].val);
+            //result = parseInt(symbolTable[op1].val) - parseInt(symbolTable[op2].val);
         }
         else if (strcmp( op, "Mul") == 0) {
             strcpy(tempop,"imul" );
-            result = stoi(symbolTable[op1].val) * stoi(symbolTable[op2].val);
+            //result = parseInt(symbolTable[op1].val) * parseInt(symbolTable[op2].val);
         }
         else if (strcmp( op, "Div") == 0) {
             strcpy(tempop,"idiv" );
-            result = stoi(symbolTable[op1].val) / stoi(symbolTable[op2].val);
+            //result = parseInt(symbolTable[op1].val) / parseInt(symbolTable[op2].val);
         }
 
         char *tempname = temp_int();
-        symbolTable[tempname].val = result;
+        //symbolTable[tempname].val = result;
         outFile << tempop << " " << operandl << ", " << operand2 << ", " << tempname << std::endl;
         return (tempname);
     }
@@ -49,23 +70,23 @@ char * gen_infix(char operandl[], char op[], char operand2[])
         double result = 0.0;
         if ( strcmp( op, "Add") == 0) {
             strcpy(tempop,"radd" );
-            result = stof(symbolTable[op1].val) + stof(symbolTable[op2].val);
+            //result = parseFloat(symbolTable[op1].val) + parseFloat(symbolTable[op2].val);
         } 
         else if ( strcmp( op, "Sub") == 0 ) {
             strcpy(tempop,"rsub" );
-            result = stof(symbolTable[op1].val) - stof(symbolTable[op2].val);
+            //result = parseFloat(symbolTable[op1].val) - parseFloat(symbolTable[op2].val);
         } 
         else if ( strcmp( op, "Mul" ) == 0) {
             strcpy(tempop,"rmul" );
-            result = stof(symbolTable[op1].val) * stof(symbolTable[op2].val);
+            //result = parseFloat(symbolTable[op1].val) * parseFloat(symbolTable[op2].val);
         } 
         else if (strcmp( op, "Div") == 0) {
             strcpy(tempop,"rdiv" );
-            result = stof(symbolTable[op1].val) / stof(symbolTable[op2].val);
+            //result = parseFloat(symbolTable[op1].val) / parseFloat(symbolTable[op2].val);
         }
 
         char *tempname = temp_real();
-        symbolTable[tempname].val = result;
+        //symbolTable[tempname].val = result;
         outFile << tempop << " " << operandl << ", " << operand2 << ", " << tempname << std::endl;
         return (tempname);
   }

@@ -183,6 +183,9 @@ void error( const char msg[] )
 	std::cout << "LINE " << line_no << " : " << msg << std::endl;
 	exit( -1 );
 }
+void error(const std::string msg) {
+    error(msg.c_str());
+}
 
 void yyerror(const char s[]) {
   std::cout << "EEK, parse error!  Message: " << s << " on line: " << line_no << std::endl;

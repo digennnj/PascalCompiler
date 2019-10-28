@@ -20,6 +20,9 @@ plusop		[+]
 minusop  	[-]
 multiplyop  [*]
 divideop    [/]
+sngllncomment           [/][/]
+mutlilncommentopen      [{]
+mutlilncommentclose     [}]
 intliteral      (0|([1-9]{digit}*))
 realliteral      (0|([1-9]{digit}*))[\.]{digit}+
 id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
@@ -35,6 +38,7 @@ id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
 [Ee][Nn][Dd]                                    {return END;}
 [Rr][Ee][Aa][Dd]                                {return READ;}
 [Ww][Rr][Ii][Tt][Ee]                            {return WRITE;}
+[Mm][Oo][Dd]                                    {return MODOP;}
 {comma}                                         {return COMMA;}
 {squote}                                        {return SQUOTE;}
 {period}					                    {return PERIOD;}
@@ -47,6 +51,9 @@ id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
 {minusop}                                       {return MINUSOP;}
 {multiplyop}                                    {return MULTIPLYOP;}
 {divideop}                                      {return DIVIDEOP;}
+{sngllncomment}                                 {return SNGLLNCOMMENT;}
+{mutlilncommentopen}                            {return MULTILNCOMMENTOPEN;}
+{mutlilncommentclose}                           {return MULTILNCOMMENTCLOSE;}
 {character}                                     {yylval.sval = strdup(yytext); return CHARACTER;}
 {intliteral}                                    {yylval.sval = strdup(yytext); return INTLITERAL;}
 {realliteral}                                   {yylval.sval = strdup(yytext); return REALLITERAL;}

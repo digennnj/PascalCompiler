@@ -18,13 +18,13 @@ void assign (char target[], char source[])
      else {
           if (symbolTable[target].type != symbolTable[source].type) {
                if(symbolTable[target].type == REAL && symbolTable[source].type == INT) {
-                    char * temp = convert_to_real(source);
-                    outFile << "store " << temp << ", " << target << std::endl;
-                    symbolTable[target].val = std::atof(source);
+                    char * tempname = convert_to_real(symbolTable[source].val.c_str());
+                    outFile << "store " << tempname << ", " << target << std::endl;
+                    symbolTable[target].val = symbolTable[tempname].val;
                } else if(symbolTable[target].type == INT && symbolTable[source].type == REAL) {
-                    char * temp = convert_to_int(source);
-                    outFile << "store " << temp << ", " << target << std::endl;
-                    symbolTable[target].val = std::atoi(source);
+                    char * tempname = convert_to_int(symbolTable[source].val.c_str());
+                    outFile << "store " << tempname << ", " << target << std::endl;
+                    symbolTable[target].val = symbolTable[source].val;
                } else if(symbolTable[target].type == CHAR) {
                     error("Assignment value is not a character");
                } else {
@@ -32,7 +32,7 @@ void assign (char target[], char source[])
                }
           } else {
                outFile << "store " << source << ", " << target << std::endl;
-               symbolTable[target].val = source;
+               symbolTable[target].val = symbolTable[source].val;
           }
      }
 }
@@ -66,7 +66,7 @@ void assign_int(char target[], char source[]) {
           } else if (symbolTable[target].type == REAL) {
                char * temp = convert_to_real(source);
                outFile << "store " << temp << ", " << target << std::endl;
-               symbolTable[target].val = source;
+               symbolTable[target].val = symbolTable[temp].val;
           } else {
                error("Cannot assign integer to character");
           }

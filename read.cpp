@@ -9,5 +9,5 @@ extern void error(const char msg[]);
 void read_id (char id_name[])
 {
      if (symbolTable.find(id_name)==symbolTable.end()) {error("SYMBOL NOT DEFINED");}
-     else {outFile << "read " << id_name << ", integer" << std::endl;}
+     else {outFile << "read " << id_name << std::endl;}
 }

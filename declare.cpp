@@ -20,7 +20,7 @@ void decl_id(char identifier[], std::string type) {
                 outFile << "declare " << identifier << ", real" << std::endl;
             } else if (type == "CHARACTER") {
                 symbolTable[identifier] = {CHAR}; //{CHAR, ""};
-                outFile << "declare " << identifier << ", char" << std::endl;
+                outFile << "declare " << identifier << ", character" << std::endl;
             }
         }
 }

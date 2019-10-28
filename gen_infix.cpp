@@ -34,11 +34,9 @@ float parseInt(std::string s) {
     }
 }
 */
-char * gen_infix(char operandl[], char op[], char operand2[])
+char * gen_infix(char op1[], char op[], char op2[])
 {
   char tempop[8];
-  char * op1 = operandl;
-  char * op2 = operand2;
 
   // If type of both operands is INT
   if(symbolTable[op1].type == INT && symbolTable[op2].type == INT) {
@@ -62,7 +60,7 @@ char * gen_infix(char operandl[], char op[], char operand2[])
 
         char *tempname = temp_int();
         //symbolTable[tempname].val = result;
-        outFile << tempop << " " << operandl << ", " << operand2 << ", " << tempname << std::endl;
+        outFile << tempop << " " << op1 << ", " << op2 << ", " << tempname << std::endl;
         return (tempname);
     }
   // If type of both operands in REAL
@@ -87,13 +85,13 @@ char * gen_infix(char operandl[], char op[], char operand2[])
 
         char *tempname = temp_real();
         //symbolTable[tempname].val = result;
-        outFile << tempop << " " << operandl << ", " << operand2 << ", " << tempname << std::endl;
+        outFile << tempop << " " << op1 << ", " << op2 << ", " << tempname << std::endl;
         return (tempname);
   }
   // if data types are not the same, run operation then convert
   // For if we need to convert the first operand
   else if (symbolTable[op1].type == INT && symbolTable[op2].type == REAL) {
-        char* convert = convert_to_real(op1);
+        op1 = convert_to_real(op1);
         double res = 0.0;
         if ( strcmp( op, "Add") == 0 ) {
             strcpy(tempop, "radd");
@@ -102,21 +100,21 @@ char * gen_infix(char operandl[], char op[], char operand2[])
             strcpy(tempop,"rsub" );
         }
         char *tempname = temp_real();
-        outFile << tempop << " " << operandl << ", " << operand2 << ", " << tempname << std::endl;
+        outFile << tempop << " " << op1 << ", " << op2 << ", " << tempname << std::endl;
         return (tempname);
   }
   // If the types differ and we need to convert the second operand:
   else if (symbolTable[op1].type == REAL && symbolTable[op2].type == INT) {
        if ( strcmp( op, "Add") == 0) {
-           convert_to_real(op2);
+           op2 = convert_to_real(op2);
            strcpy(tempop,"radd" );
        }
         else {
-           convert_to_real(op2);
+           op2 = convert_to_real(op2);
            strcpy(tempop,"rsub" );
         }
         char *tempname = temp_real();
-        outFile << tempop << " " << operandl << ", " << operand2 << ", " << tempname << std::endl;
+        outFile << tempop << " " << op1 << ", " << op2 << ", " << tempname << std::endl;
         return (tempname);
   }
   else {

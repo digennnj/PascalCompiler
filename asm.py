@@ -1,48 +1,79 @@
 from sys import stdin,stdout, argv
 from collections import defaultdict
-symbols = defaultdict(int)
+symbols = {}
 def parse(line):
     cmd, *rest = line.split()
     args = ''.join(rest).split(',')
     return (cmd, args)
-def val(term):
+def lit(term):
     try: return int(term)
     except ValueError: pass
     try: return float(term)
     except ValueError: pass
+    if len(term)==3 and term[0]==term[-1]=="'": return term[1]
+    raise ValueError("not a valid literal: {}".format(term))
+def val(term):
+    try: return lit(term)
+    except ValueError: pass
     if term in symbols: return symbols[term]
+    print("symbol table: ", symbols)
     raise ValueError("symbol not defined: {}".format(term))
+def t(typ):
+    if type(typ)==str: typ=typ.lower()
+    types = {'integer':int, 'real':float, 'character':str, int:int, float:float, str:str}
+    return types[typ]
+def expectType(typ, *terms):
+    typ = t(typ)
+    for term in terms:
+        if type(val(term))!=typ:
+            raise ValueError("expected {} but got ({}={!r})".format(typ, term, val(term)))
+def dbg(term):
+    print('{} = {!r}'.format(term, val(term)))
 def exec(stmt):
     cmd, args = stmt
     if cmd=="declare":
-        dst,type = args
-        symbols[dst]=0
+        dst,typ = args
+        typ=t(typ)
+        if typ==int: res=0
+        elif typ==float: res=0.0
+        else: res='\0'
+        symbols[dst]=res; # dbg(dst)
     elif cmd=="read":
-        dst,type = args
-        symbols[dst] = int(input(dst+"> "))
-    elif cmd=="isub":
+        dst, = args
+        resp=input(dst+"> ")
+        res=lit(resp)
+        typ = type(symbols[dst])
+        if type(res)!=typ: raise ValueError("expected {} but got lit {}".format(typ, resp))
+        symbols[dst] = res; dbg(dst)
+    elif cmd=="isub" or cmd=="rsub":
         a,b,dst = args
-        #print(f'{dst} = {val(a)}-{val(b)}')
-        symbols[dst] = val(a)-val(b)
-    elif cmd=="iadd":
+        if cmd=="isub": expectType(int, a,b,dst)
+        elif cmd=="rsub": expectType(float, a,b,dst)
+        symbols[dst] = val(a)-val(b); dbg(dst)
+    elif cmd=="iadd" or cmd=="radd":
         a,b,dst = args
-        #print(f'{dst} = {val(a)}+{val(b)}')
-        symbols[dst] = val(a)+val(b)
+        if cmd=="iadd": expectType(int, a,b,dst)
+        elif cmd=="radd": expectType(float, a,b,dst)
+        symbols[dst] = val(a)+val(b); dbg(dst)
     elif cmd=="store":
         a,dst = args
-        #print(f'{dst} = {val(a)}')
-        symbols[dst] = val(a)
+        expectType(type(symbols[dst]), a)
+        symbols[dst] = val(a); dbg(dst)
     elif cmd=="write":
-        a,type = args
-        print(val(a))
+        a, = args
+        print("out({}): {!r}".format(a, val(a)))
     elif cmd=="itor":
         a,dst = args
-        symbols[dst] = float(val(a))
+        expectType(int, a); expectType(float, dst)
+        symbols[dst] = float(val(a)); dbg(dst)
     elif cmd=="rtoi":
         a,dst = args
-        symbols[dst] = int(val(a))
+        expectType(float, a); expectType(int, dst)
+        symbols[dst] = int(val(a)); dbg(dst)
     elif cmd=="halt":
         exit(0)
+    else:
+        raise ValueError("statement not recognized: {}".format(stmt))
 
 with open(argv[1], "r") as f:
     for line in f:

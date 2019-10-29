@@ -1,5 +1,5 @@
 #!/bin/sh
-pfile="$1"; asmfile="${1%%.p}".asm; outfile = "${1%%.p}".out
+pfile="$1"; asmfile="${1%%.p}".asm; outfile="${1%%.p}".out
 echo "=== PASCAL" &&
 cat "$pfile" &&
 ./pascal "$pfile" &&

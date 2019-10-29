@@ -12,7 +12,6 @@ char *temp_int() {
     max_int++;
     sprintf(tempname, "&tempi%d" ,max_int);
     decl_id(tempname, INT);
-    //outFile << "declare " << tempname << ", integer" << std::endl;
     return strdup(tempname);
 }
 char *temp_real() {
@@ -21,7 +20,6 @@ char *temp_real() {
     max_real++;
     sprintf(tempname, "&tempr%d" ,max_real);
     decl_id(tempname, REAL);
-    //outFile << "declare " << tempname << ", real" << std::endl;
     return strdup(tempname);
 }
 char *temp_char() {
@@ -30,6 +28,13 @@ char *temp_char() {
     max_char++;
     sprintf(tempname, "&tempc%d" ,max_char);
     decl_id(tempname, CHAR);
-    //outFile << "declare " << tempname << ", integer" << std::endl;
+    return strdup(tempname);
+}
+char *temp_bool() {
+    static int max_bool=0;
+    static char tempname[30];
+    max_bool++;
+    sprintf(tempname, "&tempb%d" ,max_bool);
+    decl_id(tempname, BOOL);
     return strdup(tempname);
 }

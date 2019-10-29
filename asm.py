@@ -12,6 +12,8 @@ def lit(term):
     try: return float(term)
     except ValueError: pass
     if len(term)==3 and term[0]==term[-1]=="'": return term[1]
+    if term.lower()=="true": return True
+    if term.lower()=="false": return False
     raise ValueError("not a valid literal: {}".format(term))
 def val(term):
     try: return lit(term)
@@ -21,7 +23,7 @@ def val(term):
     raise ValueError("symbol not defined: {}".format(term))
 def t(typ):
     if type(typ)==str: typ=typ.lower()
-    types = {'integer':int, 'real':float, 'character':str, int:int, float:float, str:str}
+    types = {'integer':int, 'real':float, 'character':str, 'boolean':bool, int:int, float:float, str:str, bool:bool}
     return types[typ]
 def expectType(typ, *terms):
     typ = t(typ)
@@ -37,7 +39,9 @@ def exec(stmt):
         typ=t(typ)
         if typ==int: res=0
         elif typ==float: res=0.0
-        else: res='\0'
+        elif typ==str: res='\0'
+        elif typ==bool: res=False
+        else: raise ValueError("Invalid type: {}".format(typ))
         symbols[dst]=res; # dbg(dst)
     elif cmd=="read":
         dst, = args

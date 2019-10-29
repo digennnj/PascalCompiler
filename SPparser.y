@@ -25,6 +25,7 @@ extern char *convert_to_real(const char *val);
 char *temp_char();
 char *temp_int();
 char *temp_real();
+char *temp_bool();
 void assign_lit(char[], char[]);
 void assign(char[], char[]);
 void decl_id (char[], Type);
@@ -39,8 +40,9 @@ void yyerror(const char []);
        int ival;
        char * sval;
        }
-%token PROGRAM VAR START END READ WRITE ASSIGNOP INTLITERAL REALLITERAL
-%token INTTYPE REALTYPE CHARTYPE CHARACTER
+%token PROGRAM VAR START END READ WRITE ASSIGNOP
+%token INTLITERAL REALLITERAL CHARACTER BOOLLITERAL
+%token INTTYPE REALTYPE CHARTYPE BOOLTYPE
 %token LPAREN RPAREN COMMA SQUOTE PERIOD SEMICOLON COLON PLUSOP MINUSOP MULTIPLYOP DIVIDEOP ID
 
 %left PLUSOP MINUSOP MULTIPLYOP DIVIDEOP
@@ -53,6 +55,7 @@ void yyerror(const char []);
 %type <sval>CHARACTER
 %type <sval>INTLITERAL
 %type <sval>REALLITERAL
+%type <sval>BOOLLITERAL
 
 
 %start system_goal
@@ -64,6 +67,7 @@ program	    :	 PROGRAM {line_no++;} VAR variables START {line_no++;} statement_l
 decl_type : INTTYPE {cur_type = INT;}
      | REALTYPE {cur_type = REAL;}
      | CHARTYPE {cur_type = CHAR;}
+     | BOOLTYPE {cur_type = BOOL;}
      ;
 variables   :	SEMICOLON {line_no++;} variables
 		 | SEMICOLON {line_no++;}
@@ -102,15 +106,16 @@ expr       :    term {$$=strdup($1);}
 		;
 term      :	lparen expression rparen   {$$=strdup($2);}
 		;
-term      :	ident      {if (symbolTable.find($1)==symbolTable.end()) {
-                            error("SYMBOL NOT DEFINED");}
-                        else {$$=strdup($1);}}
-		;
 term      :	INTLITERAL {$$ = temp_int(); assign_lit($$, $1);}
           |	REALLITERAL {$$ = temp_real(); assign_lit($$, $1);}
 		| {error("NUMERIC VALUE EXPECTED, BUT FOUND");}
 		;
 term	   : CHARACTER {$$=temp_char(); assign_lit($$, $1);}
+        | BOOLLITERAL {$$=temp_bool(); assign_lit($$, $1);}
+		;
+term      :	ident      {if (symbolTable.find($1)==symbolTable.end()) {
+                            error("SYMBOL NOT DEFINED");}
+                        else {$$=strdup($1);}}
 		;
 lparen    :	LPAREN
 		| {error("( EXPECTED , BUT FOUND");}

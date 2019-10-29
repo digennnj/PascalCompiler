@@ -25,6 +25,7 @@ realliteral      (0|([1-9]{digit}*))[\.]{digit}+
 boolliteral     ([Tt][Rr][Uu][Ee]|[Ff][Aa][Ll][Ss][Ee])
 strliteral      ["][^"]*["]
 id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
+   // see http://dinosaur.compilertools.net/flex/flex_11.html about lex start conditions
 %s PASCAL
 %x COMMENT MULTICOMMENT
 %%

@@ -53,7 +53,9 @@ def exec(stmt):
         else: raise ValueError("Invalid type: {}".format(typ))
         symbols[dst]=res; # dbg(dst)
     elif cmd=="read":
-        dst, = args
+        dst,typ = args
+        typ=t(typ)
+        expectType(typ, dst)
         resp=input(dst+"> ")
         res=lit(resp)
         typ = type(symbols[dst])

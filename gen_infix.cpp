@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 extern std::ofstream outFile;
+extern char *temp_str();
 extern char *temp_int();
 extern char *temp_real();
 extern char *temp_bool();
@@ -20,6 +21,7 @@ char *_do(const char cmd[], const char op1[], const char op2[]) {
     if (strcmp(cmd, "iadd")==0 || strcmp(cmd, "isub")==0 || strcmp(cmd, "imul")==0 || strcmp(cmd, "idiv")==0 || strcmp(cmd, "imod")==0) { res = temp_int();}
     else if (strcmp(cmd, "radd")==0 || strcmp(cmd, "rsub")==0 || strcmp(cmd, "rmul")==0 || strcmp(cmd, "rdiv")==0)                      { res = temp_real();}
     else if (strcmp(cmd, "and")==0 || strcmp(cmd, "or")==0 || strcmp(cmd, "equ")==0 || strcmp(cmd, "high")==0 || strcmp(cmd, "low")==0)  { res = temp_bool();}
+    else if (strcmp(cmd, "sadd")==0)  { res = temp_str();}
     else { error("invalid operation: "+std::string(cmd));}
     outFile << cmd << " " << op1 << ", " << op2 << ", " << res << std::endl;
     return res;
@@ -93,6 +95,12 @@ char * gen_infix(char op1[], const char op[], char op2[])
       if (strcmp( op, "Eq") == 0) { return _do("equ", op1, op2);}
       else if (strcmp( op, "Neq") == 0) { return gen_not(_do("equ", op1, op2));}
       else { error("unsupported operation on chars: "+std::string(op));}
+  }
+  else if (t==STR) {
+      if (strcmp( op, "Eq") == 0) { return _do("equ", op1, op2);}
+      else if (strcmp( op, "Neq") == 0) { return gen_not(_do("equ", op1, op2));}
+      else if ( strcmp( op, "Add") == 0) { return _do("sadd", op1, op2);}
+      else { error("unsupported operation on strings: "+std::string(op));}
   }
   else {
       error("unsupported operand type "+type_str(t));

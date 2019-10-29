@@ -13,6 +13,7 @@ extern "C" int yyparse();
 extern FILE * yyin;
 
 int line_no = 1;
+Type cur_type = INT;
 std::ofstream outFile;
 
 std::map<std::string,Variable> symbolTable;
@@ -21,14 +22,12 @@ extern char *convert_to_int(const char *val);
 extern char *convert_to_real(const char *val);
 
 
+char *temp_char();
+char *temp_int();
+char *temp_real();
+void assign_lit(char[], char[]);
 void assign(char[], char[]);
-void assign_char(char[], char[]);
-void assign_int(char[], char[]);
-void assign_real(char[], char[]);
-void decl_id (char[], std::string);
-void decl_int(char[]);
-void decl_real(char[]);
-void decl_char(char[]);
+void decl_id (char[], Type);
 void finish();
 char * gen_infix(char [], char [], char []);
 void read_id (char []);
@@ -62,46 +61,26 @@ void yyerror(const char []);
 
 program	    :	 PROGRAM {line_no++;} VAR variables START {line_no++;} statement_list END PERIOD {line_no++;} 
 		;
+decl_type : INTTYPE {cur_type = INT;}
+     | REALTYPE {cur_type = REAL;}
+     | CHARTYPE {cur_type = CHAR;}
+     ;
 variables   :	SEMICOLON {line_no++;} variables
 		 | SEMICOLON {line_no++;}
-		 | INTTYPE i_list SEMICOLON {line_no++;} variables
-		 | INTTYPE i_list SEMICOLON {line_no++;}
-		 | REALTYPE r_list SEMICOLON {line_no++;} variables
-		 | REALTYPE r_list SEMICOLON {line_no++;}
-		 | CHARTYPE c_list SEMICOLON {line_no++;} variables
-		 | CHARTYPE c_list SEMICOLON {line_no++;}
+         | decl_type decl_list SEMICOLON {line_no++;} variables
+         | decl_type decl_list SEMICOLON {line_no++;}
 		;
-c_list      :   c_decl
-		 | c_list COMMA c_decl
-		;
-c_decl    :   ident { decl_id($1, "CHARACTER"); }
-		| 	ident ASSIGNOP REALLITERAL { error("Cannot convert real to character"); }
-		| 	ident ASSIGNOP INTLITERAL { error("Cannot convert integer to character"); }
-        |   ident ASSIGNOP expression { decl_id($1, "CHARACTER"); } {assign_char($1,$3); }
-        ;
-i_list      :   i_decl
-		 | i_list COMMA i_decl
-		;
-i_decl    :   ident { decl_id($1, "INTEGER"); }
-		| 	ident ASSIGNOP CHARACTER { error("Cannot convert character to integer"); }
-		|	ident ASSIGNOP REALLITERAL { decl_id($1, "INTEGER"); } {assign_int($1,convert_to_int($3)); }
-        |   ident ASSIGNOP expression { decl_id($1, "INTEGER"); } {assign_int($1,$3); }
-        ;
-r_list      :   r_decl
-		 | r_list COMMA r_decl
-		;
-r_decl    :   ident { decl_id($1, "REAL"); }
-		| 	ident ASSIGNOP CHARACTER { error("Cannot convert character to real"); }
-		|	ident ASSIGNOP INTLITERAL { decl_id($1, "REAL"); } {assign_real($1,convert_to_real($3)); }
-        |   ident ASSIGNOP expression { decl_id($1, "REAL"); } {assign_real($1,$3); }
-        ;
+decl_list : decl
+          | decl_list COMMA decl
+          ;
+decl : ident {decl_id($1, cur_type);}
+     | ident ASSIGNOP expression {decl_id($1, cur_type);} {assign($1,$3);}
+     ;
+
 statement_list  :   statement
                  | statement_list statement
 		;
 statement  : 	ident ASSIGNOP expression {assign($1,$3);} SEMICOLON {line_no++;}
-		|	ident ASSIGNOP INTLITERAL {assign_int($1,$3);} SEMICOLON {line_no++;}
-		|	ident ASSIGNOP REALLITERAL {assign_real($1,$3);} SEMICOLON {line_no++;}
-		|	ident ASSIGNOP CHARACTER {assign_char($1,$3);} SEMICOLON {line_no++;}
 		;
 statement  :	READ lparen id_list rparen SEMICOLON {line_no++;}
 		;
@@ -127,11 +106,11 @@ term      :	ident      {if (symbolTable.find($1)==symbolTable.end()) {
                             error("SYMBOL NOT DEFINED");}
                         else {$$=strdup($1);}}
 		;
-term      :	INTLITERAL {$$ = strdup(yylval.sval);}
-          |	REALLITERAL {$$ = strdup(yylval.sval);}
+term      :	INTLITERAL {$$ = temp_int(); assign_lit($$, $1);}
+          |	REALLITERAL {$$ = temp_real(); assign_lit($$, $1);}
 		| {error("NUMERIC VALUE EXPECTED, BUT FOUND");}
 		;
-term	   : CHARACTER {$$=strdup($1);}
+term	   : CHARACTER {$$=temp_char(); assign_lit($$, $1);}
 		;
 lparen    :	LPAREN
 		| {error("( EXPECTED , BUT FOUND");}

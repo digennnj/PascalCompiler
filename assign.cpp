@@ -12,6 +12,10 @@ extern void error(const char msg[]);
 extern void error(const std::string);
 extern void printSymbolTable();
 
+void assign_lit(char target[], char source[])
+{
+    outFile << "store " << source << ", " << target << std::endl;
+}
 void assign (char target[], char source[])
 {
      /* Generate code for assignment. */
@@ -19,78 +23,25 @@ void assign (char target[], char source[])
      else if (symbolTable.find(source)==symbolTable.end()) {printSymbolTable(); error("SOURCE SYMBOL NOT DEFINED: "+std::string(source));}
      else {
           if (symbolTable[target].type != symbolTable[source].type) {
-               if(symbolTable[target].type == REAL && symbolTable[source].type == INT) {
+              if (symbolTable[target].type == REAL) {
+                  if (symbolTable[source].type == INT) {
                     char * temp = convert_to_real(source);
                     outFile << "store " << temp << ", " << target << std::endl;
-                    //symbolTable[target].val = std::atof(source);
-               } else if(symbolTable[target].type == INT && symbolTable[source].type == REAL) {
+                  }
+                  else {error("Can't assign value to a real");}
+              }
+              else if (symbolTable[target].type == INT) {
+                  if (symbolTable[source].type == REAL) {
                     char * temp = convert_to_int(source);
                     outFile << "store " << temp << ", " << target << std::endl;
-                    //symbolTable[target].val = std::atoi(source);
-               } else if(symbolTable[target].type == CHAR) {
-                    error("Assignment value is not a character");
-               } else {
-                    error("Assignment value is not a number");
-               }
+                  }
+                  else {error("Can't assign value to an int");}
+              }
+              else if (symbolTable[target].type == CHAR) {
+                  error("Can't assign value to a char");
+              }
           } else {
                outFile << "store " << source << ", " << target << std::endl;
-               //symbolTable[target].val = source;
           }
      }
 }
-
-void assign_char (char target[], char source[])
-{
-     if (symbolTable.find(target)==symbolTable.end()) {error("SYMBOL NOT DEFINED");}
-     else {
-          if(symbolTable[target].type == CHAR) {
-               outFile << "store " << source << ", " << target << std::endl;
-               //symbolTable[target].val = source;
-          } else {
-               switch (symbolTable[target].type) {
-                    case 0:
-                         error("Cannot assign character to integer");
-                         break;
-                    case 1:
-                         error("Cannot assign character to real");
-                         break;
-               }
-          }
-     }
-}
-
-void assign_int(char target[], char source[]) {
-     if (symbolTable.find(target)==symbolTable.end()) {error("SYMBOL NOT DEFINED");}
-     else {
-          if(symbolTable[target].type == INT) {
-               outFile << "store " << source << ", " << target << std::endl;
-               //symbolTable[target].val = source;
-          } else if (symbolTable[target].type == REAL) {
-               char * temp = convert_to_real(source);
-               outFile << "store " << temp << ", " << target << std::endl;
-               //symbolTable[target].val = source;
-          } else {
-               error("Cannot assign integer to character");
-          }
-     }
-}
-
-void assign_real(char target[], char source[]) {
-     if (symbolTable.find(target)==symbolTable.end()) {error("SYMBOL NOT DEFINED");}
-     else {
-          if(symbolTable[target].type == REAL) {
-               outFile << "store " << source << ", " << target << std::endl;
-               //symbolTable[target].val = source;
-          } else if (symbolTable[target].type == INT) {
-               char * temp = convert_to_int(source);
-               outFile << "store " << temp << ", " << target << std::endl;
-               //symbolTable[target].val = source;
-          } else {
-               error("Cannot assign real to character");
-          }
-     }
-}
-
-  
-  
-  

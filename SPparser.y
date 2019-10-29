@@ -78,8 +78,8 @@ variables   :	SEMICOLON {line_no++;} variables
 		 | CHARTYPE c_list SEMICOLON {line_no++;}
 		| BOOLTYPE b_list SEMICOLON {line_no++;} variables
 		| BOOLTYPE b_list SEMICOLON {line_no++;}
-                 | STRINGTYPE s_list SEMICOLON {line_no++;} variables
-                 | STRINGTYPE s_list SEMICOLON {line_no++;}
+		| STRINGTYPE s_list SEMICOLON {line_no++;} variables
+		| STRINGTYPE s_list SEMICOLON {line_no++;}
 		;
 c_list      :   c_decl
 		 | c_list COMMA c_decl

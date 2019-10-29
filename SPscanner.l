@@ -26,7 +26,7 @@ mutlilncommentopen      [{]
 mutlilncommentclose     [}]
 intliteral      (0|([1-9]{digit}*))
 realliteral      (0|([1-9]{digit}*))[\.]{digit}+
-stringliteral   (0|"(^A)*"|"A*")
+stringliteral   ["][a-zA-Z0-9]*["]
 id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
 %%
 [ \t]+                                          {/* do nothing */}

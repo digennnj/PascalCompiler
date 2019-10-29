@@ -26,7 +26,7 @@ void decl_id(char identifier[], std::string type) {
                 outFile << "declare " << identifier << ", bool" << std::endl;
             } else if (type == "STR") {
                 symbolTable[identifier] = {STR, ""};
-                outFile << "declare " << identifier << ", bool" << std::endl;
+                outFile << "declare " << identifier << ", string" << std::endl;
             }
         }
 }

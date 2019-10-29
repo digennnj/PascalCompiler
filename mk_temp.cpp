@@ -38,3 +38,11 @@ char *temp_bool() {
     decl_id(tempname, BOOL);
     return strdup(tempname);
 }
+char *temp_str() {
+    static int max_str=0;
+    static char tempname[30];
+    max_str++;
+    sprintf(tempname, "&temps%d" ,max_str);
+    decl_id(tempname, STR);
+    return strdup(tempname);
+}

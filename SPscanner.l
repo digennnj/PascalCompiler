@@ -23,6 +23,7 @@ divideop    [/]
 intliteral      (0|([1-9]{digit}*))
 realliteral      (0|([1-9]{digit}*))[\.]{digit}+
 boolliteral     ([Tt][Rr][Uu][Ee]|[Ff][Aa][Ll][Ss][Ee])
+strliteral      ["][^"]*["]
 id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
 %%
 [ \t]+                                          {/* do nothing */}
@@ -33,6 +34,7 @@ id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
 [Rr][Ee][Aa][Ll]                                {return REALTYPE;}
 [Cc][Hh][Aa][Rr][Aa][Cc][Tt][Ee][Rr]            {return CHARTYPE;}
 [Bb][Oo][Oo][Ll][Ee][Aa][Nn]                    {return BOOLTYPE;}
+[Ss][Tt][Rr][Ii][Nn][Gg]                        {return STRTYPE;}
 [Bb][Ee][Gg][Ii][Nn]                            {return START;}
 [Ee][Nn][Dd]                                    {return END;}
 [Rr][Ee][Aa][Dd]                                {return READ;}
@@ -63,6 +65,7 @@ id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
 {intliteral}                                    {yylval.sval = strdup(yytext); return INTLITERAL;}
 {realliteral}                                   {yylval.sval = strdup(yytext); return REALLITERAL;}
 {boolliteral}                                   {yylval.sval = strdup(yytext); return BOOLLITERAL;}
+{strliteral}                                   {yylval.sval = strdup(yytext); return STRLITERAL;}
 {id}                                            {yylval.sval = strdup(yytext); return ID;}
 
 [^,]		{std::cout << "SYNTAX ERROR: " << yytext << " IS ILLEGAL" << std::endl;}

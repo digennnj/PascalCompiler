@@ -2,16 +2,23 @@
 from sys import stdin,stdout, argv
 from collections import defaultdict
 symbols = {}
+class Char:
+    def __init__(self, c):
+        self.c = c
+    def __str__(self): return str(self.c)
+    def __repr__(self): return repr(self.c)
 def parse(line):
     cmd, *rest = line.split()
     args = ''.join(rest).split(',')
+    # TODO: make it so it doesn't choke on strings/char literals with commas/spaces in them
     return (cmd, args)
 def lit(term):
     try: return int(term)
     except ValueError: pass
     try: return float(term)
     except ValueError: pass
-    if len(term)==3 and term[0]==term[-1]=="'": return term[1]
+    if len(term)==3 and term[0]==term[-1]=="'": return Char(term[1])
+    if len(term)>=2 and term[0]==term[-1]=='"': return term[1:-1]
     if term.lower()=="true": return True
     if term.lower()=="false": return False
     raise ValueError("not a valid literal: {}".format(term))
@@ -23,7 +30,7 @@ def val(term):
     raise ValueError("symbol not defined: {}".format(term))
 def t(typ):
     if type(typ)==str: typ=typ.lower()
-    types = {'integer':int, 'real':float, 'character':str, 'boolean':bool, int:int, float:float, str:str, bool:bool}
+    types = {'integer':int, 'real':float, 'character':Char, 'boolean':bool, 'string':str, int:int, float:float, Char:Char, bool:bool, str:str}
     return types[typ]
 def expectType(typ, *terms):
     typ = t(typ)
@@ -39,7 +46,8 @@ def exec(stmt):
         typ=t(typ)
         if typ==int: res=0
         elif typ==float: res=0.0
-        elif typ==str: res='\0'
+        elif typ==Char: res=Char('\0')
+        elif typ==str: res = ''
         elif typ==bool: res=False
         else: raise ValueError("Invalid type: {}".format(typ))
         symbols[dst]=res; # dbg(dst)

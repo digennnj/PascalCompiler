@@ -19,6 +19,7 @@ void decl_id(char identifier[], Type type) {
                 case CHAR: typeStr = "character"; break;
                 case REAL: typeStr = "real"; break;
                 case BOOL: typeStr = "boolean"; break;
+                case STR: typeStr = "string"; break;
             }
             symbolTable[identifier] = {type};
             outFile << "declare " << identifier << ", " << typeStr << std::endl;

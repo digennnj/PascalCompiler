@@ -23,6 +23,7 @@ extern char *convert_to_real(const char *val);
 
 
 char *temp_char();
+char *temp_str();
 char *temp_int();
 char *temp_real();
 char *temp_bool();
@@ -42,8 +43,8 @@ void yyerror(const char []);
        char * sval;
        }
 %token PROGRAM VAR START END READ WRITE ASSIGNOP
-%token INTLITERAL REALLITERAL CHARACTER BOOLLITERAL
-%token INTTYPE REALTYPE CHARTYPE BOOLTYPE
+%token INTLITERAL REALLITERAL CHARACTER BOOLLITERAL STRLITERAL
+%token INTTYPE REALTYPE CHARTYPE BOOLTYPE STRTYPE
 %token EQOP NEQOP LTOP GTOP LEQOP GEQOP NOTOP
 %token LPAREN RPAREN COMMA SQUOTE PERIOD SEMICOLON COLON PLUSOP MINUSOP MULTIPLYOP DIVIDEOP ID MODOP
 
@@ -62,6 +63,7 @@ void yyerror(const char []);
 %type <sval>INTLITERAL
 %type <sval>REALLITERAL
 %type <sval>BOOLLITERAL
+%type <sval>STRLITERAL
 
 
 %start system_goal
@@ -74,6 +76,7 @@ decl_type : INTTYPE {cur_type = INT;}
      | REALTYPE {cur_type = REAL;}
      | CHARTYPE {cur_type = CHAR;}
      | BOOLTYPE {cur_type = BOOL;}
+     | STRTYPE  {cur_type = STR;}
      ;
 variables   :	SEMICOLON {line_no++;} variables
 		 | SEMICOLON {line_no++;}
@@ -132,6 +135,7 @@ term      :	INTLITERAL {$$ = temp_int(); assign_lit($$, $1);}
 		;
 term	   : CHARACTER {$$=temp_char(); assign_lit($$, $1);}
         | BOOLLITERAL {$$=temp_bool(); assign_lit($$, $1);}
+        | STRLITERAL {$$=temp_str(); assign_lit($$, $1);}
 		;
 term      :	ident      {if (symbolTable.find($1)==symbolTable.end()) {
                             error("SYMBOL NOT DEFINED");}

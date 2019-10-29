@@ -31,6 +31,7 @@ void assign(char[], char[]);
 void decl_id (char[], Type);
 void finish();
 char * gen_infix(char [], const char [], char []);
+char *gen_not(char []);
 void read_id (char []);
 void write_expr(char []);
 void error(const char []);
@@ -43,10 +44,11 @@ void yyerror(const char []);
 %token PROGRAM VAR START END READ WRITE ASSIGNOP
 %token INTLITERAL REALLITERAL CHARACTER BOOLLITERAL
 %token INTTYPE REALTYPE CHARTYPE BOOLTYPE
-%token EQOP NEQOP LTOP GTOP LEQOP GEQOP;
+%token EQOP NEQOP LTOP GTOP LEQOP GEQOP NOTOP
 %token LPAREN RPAREN COMMA SQUOTE PERIOD SEMICOLON COLON PLUSOP MINUSOP MULTIPLYOP DIVIDEOP ID
 
 %left ANDOP OROP
+%left NOTOP
 %left EQOP NEQOP LTOP GTOP LEQOP GEQOP
 %left PLUSOP MINUSOP
 %left MULTIPLYOP DIVIDEOP
@@ -104,6 +106,7 @@ expr_list  :	expression   {write_expr($1);}
 		;
 expression :	expr   {$$=strdup($1);}
                 ;
+// see https://perso.esiee.fr/~najmanl/compil/Bison/bison_5.html
 expr       :    term {$$=strdup($1);}
 		| expr PLUSOP expr {$$=strdup(gen_infix($1,"Add",$3));}
 		| expr MINUSOP expr {$$=strdup(gen_infix($1,"Sub",$3));}
@@ -117,6 +120,7 @@ expr       :    term {$$=strdup($1);}
 		| expr GTOP expr {$$=strdup(gen_infix($1,"Gt",$3));}
 		| expr LEQOP expr {$$=strdup(gen_infix($1,"Leq",$3));}
 		| expr GEQOP expr {$$=strdup(gen_infix($1,"Neq",$3));}
+        | NOTOP expr {$$=strdup(gen_not($2));}
 		| {error("EXPRESSION EXPECTED, BUT FOUND");}
 		;
 term      :	lparen expression rparen   {$$=strdup($2);}

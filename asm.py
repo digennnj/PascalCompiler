@@ -83,6 +83,10 @@ def exec(stmt):
         a,b,dst = args
         expectType(bool, a,b,dst)
         symbols[dst] = val(a) and val(b); dbg(dst)
+    elif cmd=="not":
+        a,dst = args
+        expectType(bool, a,dst)
+        symbols[dst] = not val(a); dbg(dst)
     elif cmd=="equ":
         a,b,dst = args
         expectType(bool, dst)

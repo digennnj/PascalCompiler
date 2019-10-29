@@ -24,6 +24,15 @@ char *_do(const char cmd[], const char op1[], const char op2[]) {
     outFile << cmd << " " << op1 << ", " << op2 << ", " << res << std::endl;
     return res;
 }
+char *gen_not(char op1[]) {
+    Type t = symbolTable[op1].type;
+    if (t==BOOL) {
+        char *res = temp_bool();
+        outFile << "not" << " " << op1 << ", " << res << std::endl;
+        return res;
+    }
+    else { error("invalid operand for not: "+std::string(op1));}
+}
 char * gen_infix(char op1[], const char op[], char op2[])
 {
   char tempop[8];
@@ -51,7 +60,7 @@ char * gen_infix(char op1[], const char op[], char op2[])
         else if (strcmp( op, "Mul") == 0) { return _do("imul", op1, op2);}
         else if (strcmp( op, "Div") == 0) { return _do("idiv", op1, op2);}
         else if (strcmp( op, "Eq") == 0) { return _do("equ", op1, op2);}
-        //else if (strcmp( op, "Neq") == 0) { return _do("equ", op1, op2);}
+        else if (strcmp( op, "Neq") == 0) { return gen_not(_do("equ", op1, op2));}
         else if (strcmp( op, "Lt") == 0) { return _do("low", op1, op2);}
         else if (strcmp( op, "Gt") == 0) { return _do("high", op1, op2);}
         else if (strcmp( op, "Leq") == 0) { return _do("or", _do("low", op1, op2), _do("equ", op1,op2));}
@@ -65,7 +74,7 @@ char * gen_infix(char op1[], const char op[], char op2[])
         else if ( strcmp( op, "Mul" ) == 0) { return _do("rmul", op1, op2);}
         else if (strcmp( op, "Div") == 0) { return _do("rdiv", op1, op2);}
         else if (strcmp( op, "Eq") == 0) { return _do("equ", op1, op2);}
-        //else if (strcmp( op, "Neq") == 0) { return _do("equ", op1, op2);}
+        else if (strcmp( op, "Neq") == 0) { return gen_not(_do("equ", op1, op2));}
         else if (strcmp( op, "Lt") == 0) { return _do("low", op1, op2);}
         else if (strcmp( op, "Gt") == 0) { return _do("high", op1, op2);}
         else if (strcmp( op, "Leq") == 0) { return _do("or", _do("low", op1, op2), _do("equ", op1,op2));}
@@ -76,12 +85,12 @@ char * gen_infix(char op1[], const char op[], char op2[])
       if (strcmp(op, "And") == 0) {return _do("and", op1, op2);}
       else if (strcmp(op, "Or") == 0) {return _do("or", op1, op2);}
       else if (strcmp( op, "Eq") == 0) { return _do("equ", op1, op2);}
-      //else if (strcmp( op, "Neq") == 0) { return _do("equ", op1, op2);}
+      else if (strcmp( op, "Neq") == 0) { return gen_not(_do("equ", op1, op2));}
       else { error("unsupported operation on bools: "+std::string(op));}
   }
   else if (t==CHAR) {
       if (strcmp( op, "Eq") == 0) { return _do("equ", op1, op2);}
-      //else if (strcmp( op, "Neq") == 0) { return _do("equ", op1, op2);}
+      else if (strcmp( op, "Neq") == 0) { return gen_not(_do("equ", op1, op2));}
       else { error("unsupported operation on chars: "+std::string(op));}
   }
   else {

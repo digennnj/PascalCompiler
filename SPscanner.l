@@ -51,6 +51,7 @@ id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
 {divideop}                                      {return DIVIDEOP;}
 [Aa][Nn][Dd]                                    {return ANDOP;}
 [Oo][Rr]                                        {return OROP;}
+[Nn][Oo][Tt]                                    {return NOTOP;}
 [=]                                             {return EQOP;}
 [<][>]                                          {return NEQOP;}
 [<]                                             {return LTOP;}

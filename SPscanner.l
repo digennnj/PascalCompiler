@@ -7,6 +7,7 @@ extern "C" int yylex();
 character ['][a-zA-Z0-9][']
 letter  [a-zA-Z]
 digit   [0-9]
+boolean            (true|false)
 semicolon	[;]
 colon		[:]
 underscore	[_]
@@ -25,6 +26,7 @@ mutlilncommentopen      [{]
 mutlilncommentclose     [}]
 intliteral      (0|([1-9]{digit}*))
 realliteral      (0|([1-9]{digit}*))[\.]{digit}+
+stringliteral   (0|"(^A)*"|"A*")
 id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
 %%
 [ \t]+                                          {/* do nothing */}
@@ -34,6 +36,8 @@ id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
 [Ii][Nn][Tt][Ee][Gg][Ee][Rr]			        {return INTTYPE;}
 [Rr][Ee][Aa][Ll]                                {return REALTYPE;}
 [Cc][Hh][Aa][Rr][Aa][Cc][Tt][Ee][Rr]            {return CHARTYPE;}
+[Bb][Oo][Oo][Ll][Ee][Aa][Nn]                    {return BOOLTYPE;}
+[Ss][Tt][Rr][Ii][Nn][Gg]                        {return STRINGTYPE;}
 [Bb][Ee][Gg][Ii][Nn]                            {return START;}
 [Ee][Nn][Dd]                                    {return END;}
 [Rr][Ee][Aa][Dd]                                {return READ;}
@@ -57,6 +61,8 @@ id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
 {character}                                     {yylval.sval = strdup(yytext); return CHARACTER;}
 {intliteral}                                    {yylval.sval = strdup(yytext); return INTLITERAL;}
 {realliteral}                                   {yylval.sval = strdup(yytext); return REALLITERAL;}
+{stringliteral}                                 {yylval.sval = strdup(yytext); return STRINGLITERAL;}
+{boolean}                                       {yylval.sval = strdup(yytext); return BOOLEAN;}
 {id}                                            {yylval.sval = strdup(yytext); return ID;}
 
 [^,]		{std::cout << "SYNTAX ERROR: " << yytext << " IS ILLEGAL" << std::endl;}

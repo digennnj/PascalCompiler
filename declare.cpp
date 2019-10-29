@@ -21,6 +21,12 @@ void decl_id(char identifier[], std::string type) {
             } else if (type == "CHARACTER") {
                 symbolTable[identifier] = {CHAR, ""};
                 outFile << "declare " << identifier << ", char" << std::endl;
+            } else if (type == "BOOL") {
+                symbolTable[identifier] = {BOOL, ""};
+                outFile << "declare " << identifier << ", bool" << std::endl;
+            } else if (type == "STR") {
+                symbolTable[identifier] = {STR, ""};
+                outFile << "declare " << identifier << ", bool" << std::endl;
             }
         }
 }

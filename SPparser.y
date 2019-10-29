@@ -25,10 +25,13 @@ void assign(char[], char[]);
 void assign_char(char[], char[]);
 void assign_int(char[], char[]);
 void assign_real(char[], char[]);
+void assign_bool(char[], char[]);
+void assign_string(char[], char[]);
 void decl_id (char[], std::string);
 void decl_int(char[]);
 void decl_real(char[]);
 void decl_char(char[]);
+void decl_bool(char[]);
 void finish();
 char * gen_infix(char [], char [], char []);
 void read_id (char []);
@@ -41,7 +44,7 @@ void yyerror(const char []);
        char * sval;
        }
 %token PROGRAM VAR START END READ WRITE ASSIGNOP INTLITERAL REALLITERAL
-%token INTTYPE REALTYPE CHARTYPE CHARACTER
+%token INTTYPE REALTYPE CHARTYPE CHARACTER BOOLEAN BOOLTYPE STRINGLITERAL STRINGTYPE
 %token LPAREN RPAREN COMMA SQUOTE PERIOD SEMICOLON COLON PLUSOP MINUSOP MULTIPLYOP DIVIDEOP ID
 %token SNGLLNCOMMENT MULTILNCOMMENTOPEN MULTILNCOMMENTCLOSE
 
@@ -54,7 +57,9 @@ void yyerror(const char []);
 %type <sval>add_op
 %type <sval>CHARACTER
 %type <sval>INTLITERAL
+%type <sval>STRINGLITERAL
 %type <sval>REALLITERAL
+%type <sval>BOOLEAN
 
 
 %start system_goal
@@ -71,6 +76,10 @@ variables   :	SEMICOLON {line_no++;} variables
 		 | REALTYPE r_list SEMICOLON {line_no++;}
 		 | CHARTYPE c_list SEMICOLON {line_no++;} variables
 		 | CHARTYPE c_list SEMICOLON {line_no++;}
+		| BOOLTYPE b_list SEMICOLON {line_no++;} variables
+		| BOOLTYPE b_list SEMICOLON {line_no++;}
+                 | STRINGTYPE s_list SEMICOLON {line_no++;} variables
+                 | STRINGTYPE s_list SEMICOLON {line_no++;}
 		;
 c_list      :   c_decl
 		 | c_list COMMA c_decl
@@ -96,6 +105,20 @@ r_decl    :   ident { decl_id($1, "REAL"); }
 		|	ident ASSIGNOP INTLITERAL { decl_id($1, "REAL"); } {assign_real($1,$3); }
         |   ident ASSIGNOP expression { decl_id($1, "REAL"); } {assign_real($1,$3); }
         ;
+b_list      :   b_decl
+                 | b_list COMMA b_decl
+                ;
+b_decl    :   ident { decl_id($1, "BOOL"); }
+        |   ident ASSIGNOP BOOLEAN { decl_id($1, "BOOL"); } {assign_bool($1,$3); }
+        |   ident ASSIGNOP expression { decl_id($1, "BOOL"); } {assign_bool($1,$3); }
+		;
+s_list      :   s_decl
+                 | s_list COMMA c_decl
+                ;
+s_decl    :   ident { decl_id($1, "STR"); }
+        |   ident ASSIGNOP STRINGLITERAL { decl_id($1, "STR"); } {assign_string($1,$3); }
+        |   ident ASSIGNOP expression { decl_id($1, "STR"); } {assign_string($1,$3); }
+        ;
 statement_list  :  statement
                  | statement_list statement
 		;
@@ -107,6 +130,7 @@ statement  : 	ident ASSIGNOP expression {assign($1,$3);} SEMICOLON {line_no++;}
 		|	ident ASSIGNOP INTLITERAL {assign_int($1,$3);} SEMICOLON {line_no++;}
 		|	ident ASSIGNOP REALLITERAL {assign_real($1,$3);} SEMICOLON {line_no++;}
 		|	ident ASSIGNOP CHARACTER {assign_char($1,$3);} SEMICOLON {line_no++;}
+		|	ident ASSIGNOP BOOLEAN {assign_bool($1,$3);} SEMICOLON {line_no++;}
 		;
 statement  :	READ lparen id_list rparen SEMICOLON {line_no++;}
 		;
@@ -134,6 +158,7 @@ term      :	ident      {if (symbolTable.find($1)==symbolTable.end()) {
 		;
 term      :	INTLITERAL {$$ = strdup(yylval.sval);}
           |	REALLITERAL {$$ = strdup(yylval.sval);}
+		  |	STRINGLITERAL {$$ = strdup(yylval.sval);}
 		| {error("NUMERIC VALUE EXPECTED, BUT FOUND");}
 		;
 term	   : CHARACTER {$$=strdup($1);}

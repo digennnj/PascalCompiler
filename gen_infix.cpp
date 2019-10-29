@@ -26,6 +26,20 @@ char *_do(const char cmd[], const char op1[], const char op2[]) {
     outFile << cmd << " " << op1 << ", " << op2 << ", " << res << std::endl;
     return res;
 }
+char *gen_neg(char op1[]) {
+    Type t = symbolTable[op1].type;
+    if (t==INT) {
+        char *res = temp_int();
+        outFile << "isub" << " " << "0" << ", " << op1 << ", " << res << std::endl;
+        return res;
+    }
+    else if (t==REAL) {
+        char *res = temp_real();
+        outFile << "rsub" << " " << "0.0" << ", " << op1 << ", " << res << std::endl;
+        return res;
+    }
+    else { error("invalid operand for not: "+std::string(op1));}
+}
 char *gen_not(char op1[]) {
     Type t = symbolTable[op1].type;
     if (t==BOOL) {

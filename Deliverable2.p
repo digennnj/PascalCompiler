@@ -9,6 +9,7 @@ Begin
     Write( x + y, b , 3<=3.0, 2.9<=3.0, y<=j and false, not not true and not u, not 4<>4.0);
     write(4+9*7%6/0.9-1);
     write("hello!!"+" world!!" = "hi {world}...");
+    write(-1.5 - -j);
     x := k- y + j;
     m := y + ( j - k );
     a := c;

@@ -33,6 +33,7 @@ void decl_id (char[], Type);
 void finish();
 char * gen_infix(char [], const char [], char []);
 char *gen_not(char []);
+char *gen_neg(char []);
 void read_id (char []);
 void write_expr(char []);
 void error(const char []);
@@ -125,6 +126,7 @@ expr       :    term {$$=strdup($1);}
 		| expr LEQOP expr {$$=strdup(gen_infix($1,"Leq",$3));}
 		| expr GEQOP expr {$$=strdup(gen_infix($1,"Neq",$3));}
         | NOTOP expr {$$=strdup(gen_not($2));}
+        | MINUSOP expr {$$=strdup(gen_neg($2));}
 		| {error("EXPRESSION EXPECTED, BUT FOUND");}
 		;
 term      :	lparen expression rparen   {$$=strdup($2);}

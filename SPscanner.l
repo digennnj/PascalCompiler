@@ -25,7 +25,13 @@ realliteral      (0|([1-9]{digit}*))[\.]{digit}+
 boolliteral     ([Tt][Rr][Uu][Ee]|[Ff][Aa][Ll][Ss][Ee])
 strliteral      ["][^"]*["]
 id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
+%s PASCAL
+%x COMMENT MULTICOMMENT
 %%
+^[/][/]                                         {BEGIN COMMENT;}
+<COMMENT>[\n]                                   {BEGIN PASCAL;}
+[{]                                             {BEGIN MULTICOMMENT;}
+<MULTICOMMENT>[}]                               {BEGIN PASCAL;}
 [ \t]+                                          {/* do nothing */}
 [\n]                                            {/* new line*/}
 [Pp][Rr][Oo][Gg][Rr][Aa][Mm]			        {return PROGRAM;}

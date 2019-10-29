@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from sys import stdin,stdout, argv
 from collections import defaultdict
 symbols = {}

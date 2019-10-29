@@ -89,6 +89,31 @@ void assign_real(char target[], char source[]) {
      }
 }
 
+void assign_bool(char target[], char source[]) {
+     if (symbolTable.find(target)==symbolTable.end()) {error("SYMBOL NOT DEFINED");}
+     else {
+          if(symbolTable[target].type == BOOL) {
+               outFile << "store " << source << ", " << target << std::endl;
+               symbolTable[target].val = source;
+          } else {
+               error("Cannot assign boolean value to nonboolean type");
+          }
+     }
+}
+
+void assign_string (char target[], char source[])
+{
+     if (symbolTable.find(target)==symbolTable.end()) {error("SYMBOL NOT DEFINED");}
+     else {
+          if(symbolTable[target].type == STR) {
+               outFile << "store " << source << ", " << target << std::endl;
+               symbolTable[target].val = source;
+          } else {
+               error("Must store stringsliterals in type string");
+          }
+     }
+}
+
   
   
   

@@ -60,6 +60,20 @@ def exec(stmt):
         if cmd=="iadd": expectType(int, a,b,dst)
         elif cmd=="radd": expectType(float, a,b,dst)
         symbols[dst] = val(a)+val(b); dbg(dst)
+    elif cmd=="imul" or cmd=="rmul":
+        a,b,dst = args
+        if cmd=="imul": expectType(int, a,b,dst)
+        elif cmd=="rmul": expectType(float, a,b,dst)
+        symbols[dst] = val(a)*val(b); dbg(dst)
+    elif cmd=="idiv" or cmd=="rdiv":
+        a,b,dst = args
+        if cmd=="idiv": expectType(int, a,b,dst)
+        elif cmd=="rdiv": expectType(float, a,b,dst)
+        symbols[dst] = val(a)/val(b) if cmd=="rdiv" else val(a)//val(b); dbg(dst)
+    elif cmd=="imod":
+        a,b,dst = args
+        expectType(int, a,b,dst)
+        symbols[dst] = val(a)%val(b); dbg(dst)
     elif cmd=="store":
         a,dst = args
         expectType(type(symbols[dst]), a)

@@ -45,13 +45,13 @@ void yyerror(const char []);
 %token INTLITERAL REALLITERAL CHARACTER BOOLLITERAL
 %token INTTYPE REALTYPE CHARTYPE BOOLTYPE
 %token EQOP NEQOP LTOP GTOP LEQOP GEQOP NOTOP
-%token LPAREN RPAREN COMMA SQUOTE PERIOD SEMICOLON COLON PLUSOP MINUSOP MULTIPLYOP DIVIDEOP ID
+%token LPAREN RPAREN COMMA SQUOTE PERIOD SEMICOLON COLON PLUSOP MINUSOP MULTIPLYOP DIVIDEOP ID MODOP
 
 %left ANDOP OROP
 %left NOTOP
 %left EQOP NEQOP LTOP GTOP LEQOP GEQOP
 %left PLUSOP MINUSOP
-%left MULTIPLYOP DIVIDEOP
+%left MULTIPLYOP DIVIDEOP MODOP
 
 
 %type <sval>ident
@@ -112,6 +112,7 @@ expr       :    term {$$=strdup($1);}
 		| expr MINUSOP expr {$$=strdup(gen_infix($1,"Sub",$3));}
 		| expr MULTIPLYOP expr {$$=strdup(gen_infix($1,"Mul",$3));}
 		| expr DIVIDEOP expr {$$=strdup(gen_infix($1,"Div",$3));}
+		| expr MODOP expr {$$=strdup(gen_infix($1,"Mod",$3));}
 		| expr ANDOP expr {$$=strdup(gen_infix($1,"And",$3));}
 		| expr OROP expr {$$=strdup(gen_infix($1,"Or",$3));}
 		| expr EQOP expr {$$=strdup(gen_infix($1,"Eq",$3));}

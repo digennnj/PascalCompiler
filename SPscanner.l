@@ -49,6 +49,7 @@ id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
 {minusop}                                       {return MINUSOP;}
 {multiplyop}                                    {return MULTIPLYOP;}
 {divideop}                                      {return DIVIDEOP;}
+[%]                                             {return MODOP;}
 [Aa][Nn][Dd]                                    {return ANDOP;}
 [Oo][Rr]                                        {return OROP;}
 [Nn][Oo][Tt]                                    {return NOTOP;}

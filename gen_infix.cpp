@@ -17,7 +17,7 @@ extern std::map<std::string,Variable> symbolTable;
 
 char *_do(const char cmd[], const char op1[], const char op2[]) {
     char *res;
-    if (strcmp(cmd, "iadd")==0 || strcmp(cmd, "isub")==0 || strcmp(cmd, "imul")==0 || strcmp(cmd, "idiv")==0)                           { res = temp_int();}
+    if (strcmp(cmd, "iadd")==0 || strcmp(cmd, "isub")==0 || strcmp(cmd, "imul")==0 || strcmp(cmd, "idiv")==0 || strcmp(cmd, "imod")==0) { res = temp_int();}
     else if (strcmp(cmd, "radd")==0 || strcmp(cmd, "rsub")==0 || strcmp(cmd, "rmul")==0 || strcmp(cmd, "rdiv")==0)                      { res = temp_real();}
     else if (strcmp(cmd, "and")==0 || strcmp(cmd, "or")==0 || strcmp(cmd, "equ")==0 || strcmp(cmd, "high")==0 || strcmp(cmd, "low")==0)  { res = temp_bool();}
     else { error("invalid operation: "+std::string(cmd));}
@@ -59,6 +59,7 @@ char * gen_infix(char op1[], const char op[], char op2[])
         else if (strcmp( op, "Sub") == 0) { return _do("isub", op1, op2);}
         else if (strcmp( op, "Mul") == 0) { return _do("imul", op1, op2);}
         else if (strcmp( op, "Div") == 0) { return _do("idiv", op1, op2);}
+        else if (strcmp( op, "Mod") == 0) { return _do("imod", op1, op2);}
         else if (strcmp( op, "Eq") == 0) { return _do("equ", op1, op2);}
         else if (strcmp( op, "Neq") == 0) { return gen_not(_do("equ", op1, op2));}
         else if (strcmp( op, "Lt") == 0) { return _do("low", op1, op2);}

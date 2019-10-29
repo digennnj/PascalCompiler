@@ -9,7 +9,8 @@ class Char:
     def __repr__(self): return repr(self.c)
 def parse(line):
     cmd, *rest = line.split()
-    args = ''.join(rest).split(',')
+    args = ' '.join(rest).split(',')
+    args = [arg.strip() for arg in args]
     # TODO: make it so it doesn't choke on strings/char literals with commas/spaces in them
     return (cmd, args)
 def lit(term):

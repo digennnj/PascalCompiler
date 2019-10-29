@@ -15,27 +15,16 @@ extern void error(const char msg[]);
 extern void error(const std::string);
 extern std::map<std::string,Variable> symbolTable;
 
-/*
-float parseFloat(std::string s) {
-    try {
-        return stof(s);
-    }
-    catch (std::invalid_argument &ex) {
-        error("invalid value for float: "+s);
-        return -12.34f; // sentinel value
-    }
+char *_do(const char cmd[], const char op1[], const char op2[]) {
+    char *res;
+    if (strcmp(cmd, "iadd")==0 || strcmp(cmd, "isub")==0 || strcmp(cmd, "imul")==0 || strcmp(cmd, "idiv")==0)                           { res = temp_int();}
+    else if (strcmp(cmd, "radd")==0 || strcmp(cmd, "rsub")==0 || strcmp(cmd, "rmul")==0 || strcmp(cmd, "rdiv")==0)                      { res = temp_real();}
+    else if (strcmp(cmd, "and")==0 || strcmp(cmd, "or")==0 || strcmp(cmd, "equ")==0 || strcmp(cmd, "high")==0 || strcmp(cmd, "low")==0)  { res = temp_bool();}
+    else { error("invalid operation: "+std::string(cmd));}
+    outFile << cmd << " " << op1 << ", " << op2 << ", " << res << std::endl;
+    return res;
 }
-float parseInt(std::string s) {
-    try {
-        return stoi(s);
-    }
-    catch (std::invalid_argument &ex) {
-        error("invalid value for int: "+s);
-        return -1234; // sentinel value
-    }
-}
-*/
-char * gen_infix(char op1[], char op[], char op2[])
+char * gen_infix(char op1[], const char op[], char op2[])
 {
   char tempop[8];
   
@@ -57,36 +46,43 @@ char * gen_infix(char op1[], char op[], char op2[])
   Type t = t1;
   // If type of both operands is INT
   if(t==INT) {
-        if ( strcmp( op, "Add") == 0) { strcpy(tempop,"iadd" ); }
-        else if (strcmp( op, "Sub") == 0) { strcpy(tempop,"isub" ); }
-        else if (strcmp( op, "Mul") == 0) { strcpy(tempop,"imul" ); }
-        else if (strcmp( op, "Div") == 0) { strcpy(tempop,"idiv" ); }
+        if ( strcmp( op, "Add") == 0) { return _do("iadd", op1, op2);}
+        else if (strcmp( op, "Sub") == 0) { return _do("isub", op1, op2);}
+        else if (strcmp( op, "Mul") == 0) { return _do("imul", op1, op2);}
+        else if (strcmp( op, "Div") == 0) { return _do("idiv", op1, op2);}
+        else if (strcmp( op, "Eq") == 0) { return _do("equ", op1, op2);}
+        //else if (strcmp( op, "Neq") == 0) { return _do("equ", op1, op2);}
+        else if (strcmp( op, "Lt") == 0) { return _do("low", op1, op2);}
+        else if (strcmp( op, "Gt") == 0) { return _do("high", op1, op2);}
+        else if (strcmp( op, "Leq") == 0) { return _do("or", _do("low", op1, op2), _do("equ", op1,op2));}
+        else if (strcmp( op, "Geq") == 0) { return _do("or", _do("high", op1, op2), _do("equ", op1,op2));}
         else { error("unsupported operation on ints: "+std::string(op)); }
-
-        char *tempname = temp_int();
-        outFile << tempop << " " << op1 << ", " << op2 << ", " << tempname << std::endl;
-        return (tempname);
-    }
+  }
   // If type of both operands in REAL
   else if (t==REAL) {
-        if ( strcmp( op, "Add") == 0) { strcpy(tempop,"radd" ); } 
-        else if ( strcmp( op, "Sub") == 0 ) { strcpy(tempop,"rsub" ); } 
-        else if ( strcmp( op, "Mul" ) == 0) { strcpy(tempop,"rmul" ); } 
-        else if (strcmp( op, "Div") == 0) { strcpy(tempop,"rdiv" ); }
+        if ( strcmp( op, "Add") == 0) { return _do("radd", op1, op2);}
+        else if ( strcmp( op, "Sub") == 0 ) { return _do("rsub", op1, op2);}
+        else if ( strcmp( op, "Mul" ) == 0) { return _do("rmul", op1, op2);}
+        else if (strcmp( op, "Div") == 0) { return _do("rdiv", op1, op2);}
+        else if (strcmp( op, "Eq") == 0) { return _do("equ", op1, op2);}
+        //else if (strcmp( op, "Neq") == 0) { return _do("equ", op1, op2);}
+        else if (strcmp( op, "Lt") == 0) { return _do("low", op1, op2);}
+        else if (strcmp( op, "Gt") == 0) { return _do("high", op1, op2);}
+        else if (strcmp( op, "Leq") == 0) { return _do("or", _do("low", op1, op2), _do("equ", op1,op2));}
+        else if (strcmp( op, "Geq") == 0) { return _do("or", _do("high", op1, op2), _do("equ", op1,op2));}
         else { error("unsupported operation on reals: "+std::string(op)); }
-
-        char *tempname = temp_real();
-        outFile << tempop << " " << op1 << ", " << op2 << ", " << tempname << std::endl;
-        return (tempname);
   }
   else if (t==BOOL) {
-      if (strcmp(op, "And") == 0) {strcpy(tempop,"and");}
-      else if (strcmp(op, "Or") == 0) {strcpy(tempop,"or");}
-      else { error("unsupported operation on bools"+std::string(op));}
-
-        char *tempname = temp_bool();
-        outFile << tempop << " " << op1 << ", " << op2 << ", " << tempname << std::endl;
-        return (tempname);
+      if (strcmp(op, "And") == 0) {return _do("and", op1, op2);}
+      else if (strcmp(op, "Or") == 0) {return _do("or", op1, op2);}
+      else if (strcmp( op, "Eq") == 0) { return _do("equ", op1, op2);}
+      //else if (strcmp( op, "Neq") == 0) { return _do("equ", op1, op2);}
+      else { error("unsupported operation on bools: "+std::string(op));}
+  }
+  else if (t==CHAR) {
+      if (strcmp( op, "Eq") == 0) { return _do("equ", op1, op2);}
+      //else if (strcmp( op, "Neq") == 0) { return _do("equ", op1, op2);}
+      else { error("unsupported operation on chars: "+std::string(op));}
   }
   else {
       error("unsupported operand type "+type_str(t));

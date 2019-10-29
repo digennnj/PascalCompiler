@@ -51,6 +51,12 @@ id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
 {divideop}                                      {return DIVIDEOP;}
 [Aa][Nn][Dd]                                    {return ANDOP;}
 [Oo][Rr]                                        {return OROP;}
+[=]                                             {return EQOP;}
+[<][>]                                          {return NEQOP;}
+[<]                                             {return LTOP;}
+[>]                                             {return GTOP;}
+[<][=]                                          {return LEQOP;}
+[>][=]                                          {return GEQOP;}
 {character}                                     {yylval.sval = strdup(yytext); return CHARACTER;}
 {intliteral}                                    {yylval.sval = strdup(yytext); return INTLITERAL;}
 {realliteral}                                   {yylval.sval = strdup(yytext); return REALLITERAL;}

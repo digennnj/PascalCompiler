@@ -30,7 +30,7 @@ void assign_lit(char[], char[]);
 void assign(char[], char[]);
 void decl_id (char[], Type);
 void finish();
-char * gen_infix(char [], char [], char []);
+char * gen_infix(char [], const char [], char []);
 void read_id (char []);
 void write_expr(char []);
 void error(const char []);
@@ -43,15 +43,19 @@ void yyerror(const char []);
 %token PROGRAM VAR START END READ WRITE ASSIGNOP
 %token INTLITERAL REALLITERAL CHARACTER BOOLLITERAL
 %token INTTYPE REALTYPE CHARTYPE BOOLTYPE
+%token EQOP NEQOP LTOP GTOP LEQOP GEQOP;
 %token LPAREN RPAREN COMMA SQUOTE PERIOD SEMICOLON COLON PLUSOP MINUSOP MULTIPLYOP DIVIDEOP ID
 
-%left PLUSOP MINUSOP MULTIPLYOP DIVIDEOP ANDOP OROP
+%left ANDOP OROP
+%left EQOP NEQOP LTOP GTOP LEQOP GEQOP
+%left PLUSOP MINUSOP
+%left MULTIPLYOP DIVIDEOP
+
 
 %type <sval>ident
 %type <sval>expression
 %type <sval>expr
 %type <sval>term
-%type <sval>add_op
 %type <sval>CHARACTER
 %type <sval>INTLITERAL
 %type <sval>REALLITERAL
@@ -101,7 +105,18 @@ expr_list  :	expression   {write_expr($1);}
 expression :	expr   {$$=strdup($1);}
                 ;
 expr       :    term {$$=strdup($1);}
-		| expr add_op term {$$=strdup(gen_infix($1,$2,$3));}
+		| expr PLUSOP expr {$$=strdup(gen_infix($1,"Add",$3));}
+		| expr MINUSOP expr {$$=strdup(gen_infix($1,"Sub",$3));}
+		| expr MULTIPLYOP expr {$$=strdup(gen_infix($1,"Mul",$3));}
+		| expr DIVIDEOP expr {$$=strdup(gen_infix($1,"Div",$3));}
+		| expr ANDOP expr {$$=strdup(gen_infix($1,"And",$3));}
+		| expr OROP expr {$$=strdup(gen_infix($1,"Or",$3));}
+		| expr EQOP expr {$$=strdup(gen_infix($1,"Eq",$3));}
+		| expr NEQOP expr {$$=strdup(gen_infix($1,"Neq",$3));}
+		| expr LTOP expr {$$=strdup(gen_infix($1,"Lt",$3));}
+		| expr GTOP expr {$$=strdup(gen_infix($1,"Gt",$3));}
+		| expr LEQOP expr {$$=strdup(gen_infix($1,"Leq",$3));}
+		| expr GEQOP expr {$$=strdup(gen_infix($1,"Neq",$3));}
 		| {error("EXPRESSION EXPECTED, BUT FOUND");}
 		;
 term      :	lparen expression rparen   {$$=strdup($2);}
@@ -123,17 +138,6 @@ lparen    :	LPAREN
 rparen    :	RPAREN
 		| {error(") EXPECTED , BUT FOUND");}
 		;
-add_op    :	PLUSOP {$$=strdup("Add");}
-		;
-add_op    :	MINUSOP {$$=strdup("Sub");}
-		;
-add_op    :	MULTIPLYOP {$$=strdup("Mul");}
-		;
-add_op    :	DIVIDEOP {$$=strdup("Div");}
-		;
-add_op  : ANDOP {$$=strdup("And");}
-        | OROP {$$=strdup("Or");}
-        ;
 ident     :	ID {$$=strdup(yylval.sval);}
 		| {error("IDENTIFIER EXPECTED, BUT FOUND");}
 		;

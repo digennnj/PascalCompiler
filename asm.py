@@ -83,6 +83,25 @@ def exec(stmt):
         a,b,dst = args
         expectType(bool, a,b,dst)
         symbols[dst] = val(a) and val(b); dbg(dst)
+    elif cmd=="equ":
+        a,b,dst = args
+        expectType(bool, dst)
+        if type(val(a))!=type(val(b)): raise ValueError("arguments {!r} and {!r} incompatible for {}".format(val(a), val(b), cmd))
+        symbols[dst] = val(a)==val(b); dbg(dst)
+    elif cmd=="low":
+        a,b,dst = args
+        expectType(bool, dst)
+        if type(val(a))!=type(val(b)): raise ValueError("arguments {!r} and {!r} incompatible for {}".format(val(a), val(b), cmd))
+        try: expectType(int, a,b)
+        except ValueError: expectType(float, a,b)
+        symbols[dst] = val(a)<val(b); dbg(dst)
+    elif cmd=="high":
+        a,b,dst = args
+        expectType(bool, dst)
+        if type(val(a))!=type(val(b)): raise ValueError("arguments {!r} and {!r} incompatible for {}".format(val(a), val(b), cmd))
+        try: expectType(int, a,b)
+        except ValueError: expectType(float, a,b)
+        symbols[dst] = val(a)>val(b); dbg(dst)
     elif cmd=="halt":
         exit(0)
     else:

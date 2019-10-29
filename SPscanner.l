@@ -49,6 +49,8 @@ id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
 {minusop}                                       {return MINUSOP;}
 {multiplyop}                                    {return MULTIPLYOP;}
 {divideop}                                      {return DIVIDEOP;}
+[Aa][Nn][Dd]                                    {return ANDOP;}
+[Oo][Rr]                                        {return OROP;}
 {character}                                     {yylval.sval = strdup(yytext); return CHARACTER;}
 {intliteral}                                    {yylval.sval = strdup(yytext); return INTLITERAL;}
 {realliteral}                                   {yylval.sval = strdup(yytext); return REALLITERAL;}

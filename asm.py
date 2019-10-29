@@ -75,6 +75,14 @@ def exec(stmt):
         a,dst = args
         expectType(float, a); expectType(int, dst)
         symbols[dst] = int(val(a)); dbg(dst)
+    elif cmd=="or":
+        a,b,dst = args
+        expectType(bool, a,b,dst)
+        symbols[dst] = val(a) or val(b); dbg(dst)
+    elif cmd=="and":
+        a,b,dst = args
+        expectType(bool, a,b,dst)
+        symbols[dst] = val(a) and val(b); dbg(dst)
     elif cmd=="halt":
         exit(0)
     else:

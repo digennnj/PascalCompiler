@@ -20,7 +20,7 @@ void assign (char target[], char source[])
 {
      /* Generate code for assignment. */
      if (symbolTable.find(target)==symbolTable.end()) {printSymbolTable(); error("TARGET SYMBOL NOT DEFINED: "+std::string(target));}
-     else if (symbolTable.find(source)==symbolTable.end()) {printSymbolTable(); error("SOURCE SYMBOL NOT DEFINED: "+std::string(source));}
+     else if (symbolTable.find(source)==symbolTable.end()) {printSymbolTable(); error("SOURCE SYMBOL NOT DEFINED FOR "+std::string(target)+": "+std::string(source));}
      else {
           if (symbolTable[target].type != symbolTable[source].type) {
               if (symbolTable[target].type == REAL) {

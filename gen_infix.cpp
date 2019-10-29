@@ -8,6 +8,7 @@
 extern std::ofstream outFile;
 extern char *temp_int();
 extern char *temp_real();
+extern char *temp_bool();
 extern char *convert_to_int(const char *val);
 extern char *convert_to_real(const char *val);
 extern void error(const char msg[]);
@@ -37,88 +38,58 @@ float parseInt(std::string s) {
 char * gen_infix(char op1[], char op[], char op2[])
 {
   char tempop[8];
+  
+  Type t1=symbolTable[op1].type, t2=symbolTable[op2].type;
 
+  if (t1!=t2) {
+      if (t1==INT && t2==REAL) { 
+          op1 = convert_to_real(op1);
+          t1=REAL;
+      }
+      else if (t1==REAL && t2==INT) {
+          op2 = convert_to_real(op2);
+          t2=REAL;
+      }
+      else {
+          error("incompatible operand types: "+type_str(t1)+" and "+type_str(t2));
+      }
+  }
+  Type t = t1;
   // If type of both operands is INT
-  if(symbolTable[op1].type == INT && symbolTable[op2].type == INT) {
-        int result = 0;
-        if ( strcmp( op, "Add") == 0) {
-            strcpy(tempop,"iadd" );
-            //result = parseInt(symbolTable[op1].val) + parseInt(symbolTable[op2].val);
-        }
-        else if (strcmp( op, "Sub") == 0) {
-            strcpy(tempop,"isub" );
-            //result = parseInt(symbolTable[op1].val) - parseInt(symbolTable[op2].val);
-        }
-        else if (strcmp( op, "Mul") == 0) {
-            strcpy(tempop,"imul" );
-            //result = parseInt(symbolTable[op1].val) * parseInt(symbolTable[op2].val);
-        }
-        else if (strcmp( op, "Div") == 0) {
-            strcpy(tempop,"idiv" );
-            //result = parseInt(symbolTable[op1].val) / parseInt(symbolTable[op2].val);
-        }
+  if(t==INT) {
+        if ( strcmp( op, "Add") == 0) { strcpy(tempop,"iadd" ); }
+        else if (strcmp( op, "Sub") == 0) { strcpy(tempop,"isub" ); }
+        else if (strcmp( op, "Mul") == 0) { strcpy(tempop,"imul" ); }
+        else if (strcmp( op, "Div") == 0) { strcpy(tempop,"idiv" ); }
+        else { error("unsupported operation on ints: "+std::string(op)); }
 
         char *tempname = temp_int();
-        //symbolTable[tempname].val = result;
         outFile << tempop << " " << op1 << ", " << op2 << ", " << tempname << std::endl;
         return (tempname);
     }
   // If type of both operands in REAL
-  else if (symbolTable[op1].type == REAL && symbolTable[op2].type == REAL) {
-        double result = 0.0;
-        if ( strcmp( op, "Add") == 0) {
-            strcpy(tempop,"radd" );
-            //result = parseFloat(symbolTable[op1].val) + parseFloat(symbolTable[op2].val);
-        } 
-        else if ( strcmp( op, "Sub") == 0 ) {
-            strcpy(tempop,"rsub" );
-            //result = parseFloat(symbolTable[op1].val) - parseFloat(symbolTable[op2].val);
-        } 
-        else if ( strcmp( op, "Mul" ) == 0) {
-            strcpy(tempop,"rmul" );
-            //result = parseFloat(symbolTable[op1].val) * parseFloat(symbolTable[op2].val);
-        } 
-        else if (strcmp( op, "Div") == 0) {
-            strcpy(tempop,"rdiv" );
-            //result = parseFloat(symbolTable[op1].val) / parseFloat(symbolTable[op2].val);
-        }
+  else if (t==REAL) {
+        if ( strcmp( op, "Add") == 0) { strcpy(tempop,"radd" ); } 
+        else if ( strcmp( op, "Sub") == 0 ) { strcpy(tempop,"rsub" ); } 
+        else if ( strcmp( op, "Mul" ) == 0) { strcpy(tempop,"rmul" ); } 
+        else if (strcmp( op, "Div") == 0) { strcpy(tempop,"rdiv" ); }
+        else { error("unsupported operation on reals: "+std::string(op)); }
 
         char *tempname = temp_real();
-        //symbolTable[tempname].val = result;
         outFile << tempop << " " << op1 << ", " << op2 << ", " << tempname << std::endl;
         return (tempname);
   }
-  // if data types are not the same, run operation then convert
-  // For if we need to convert the first operand
-  else if (symbolTable[op1].type == INT && symbolTable[op2].type == REAL) {
-        op1 = convert_to_real(op1);
-        double res = 0.0;
-        if ( strcmp( op, "Add") == 0 ) {
-            strcpy(tempop, "radd");
-        }
-        else if ( strcmp( op, "Sub") == 0 ){
-            strcpy(tempop,"rsub" );
-        }
-        char *tempname = temp_real();
-        outFile << tempop << " " << op1 << ", " << op2 << ", " << tempname << std::endl;
-        return (tempname);
-  }
-  // If the types differ and we need to convert the second operand:
-  else if (symbolTable[op1].type == REAL && symbolTable[op2].type == INT) {
-       if ( strcmp( op, "Add") == 0) {
-           op2 = convert_to_real(op2);
-           strcpy(tempop,"radd" );
-       }
-        else {
-           op2 = convert_to_real(op2);
-           strcpy(tempop,"rsub" );
-        }
-        char *tempname = temp_real();
+  else if (t==BOOL) {
+      if (strcmp(op, "And") == 0) {strcpy(tempop,"and");}
+      else if (strcmp(op, "Or") == 0) {strcpy(tempop,"or");}
+      else { error("unsupported operation on bools"+std::string(op));}
+
+        char *tempname = temp_bool();
         outFile << tempop << " " << op1 << ", " << op2 << ", " << tempname << std::endl;
         return (tempname);
   }
   else {
-      error("Data types are neither INT nor REAL.");
+      error("unsupported operand type "+type_str(t));
   }
 
 }

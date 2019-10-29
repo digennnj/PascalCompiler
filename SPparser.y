@@ -45,7 +45,7 @@ void yyerror(const char []);
 %token INTTYPE REALTYPE CHARTYPE BOOLTYPE
 %token LPAREN RPAREN COMMA SQUOTE PERIOD SEMICOLON COLON PLUSOP MINUSOP MULTIPLYOP DIVIDEOP ID
 
-%left PLUSOP MINUSOP MULTIPLYOP DIVIDEOP
+%left PLUSOP MINUSOP MULTIPLYOP DIVIDEOP ANDOP OROP
 
 %type <sval>ident
 %type <sval>expression
@@ -131,6 +131,9 @@ add_op    :	MULTIPLYOP {$$=strdup("Mul");}
 		;
 add_op    :	DIVIDEOP {$$=strdup("Div");}
 		;
+add_op  : ANDOP {$$=strdup("And");}
+        | OROP {$$=strdup("Or");}
+        ;
 ident     :	ID {$$=strdup(yylval.sval);}
 		| {error("IDENTIFIER EXPECTED, BUT FOUND");}
 		;

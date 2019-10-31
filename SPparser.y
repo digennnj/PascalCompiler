@@ -124,7 +124,7 @@ expr       :    term {$$=strdup($1);}
 		| expr LTOP expr {$$=strdup(gen_infix($1,"Lt",$3));}
 		| expr GTOP expr {$$=strdup(gen_infix($1,"Gt",$3));}
 		| expr LEQOP expr {$$=strdup(gen_infix($1,"Leq",$3));}
-		| expr GEQOP expr {$$=strdup(gen_infix($1,"Neq",$3));}
+		| expr GEQOP expr {$$=strdup(gen_infix($1,"Geq",$3));}
         | NOTOP expr {$$=strdup(gen_not($2));}
         | MINUSOP expr {$$=strdup(gen_neg($2));}
 		| {error("EXPRESSION EXPECTED, BUT FOUND");}

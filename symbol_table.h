@@ -4,5 +4,5 @@
 enum Type {INT, REAL, CHAR, BOOL, STR};
 typedef struct Variable {
     Type type;
-    std::string val;
 } Variable;
+std::string type_str(Type typ);

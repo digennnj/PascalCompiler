@@ -1,12 +1,12 @@
-prOgraM 
-  vAr 
-      character a, b, c :=a; 
-      Real x := 0, y:=1 ;
-      inteGER k := 1, j := 2.5, m;
-Begin 
-   Write( x + y, b );
-   x := k- y + j; 
-   m := y + ( j - k ); 
-   a := c;
-  reAd( a, y, k, m); 
-END. 
+program
+var
+integer a:=4,b:=3,c:=5;
+real e := 3;
+character d:='a';
+Begin
+a := c;
+b := 3.0;
+e := 4;
+d := 'b';
+write(d, b);
+end.

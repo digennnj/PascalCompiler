@@ -66,11 +66,11 @@ def exec(stmt):
         if cmd=="isub": expectType(int, a,b,dst)
         elif cmd=="rsub": expectType(float, a,b,dst)
         symbols[dst] = val(a)-val(b); dbg(dst)
-    elif cmd=="iadd" or cmd=="radd" or cmd=="sadd":
+    elif cmd=="iadd" or cmd=="radd" or cmd=="concat":
         a,b,dst = args
         if cmd=="iadd": expectType(int, a,b,dst)
         elif cmd=="radd": expectType(float, a,b,dst)
-        elif cmd=="sadd": expectType(str, a,b,dst)
+        elif cmd=="concat": expectType(str, a,b,dst)
         symbols[dst] = val(a)+val(b); dbg(dst)
     elif cmd=="imul" or cmd=="rmul":
         a,b,dst = args

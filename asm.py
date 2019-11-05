@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from sys import stdin,stdout, argv
+from sys import stdin,stdout,stderr, argv
 from collections import defaultdict
 symbols = {}
 class Char:
@@ -137,6 +137,9 @@ def exec(stmt):
     else:
         raise ValueError("statement not recognized: {}".format(stmt))
 
+if len(argv)!=2:
+    stderr.write("usage: asm.py foo.asm\n")
+    exit(1)
 with open(argv[1], "r") as f:
     for lineNum, line in enumerate(f):
         try: 

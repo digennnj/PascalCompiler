@@ -1,0 +1,25 @@
+&tempi1 = 4
+a = 4
+&tempi2 = 3
+b = 3
+&tempi3 = 5
+c = 5
+&tempi4 = 3
+&tempi5 = 3
+&tempr1 = 3.0
+e = 3.0
+&tempc1 = 'a'
+d = 'a'
+a = 5
+&tempr2 = 3.0
+&tempr3 = 3.0
+&tempi6 = 3
+b = 3
+&tempi7 = 4
+&tempi8 = 4
+&tempr4 = 4.0
+e = 4.0
+&tempc2 = 'b'
+d = 'b'
+out(d): 'b'
+out(b): 3

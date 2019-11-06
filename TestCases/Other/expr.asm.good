@@ -1,0 +1,35 @@
+declare &tempi1, integer
+store 3, &tempi1
+declare a, real
+declare &tempr1, real
+declare &tempi2, integer
+store &tempi1, &tempi2
+itor &tempi2, &tempr1
+store &tempr1, a
+declare &tempr2, real
+store 3.2, &tempr2
+declare b, real
+store &tempr2, b
+declare &tempr3, real
+store 2.5, &tempr3
+declare c, real
+store &tempr3, c
+declare &tempi3, integer
+store 3, &tempi3
+declare x, integer
+store &tempi3, x
+declare &tempi4, integer
+store 3, &tempi4
+declare y, integer
+store &tempi4, y
+declare &tempi5, integer
+store 2, &tempi5
+declare z, integer
+store &tempi5, z
+declare &tempi6, integer
+idiv y, z, &tempi6
+store &tempi6, x
+declare &tempr4, real
+rdiv b, c, &tempr4
+store &tempr4, a
+halt

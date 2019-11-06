@@ -1,0 +1,45 @@
+declare &tempi1, integer
+store 4, &tempi1
+declare a, integer
+store &tempi1, a
+declare &tempi2, integer
+store 3, &tempi2
+declare b, integer
+store &tempi2, b
+declare &tempi3, integer
+store 5, &tempi3
+declare c, integer
+store &tempi3, c
+declare &tempi4, integer
+store 3, &tempi4
+declare e, real
+declare &tempr1, real
+declare &tempi5, integer
+store &tempi4, &tempi5
+itor &tempi5, &tempr1
+store &tempr1, e
+declare &tempc1, character
+store 'a', &tempc1
+declare d, character
+store &tempc1, d
+store c, a
+declare &tempr2, real
+store 3.0, &tempr2
+declare &tempi6, integer
+declare &tempr3, real
+store &tempr2, &tempr3
+rtoi &tempr3, &tempi6
+store &tempi6, b
+declare &tempi7, integer
+store 4, &tempi7
+declare &tempr4, real
+declare &tempi8, integer
+store &tempi7, &tempi8
+itor &tempi8, &tempr4
+store &tempr4, e
+declare &tempc2, character
+store 'b', &tempc2
+store &tempc2, d
+write d
+write b
+halt

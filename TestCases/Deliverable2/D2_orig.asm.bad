@@ -1,0 +1,86 @@
+declare less, boolean
+store 1, less
+declare more, boolean
+declare a, character
+declare b, character
+declare c, character
+store 'a', c
+declare x, real
+store 0, x
+declare y, real
+itor 1, &tempr1
+store &tempr1, y
+declare k, integer
+declare j, integer
+roti 2.5, &tempi2
+store &tempi2, j
+declare m, integer
+declare hello, string
+store "hi!", hello
+declare bye, string
+store "goodbye", bye
+declare no, string
+// separate declaration section from statement section
+fadd x, y, &tempr3
+write &tempr3
+write b
+not less, &tempi4
+write &tempi4
+itor k, &tempr5
+rsub &tempr5, y, &tempr6
+itor j, &tempr7
+radd &tempr6, &tempr7, &tempr8
+store &tempr8, x
+isub j, k, &tempi9
+itor &tempi9, &tempr10
+radd y, &tempr10, &tempr11
+rtoi &tempr11, &tempi12
+store &tempi12, m
+store c, a
+read a, character
+read y, real
+read k, integer
+read no, boolean
+concat hello, bye, &temps13
+store &temps13, bye
+store "byebye", bye
+itor k, &tempr14
+rmult &tempr14, x, &tempr15
+itor m, &tempr16
+radd &tempr16, &tempr15, &tempr17
+store &tempr17, x
+idiv k, j, &tempi18
+imod &tempi18, k, &tempi19
+store &tempi19, j
+itor k, &tempr20
+rmult &tempr20, x, &tempr21
+itor 3, &tempr22
+radd &tempr21, &tempr22, &tempr23
+store &tempr23, y
+itor j, &tempr24
+rsub y, &tempr24, &tempr25
+rmult x, &tempr25, &tempr26
+itor k, &tempr27
+rdiv &tempr26, &tempr27, &tempr28
+rtoi &tempr28, &tempi29
+store &tempi29, m
+isub j, m, &tempi30
+rtoi x, &tempi31
+high &tempi30, &tempi31, &tempi32
+equ &tempi30, &tempi31, &tempi33
+or &tempi32, &tempi33, &tempi34
+store &tempi34, more
+not more, &tempi35
+store &tempi35, less
+and less, more, &tempi36
+rtoi x, &tempi37
+rtoi y, &tempi38
+low &tempi37, &tempi38, &tempi39
+or &tempi36, &tempi39, &tempi40
+store &tempi40, more
+
+
+
+halt
+
+

@@ -1,0 +1,6 @@
+to match her version:
+don't declare temporary variables
+don't need to convert integer literals to store them in a real
+don't need to declare literals to use them
+use integer registers for booleans (but still declare variable as boolean)
+allow comments and blank lines in .asm files

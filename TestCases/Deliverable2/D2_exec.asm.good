@@ -1,0 +1,120 @@
+declare less, boolean
+store true, less
+declare more, boolean
+declare a, character
+declare b, character
+declare c, character
+store 'a', c
+declare x, real
+store 0.0, x
+declare y, real
+declare &tempr1, real
+itor 1, &tempr1
+store &tempr1, y
+declare k, integer
+declare j, integer
+declare &tempi2, integer
+rtoi 2.5, &tempi2
+store &tempi2, j
+declare m, integer
+declare hello, string
+store "hi!", hello
+declare bye, string
+store "goodbye", bye
+declare no, string
+declare &tempr3, real
+radd x, y, &tempr3
+write &tempr3
+write b
+declare &tempi4, boolean
+not less, &tempi4
+write &tempi4
+declare &tempr5, real
+itor k, &tempr5
+declare &tempr6, real
+rsub &tempr5, y, &tempr6
+declare &tempr7, real
+itor j, &tempr7
+declare &tempr8, real
+radd &tempr6, &tempr7, &tempr8
+store &tempr8, x
+declare &tempi9, integer
+isub j, k, &tempi9
+declare &tempr10, real
+itor &tempi9, &tempr10
+declare &tempr11, real
+radd y, &tempr10, &tempr11
+declare &tempi12, integer
+rtoi &tempr11, &tempi12
+store &tempi12, m
+store c, a
+read a, character
+read y, real
+read k, integer
+read no, string
+declare &temps13, string
+concat hello, bye, &temps13
+store &temps13, bye
+store "byebye", bye
+declare &tempr14, real
+itor k, &tempr14
+declare &tempr15, real
+rmul &tempr14, x, &tempr15
+declare &tempr16, real
+itor m, &tempr16
+declare &tempr17, real
+radd &tempr16, &tempr15, &tempr17
+store &tempr17, x
+declare &tempi18, integer
+idiv k, j, &tempi18
+declare &tempi19, integer
+imod &tempi18, k, &tempi19
+store &tempi19, j
+declare &tempr20, real
+itor k, &tempr20
+declare &tempr21, real
+rmul &tempr20, x, &tempr21
+declare &tempr22, real
+itor 3, &tempr22
+declare &tempr23, real
+radd &tempr21, &tempr22, &tempr23
+store &tempr23, y
+declare &tempr24, real
+itor j, &tempr24
+declare &tempr25, real
+rsub y, &tempr24, &tempr25
+declare &tempr26, real
+rmul x, &tempr25, &tempr26
+declare &tempr27, real
+itor k, &tempr27
+declare &tempr28, real
+rdiv &tempr26, &tempr27, &tempr28
+declare &tempi29, integer
+rtoi &tempr28, &tempi29
+store &tempi29, m
+declare &tempi30, integer
+isub j, m, &tempi30
+declare &tempi31, integer
+rtoi x, &tempi31
+declare &tempi32, boolean
+high &tempi30, &tempi31, &tempi32
+declare &tempi33, boolean
+equ &tempi30, &tempi31, &tempi33
+declare &tempi34, boolean
+or &tempi32, &tempi33, &tempi34
+store &tempi34, more
+declare &tempi35, boolean
+not more, &tempi35
+store &tempi35, less
+declare &tempi36, boolean
+and less, more, &tempi36
+declare &tempi37, integer
+rtoi x, &tempi37
+declare &tempi38, integer
+rtoi y, &tempi38
+declare &tempi39, boolean
+low &tempi37, &tempi38, &tempi39
+declare &tempi40, boolean
+or &tempi36, &tempi39, &tempi40
+store &tempi40, more
+halt

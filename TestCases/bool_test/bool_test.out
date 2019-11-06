@@ -1,0 +1,24 @@
+&tempi1 = 1
+&tempi2 = -1
+&tempi3 = 3
+&tempb1 = False
+out(&tempb1): False
+&tempi4 = 1
+&tempi5 = -1
+&tempi6 = 3
+&tempb2 = False
+&tempb3 = False
+&tempb4 = False
+out(&tempb4): False
+&tempi7 = 1
+&tempi8 = -1
+&tempi9 = 3
+&tempb5 = False
+&tempb6 = True
+&tempb7 = True
+out(&tempb7): True
+&tempi10 = 1
+&tempi11 = -1
+&tempi12 = 3
+&tempb8 = True
+out(&tempb8): True

@@ -1,0 +1,35 @@
+&tempc1 = 'a'
+c = 'a'
+&tempi1 = 0
+&tempi2 = 0
+&tempr1 = 0.0
+x = 0.0
+&tempi3 = 1
+&tempi4 = 1
+&tempr2 = 1.0
+y = 1.0
+&tempr3 = 2.5
+&tempr4 = 2.5
+&tempi5 = 2
+j = 2
+&tempr5 = 1.0
+out(&tempr5): 1.0
+out(b): '\x00'
+&tempi6 = 0
+&tempr6 = 0.0
+&tempr7 = -1.0
+&tempi7 = 2
+&tempr8 = 2.0
+&tempr9 = 1.0
+x = 1.0
+&tempi8 = 2
+&tempi9 = 2
+&tempr10 = 2.0
+&tempr11 = 3.0
+&tempr12 = 3.0
+&tempi10 = 3
+m = 3
+a = 'a'
+a> a = '1'
+y> y = 1.1
+k> k = 1

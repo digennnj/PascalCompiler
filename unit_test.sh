@@ -2,7 +2,9 @@
 shopt -s nullglob
 good() { echo -n $'\033[32m'"$@"$'\033[m';}
 bad() { echo -n $'\033[31m'"$@"$'\033[m';}
-for test_dir in "$@"; do
+test_dirs=("$@")
+if [[ $# -lt 1 ]]; then test_dirs=(TestCases/*); fi
+for test_dir in "${test_dirs[@]}"; do
     echo -n "asm: "
     for asm_file in "${test_dir}/"*.asm.good; do
         prefix="${asm_file%%.asm.good}"

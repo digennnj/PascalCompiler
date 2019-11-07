@@ -48,6 +48,9 @@ id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
 [Ee][Nn][Dd]                                    {return END;}
 [Rr][Ee][Aa][Dd]                                {return READ;}
 [Ww][Rr][Ii][Tt][Ee]                            {return WRITE;}
+[Ii][Ff]					{return IF;}
+[Tt][Hh][Ee][Nn]				{return THEN;}
+[Ee][Ll][Ss][Ee]				{return ELSE;}
 {comma}                                         {return COMMA;}
 {squote}                                        {return SQUOTE;}
 {period}					                    {return PERIOD;}

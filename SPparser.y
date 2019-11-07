@@ -47,7 +47,7 @@ void yyerror(const char []);
 %token INTLITERAL REALLITERAL CHARACTER BOOLLITERAL STRLITERAL
 %token INTTYPE REALTYPE CHARTYPE BOOLTYPE STRTYPE
 %token EQOP NEQOP LTOP GTOP LEQOP GEQOP NOTOP
-%token LPAREN RPAREN COMMA SQUOTE PERIOD SEMICOLON COLON PLUSOP MINUSOP MULTIPLYOP DIVIDEOP ID MODOP
+%token LPAREN RPAREN COMMA SQUOTE PERIOD SEMICOLON COLON PLUSOP MINUSOP MULTIPLYOP DIVIDEOP ID MODOP IF THEN ELSE
 
 %left ANDOP OROP
 %left NOTOP
@@ -102,6 +102,16 @@ statement  :	WRITE lparen expr_list rparen SEMICOLON {line_no++;}
 		;
 statement  :    SEMICOLON {line_no++;}
 		;
+statement  :	START {line_no++;} statement_list END {line_no++;}
+	   	| if_statement else_statement
+		| if_statement
+		;
+// we need to create appropriate functions to handle these
+// but this will handle the grammar and the line numbers
+if_statement:	IF expression THEN {line_no++;} statement
+	    	;
+else_statement: ELSE {line_no++;} statement
+	      	;
 id_list    :	ident      {read_id($1);}
   		| id_list COMMA ident {read_id($3);}
 		;

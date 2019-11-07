@@ -24,8 +24,8 @@ for test_dir in "${test_dirs[@]}"; do
         asm_file="${prefix}".asm.good
         test_file="${prefix}".out
         if [[ ! -f "$asm_file" ]]; then echo -n "[skip ${name}] "; continue; fi
-        if [[ -f "$in_file" ]]; then cat "$in_file" | ./asm.py "$asm_file" >"${test_file}";
-        else ./asm.py "$asm_file" | tee "${test_file}"; fi
+        if [[ -f "$in_file" ]]; then cat "$in_file" | ./asm.py "$asm_file" 2>/dev/null >"${test_file}";
+        else ./asm.py "$asm_file" 2>/dev/null | tee "${test_file}"; fi
         diff "${out_file}" "${test_file}" &>/dev/null && good "${name} " || bad "${name} "
     done
     echo

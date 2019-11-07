@@ -31,8 +31,10 @@ id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
 %%
 ^[/][/]                                         {BEGIN COMMENT;}
 <COMMENT>[\n]                                   {BEGIN PASCAL;}
+<COMMENT>.                                      {/* ignore comment */}
 [{]                                             {BEGIN MULTICOMMENT;}
 <MULTICOMMENT>[}]                               {BEGIN PASCAL;}
+<MULTICOMMENT>.                                 {/* ignore comment */}
 [ \t]+                                          {/* do nothing */}
 [\n]                                            {/* new line*/}
 [Pp][Rr][Oo][Gg][Rr][Aa][Mm]			        {return PROGRAM;}

@@ -1,0 +1,262 @@
+declare a, character
+declare b, character
+declare &tempc1, character
+store 'a', &tempc1
+declare c, character
+store &tempc1, c
+declare &tempi1, integer
+store 0, &tempi1
+declare x, real
+declare &tempr1, real
+declare &tempi2, integer
+store &tempi1, &tempi2
+itor &tempi2, &tempr1
+store &tempr1, x
+declare &tempi3, integer
+store 1, &tempi3
+declare y, real
+declare &tempr2, real
+declare &tempi4, integer
+store &tempi3, &tempi4
+itor &tempi4, &tempr2
+store &tempr2, y
+declare k, integer
+declare &tempr3, real
+store 2.5, &tempr3
+declare j, integer
+declare &tempi5, integer
+declare &tempr4, real
+store &tempr3, &tempr4
+rtoi &tempr4, &tempi5
+store &tempi5, j
+declare m, integer
+declare &tempb1, boolean
+store true, &tempb1
+declare &tempb2, boolean
+store false, &tempb2
+declare &tempb3, boolean
+and &tempb1, &tempb2, &tempb3
+declare &tempb4, boolean
+store true, &tempb4
+declare &tempb5, boolean
+or &tempb3, &tempb4, &tempb5
+declare r, boolean
+store &tempb5, r
+declare &tempb6, boolean
+store false, &tempb6
+declare &tempb7, boolean
+store trUe, &tempb7
+declare &tempb8, boolean
+or &tempb6, &tempb7, &tempb8
+declare s, boolean
+store &tempb8, s
+declare t, boolean
+declare &tempb9, boolean
+store false, &tempb9
+declare &tempb10, boolean
+equ r, &tempb9, &tempb10
+declare u, boolean
+store &tempb10, u
+declare &tempr5, real
+declare &tempi6, integer
+store j, &tempi6
+itor &tempi6, &tempr5
+declare &tempb11, boolean
+equ y, &tempr5, &tempb11
+declare &tempb12, boolean
+low y, &tempr5, &tempb12
+declare &tempb13, boolean
+or &tempb12, &tempb11, &tempb13
+declare &tempb14, boolean
+store false, &tempb14
+declare &tempb15, boolean
+and &tempb13, &tempb14, &tempb15
+declare z, boolean
+store &tempb15, z
+declare &tempi7, integer
+store 2, &tempi7
+declare &tempi8, integer
+store 1, &tempi8
+declare &tempi9, integer
+store 1, &tempi9
+declare &tempi10, integer
+iadd &tempi8, &tempi9, &tempi10
+declare &tempb16, boolean
+equ &tempi7, &tempi10, &tempb16
+declare &tempb17, boolean
+and &tempb16, u, &tempb17
+declare aa, boolean
+store &tempb17, aa
+declare &temps1, string
+store "hello world!", &temps1
+declare str, string
+store &temps1, str
+declare &temps2, string
+store "__", &temps2
+declare dunder, string
+store &temps2, dunder
+declare &tempr6, real
+radd x, y, &tempr6
+write &tempr6
+write b
+declare &tempi11, integer
+store 3, &tempi11
+declare &tempr7, real
+store 3.0, &tempr7
+declare &tempr8, real
+declare &tempi12, integer
+store &tempi11, &tempi12
+itor &tempi12, &tempr8
+declare &tempb18, boolean
+equ &tempr8, &tempr7, &tempb18
+declare &tempb19, boolean
+low &tempr8, &tempr7, &tempb19
+declare &tempb20, boolean
+or &tempb19, &tempb18, &tempb20
+write &tempb20
+declare &tempr9, real
+store 2.9, &tempr9
+declare &tempr10, real
+store 3.0, &tempr10
+declare &tempb21, boolean
+equ &tempr9, &tempr10, &tempb21
+declare &tempb22, boolean
+low &tempr9, &tempr10, &tempb22
+declare &tempb23, boolean
+or &tempb22, &tempb21, &tempb23
+write &tempb23
+declare &tempr11, real
+declare &tempi13, integer
+store j, &tempi13
+itor &tempi13, &tempr11
+declare &tempb24, boolean
+equ y, &tempr11, &tempb24
+declare &tempb25, boolean
+low y, &tempr11, &tempb25
+declare &tempb26, boolean
+or &tempb25, &tempb24, &tempb26
+declare &tempb27, boolean
+store false, &tempb27
+declare &tempb28, boolean
+and &tempb26, &tempb27, &tempb28
+write &tempb28
+declare &tempb29, boolean
+store true, &tempb29
+declare &tempb30, boolean
+not &tempb29, &tempb30
+declare &tempb31, boolean
+not &tempb30, &tempb31
+declare &tempb32, boolean
+not u, &tempb32
+declare &tempb33, boolean
+and &tempb31, &tempb32, &tempb33
+write &tempb33
+declare &tempi14, integer
+store 4, &tempi14
+declare &tempr12, real
+store 4.0, &tempr12
+declare &tempr13, real
+declare &tempi15, integer
+store &tempi14, &tempi15
+itor &tempi15, &tempr13
+declare &tempb34, boolean
+equ &tempr13, &tempr12, &tempb34
+declare &tempb35, boolean
+not &tempb34, &tempb35
+declare &tempb36, boolean
+not &tempb35, &tempb36
+write &tempb36
+declare &tempi16, integer
+store 4, &tempi16
+declare &tempi17, integer
+store 9, &tempi17
+declare &tempi18, integer
+store 7, &tempi18
+declare &tempi19, integer
+imul &tempi17, &tempi18, &tempi19
+declare &tempi20, integer
+store 6, &tempi20
+declare &tempi21, integer
+imod &tempi19, &tempi20, &tempi21
+declare &tempr14, real
+store 0.9, &tempr14
+declare &tempr15, real
+declare &tempi22, integer
+store &tempi21, &tempi22
+itor &tempi22, &tempr15
+declare &tempr16, real
+rdiv &tempr15, &tempr14, &tempr16
+declare &tempr17, real
+declare &tempi23, integer
+store &tempi16, &tempi23
+itor &tempi23, &tempr17
+declare &tempr18, real
+radd &tempr17, &tempr16, &tempr18
+declare &tempi24, integer
+store 1, &tempi24
+declare &tempr19, real
+declare &tempi25, integer
+store &tempi24, &tempi25
+itor &tempi25, &tempr19
+declare &tempr20, real
+rsub &tempr18, &tempr19, &tempr20
+write &tempr20
+declare &temps3, string
+store "hello!!", &temps3
+declare &temps4, string
+store " world!!", &temps4
+declare &temps5, string
+concat &temps3, &temps4, &temps5
+declare &temps6, string
+store "hi {world}...", &temps6
+declare &tempb37, boolean
+equ &temps5, &temps6, &tempb37
+write &tempb37
+declare &tempr21, real
+store 1.5, &tempr21
+declare &tempr22, real
+rsub 0.0, &tempr21, &tempr22
+declare &tempi26, integer
+isub 0, j, &tempi26
+declare &tempr23, real
+declare &tempi27, integer
+store &tempi26, &tempi27
+itor &tempi27, &tempr23
+declare &tempr24, real
+rsub &tempr22, &tempr23, &tempr24
+write &tempr24
+declare &tempr25, real
+declare &tempi28, integer
+store k, &tempi28
+itor &tempi28, &tempr25
+declare &tempr26, real
+rsub &tempr25, y, &tempr26
+declare &tempr27, real
+declare &tempi29, integer
+store j, &tempi29
+itor &tempi29, &tempr27
+declare &tempr28, real
+radd &tempr26, &tempr27, &tempr28
+store &tempr28, x
+declare &tempi30, integer
+isub j, k, &tempi30
+declare &tempr29, real
+declare &tempi31, integer
+store &tempi30, &tempi31
+itor &tempi31, &tempr29
+declare &tempr30, real
+radd y, &tempr29, &tempr30
+declare &tempi32, integer
+declare &tempr31, real
+store &tempr30, &tempr31
+rtoi &tempr31, &tempi32
+store &tempi32, m
+store c, a
+read str, string
+read a, character
+read y, real
+read k, integer
+declare &temps7, string
+store "oh hey I'm back!", &temps7
+write &temps7
+halt

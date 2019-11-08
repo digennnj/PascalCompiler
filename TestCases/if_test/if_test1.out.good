@@ -1,0 +1,13 @@
+&tempi1 = 1
+&tempi2 = -1
+&tempi3 = 3
+&tempb1 = False
+&tempi4 = 3
+&tempi5 = 1
+&tempi6 = -1
+&tempb2 = False
+&tempb3 = True
+&tempb4 = False
+jump(lbl1)
+&temps2 = 'BAD'
+out(&temps2): 'BAD'

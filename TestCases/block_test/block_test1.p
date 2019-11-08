@@ -1,0 +1,9 @@
+PROGRAM
+var;
+BEGIN
+    BEGIN
+        BEGIN
+        ;
+        END
+    END
+END.

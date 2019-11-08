@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "pascal.tab.h"
 extern "C" int yylex();
+int line_no = 1;
 %}
 character ['][a-zA-Z0-9][']
 letter  [a-zA-Z]
@@ -30,13 +31,14 @@ id              ({letter}|{underscore})({letter}|{digit}|{underscore})*
 %x COMMENT MULTICOMMENT
 %%
 ^[/][/]                                         {BEGIN COMMENT;}
-<COMMENT>[\n]                                   {BEGIN PASCAL;}
+<COMMENT>[\n]                                   {line_no++; BEGIN PASCAL;}
 <COMMENT>.                                      {/* ignore comment */}
 [{]                                             {BEGIN MULTICOMMENT;}
 <MULTICOMMENT>[}]                               {BEGIN PASCAL;}
 <MULTICOMMENT>.                                 {/* ignore comment */}
+<MULTICOMMENT>[\n]                              {line_no++; /* ignore comment */}
 [ \t]+                                          {/* do nothing */}
-[\n]                                            {/* new line*/}
+[\n]                                            {line_no++; /* new line*/}
 [Pp][Rr][Oo][Gg][Rr][Aa][Mm]			        {return PROGRAM;}
 [Vv][Aa][Rr]					                {return VAR;}
 [Ii][Nn][Tt][Ee][Gg][Ee][Rr]			        {return INTTYPE;}

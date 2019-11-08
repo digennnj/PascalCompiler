@@ -4,4 +4,5 @@ pascal
 *.tab.c
 *.tab.h
 *.asm
+*.out
 *.yy.c

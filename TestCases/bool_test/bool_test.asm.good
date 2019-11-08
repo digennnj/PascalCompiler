@@ -1,0 +1,45 @@
+declare &tempi1, integer
+store 1, &tempi1
+declare &tempi2, integer
+isub 0, &tempi1, &tempi2
+declare &tempi3, integer
+store 3, &tempi3
+declare &tempb1, boolean
+high &tempi2, &tempi3, &tempb1
+write &tempb1
+declare &tempi4, integer
+store 1, &tempi4
+declare &tempi5, integer
+isub 0, &tempi4, &tempi5
+declare &tempi6, integer
+store 3, &tempi6
+declare &tempb2, boolean
+equ &tempi5, &tempi6, &tempb2
+declare &tempb3, boolean
+high &tempi5, &tempi6, &tempb3
+declare &tempb4, boolean
+or &tempb3, &tempb2, &tempb4
+write &tempb4
+declare &tempi7, integer
+store 1, &tempi7
+declare &tempi8, integer
+isub 0, &tempi7, &tempi8
+declare &tempi9, integer
+store 3, &tempi9
+declare &tempb5, boolean
+equ &tempi8, &tempi9, &tempb5
+declare &tempb6, boolean
+low &tempi8, &tempi9, &tempb6
+declare &tempb7, boolean
+or &tempb6, &tempb5, &tempb7
+write &tempb7
+declare &tempi10, integer
+store 1, &tempi10
+declare &tempi11, integer
+isub 0, &tempi10, &tempi11
+declare &tempi12, integer
+store 3, &tempi12
+declare &tempb8, boolean
+low &tempi11, &tempi12, &tempb8
+write &tempb8
+halt

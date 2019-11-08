@@ -12,7 +12,7 @@ extern "C" int yylex();
 extern "C" int yyparse();
 extern FILE * yyin;
 
-int line_no = 1;
+extern int line_no;
 Type cur_type = INT;
 std::ofstream outFile;
 
@@ -71,7 +71,7 @@ void yyerror(const char []);
 %%
 
 
-program	    :	 PROGRAM {line_no++;} VAR variables START {line_no++;} statement_list END PERIOD {line_no++;} 
+program	    :	 PROGRAM VAR variables START statement_list END PERIOD 
 		;
 decl_type : INTTYPE {cur_type = INT;}
      | REALTYPE {cur_type = REAL;}
@@ -79,10 +79,10 @@ decl_type : INTTYPE {cur_type = INT;}
      | BOOLTYPE {cur_type = BOOL;}
      | STRTYPE  {cur_type = STR;}
      ;
-variables   :	SEMICOLON {line_no++;} variables
-		 | SEMICOLON {line_no++;}
-         | decl_type decl_list SEMICOLON {line_no++;} variables
-         | decl_type decl_list SEMICOLON {line_no++;}
+variables   :	SEMICOLON variables
+		 | SEMICOLON 
+         | decl_type decl_list SEMICOLON variables
+         | decl_type decl_list SEMICOLON 
 		;
 decl_list : decl
           | decl_list COMMA decl
@@ -94,23 +94,23 @@ decl : ident {decl_id($1, cur_type);}
 statement_list  :   statement
                  | statement_list statement
 		;
-statement  : 	ident ASSIGNOP expression {assign($1,$3);} SEMICOLON {line_no++;}
+statement  : 	ident ASSIGNOP expression {assign($1,$3);} SEMICOLON
 		;
-statement  :	READ lparen id_list rparen SEMICOLON {line_no++;}
+statement  :	READ lparen id_list rparen SEMICOLON
 		;
-statement  :	WRITE lparen expr_list rparen SEMICOLON {line_no++;}
+statement  :	WRITE lparen expr_list rparen SEMICOLON
 		;
-statement  :    SEMICOLON {line_no++;}
+statement  :    SEMICOLON
 		;
-statement  :	START {line_no++;} statement_list END {line_no++;}
+statement  :	START statement_list END
 	   	| if_statement else_statement
 		| if_statement
 		;
 // we need to create appropriate functions to handle these
 // but this will handle the grammar and the line numbers
-if_statement:	IF expression THEN {line_no++;} statement
+if_statement:	IF expression THEN statement
 	    	;
-else_statement: ELSE {line_no++;} statement
+else_statement: ELSE statement
 	      	;
 id_list    :	ident      {read_id($1);}
   		| id_list COMMA ident {read_id($3);}

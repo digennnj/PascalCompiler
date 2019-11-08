@@ -8,5 +8,6 @@
 &tempb2 = False
 &tempb3 = True
 &tempb4 = False
+jump(lbl1)
 &temps2 = 'BAD'
 out(&temps2): 'BAD'

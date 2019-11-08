@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 from sys import stdin,stdout,stderr, argv
 from collections import defaultdict
+PC=0  # program counter
 symbols = {}
+jumps = {}
+lines = []
 class Char:
     def __init__(self, c):
         self.c = c
     def __str__(self): return str(self.c)
     def __repr__(self): return repr(self.c)
 def parse(line):
+    if not line.split(): return ('', [])  # empty command
     cmd, *rest = line.split()
     args = ' '.join(rest).split(',')
     args = [arg.strip() for arg in args]
@@ -40,7 +44,26 @@ def expectType(typ, *terms):
             raise ValueError("expected {} but got ({}={!r})".format(typ, term, val(term)))
 def dbg(term):
     print('{} = {!r}'.format(term, val(term)))
+def jump_table(lines):
+    res = {}
+    for lineNum, line in enumerate(lines):
+        if line and line[0]==':':
+            # label looks like :lbl1 where lbl1 is the name of the label
+            #  (single word, no whitespace)
+            lbl = line.split()[0]
+            lbl = lbl[1:]
+            res[lbl] = lineNum
+    return res
+def jump(lbl):
+    global PC,jumps
+    try:
+        PC = jumps[lbl]
+        print("jump({})".format(lbl))
+    except KeyError:
+        print(jumps)
+        raise ValueError("label not defined: {}".format(lbl))
 def exec(stmt):
+    global PC
     cmd, args = stmt
     if cmd=="declare":
         dst,typ = args
@@ -132,18 +155,37 @@ def exec(stmt):
         try: expectType(int, a,b)
         except ValueError: expectType(float, a,b)
         symbols[dst] = val(a)>val(b); dbg(dst)
+    elif cmd=="jmp" or cmd=="jmp,":
+        lbl, = args
+        jump(lbl)
+    elif cmd=="jt":
+        flag,lbl = args
+        expectType(bool, flag)
+        if val(flag)==True: jump(lbl)
+    elif cmd=="jf":
+        flag,lbl = args
+        expectType(bool, flag)
+        if val(flag)==False: jump(lbl)
     elif cmd=="halt":
         exit(0)
+    elif not cmd: pass
+    elif cmd[0]==":": pass
+    elif cmd=="//": pass
     else:
-        raise ValueError("statement not recognized: {}".format(stmt))
+        raise ValueError("statement not recognized: '{}'".format(stmt))
 
 if len(argv)!=2:
     stderr.write("usage: asm.py foo.asm\n")
     exit(1)
 with open(argv[1], "r") as f:
-    for lineNum, line in enumerate(f):
+    lines = f.readlines()
+    jumps = jump_table(lines)
+    while True:
         try: 
-            exec(parse(line))
+            if PC >= len(lines): raise ValueError("reached end of program without seeing halt statement")
+            exec(parse(lines[PC]))
+            PC += 1
         except Exception:
-            print("error on line {}: {}".format(lineNum, line.rstrip()))
+            if PC < len(lines): # error on a specific line
+                print("error on line {}: {}".format(PC+1, lines[PC].rstrip()))
             raise

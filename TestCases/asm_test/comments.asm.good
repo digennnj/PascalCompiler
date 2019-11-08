@@ -1,0 +1,8 @@
+// This is a comment
+    // Is this a comment?
+
+
+// ^-- some blank lines
+
+write "Good job!"
+halt

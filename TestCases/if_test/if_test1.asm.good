@@ -18,11 +18,11 @@ declare &tempb3, boolean
 not &tempb2, &tempb3
 declare &tempb4, boolean
 and &tempb1, &tempb3, &tempb4
-jf &tempb4, $lbl1
+jf &tempb4, lbl1
 declare &temps1, string
 store "GOOD", &temps1
 write &temps1
-jmp, $lbl2
+jmp, lbl2
 :lbl1
 declare &temps2, string
 store "BAD", &temps2

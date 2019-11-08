@@ -1,0 +1,11 @@
+&tempi1 = 6
+&tempi2 = 3
+&tempb1 = True
+&tempi3 = 6
+&tempi4 = 1
+&tempi5 = -1
+&tempb2 = False
+&tempb3 = True
+&tempb4 = True
+&temps1 = 'GOOD'
+out(&temps1): 'GOOD'

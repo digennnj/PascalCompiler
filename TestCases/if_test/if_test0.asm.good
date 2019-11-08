@@ -1,19 +1,17 @@
 declare &tempi1, integer
-store 1, &tempi1
+store 6, &tempi1
 declare &tempi2, integer
-isub 0, &tempi1, &tempi2
-declare &tempi3, integer
-store 3, &tempi3
+store 3, &tempi2
 declare &tempb1, boolean
-high &tempi2, &tempi3, &tempb1
+high &tempi1, &tempi2, &tempb1
+declare &tempi3, integer
+store 6, &tempi3
 declare &tempi4, integer
-store 3, &tempi4
+store 1, &tempi4
 declare &tempi5, integer
-store 1, &tempi5
-declare &tempi6, integer
-isub 0, &tempi5, &tempi6
+isub 0, &tempi4, &tempi5
 declare &tempb2, boolean
-equ &tempi4, &tempi6, &tempb2
+equ &tempi3, &tempi5, &tempb2
 declare &tempb3, boolean
 not &tempb2, &tempb3
 declare &tempb4, boolean
@@ -22,10 +20,5 @@ jf &tempb4, &label1
 declare &temps1, string
 store "GOOD", &temps1
 write &temps1
-jmp &label2
 :&label1
-declare &temps2, string
-store "BAD", &temps2
-write &temps2
-:&label2
 halt

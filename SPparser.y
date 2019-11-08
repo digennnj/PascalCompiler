@@ -22,6 +22,9 @@ extern char *convert_to_int(const char *val);
 extern char *convert_to_real(const char *val);
 
 
+char *gen_else(char[]);
+void gen_endif(char[]);
+char *gen_if(char[]);
 char *temp_char();
 char *temp_str();
 char *temp_int();
@@ -56,6 +59,9 @@ void yyerror(const char []);
 %left MULTIPLYOP DIVIDEOP MODOP
 
 
+%type <sval>if_condition
+%type <sval>if_statement
+%type <sval>if
 %type <sval>ident
 %type <sval>expression
 %type <sval>expr
@@ -103,12 +109,15 @@ statement  :	WRITE lparen expr_list rparen SEMICOLON
 statement  :    SEMICOLON
 		;
 statement  :	START statement_list END
-	   	| if_statement else_statement
-		| if_statement
+	   	| if
 		;
+if : if_statement {$1=gen_else($1);} else_statement {$$=$1; gen_endif($1);}
+   | if_statement {$$=$1; gen_endif($1);}
 // we need to create appropriate functions to handle these
 // but this will handle the grammar and the line numbers
-if_statement:	IF expression THEN statement
+if_condition: IF expression THEN {$$=gen_if($2);}
+    ;
+if_statement:	if_condition statement {$$=$1;}
 	    	;
 else_statement: ELSE statement
 	      	;

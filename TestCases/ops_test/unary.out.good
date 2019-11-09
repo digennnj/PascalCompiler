@@ -1,0 +1,17 @@
+&tempi1 = 4
+a = 4
+&tempi2 = 6
+&tempi3 = -6
+&tempi4 = 10
+b = 10
+&tempi5 = -10
+&tempi6 = -14
+c = -14
+&tempi7 = 3
+&tempi8 = -3
+&tempi9 = 3
+&tempi10 = 17
+&tempi11 = -10
+&tempi12 = 10
+&tempi13 = 7
+out(&tempi13): 7

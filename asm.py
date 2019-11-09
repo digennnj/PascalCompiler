@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from sys import stdin,stdout,stderr, argv
 from collections import defaultdict
+DEBUG_MODE = 'DBG'  # 'OFF', 'DBG', 'LINES'
 PC=0  # program counter
 symbols = {}
 jumps = {}
@@ -27,7 +28,7 @@ def val(term):
     try: return lit(term)
     except ValueError: pass
     if term in symbols: return symbols[term]
-    print("symbol table: ", symbols)
+    dbg("symbol table: {}".format(symbols))
     raise ValueError("symbol not defined: {}".format(term))
 def t(typ):
     if type(typ)==str: typ=typ.lower()
@@ -38,8 +39,15 @@ def expectType(typ, *terms):
     for term in terms:
         if type(val(term))!=typ:
             raise ValueError("expected {} but got ({}={!r})".format(typ, term, val(term)))
-def dbg(term):
-    print('{} = {!r}'.format(term, val(term)))
+def dbg(msg):
+    if DEBUG_MODE in ('LINES', 'DBG'): print(msg)
+def dbgvar(term):
+    dbgline()
+    dbg('{} = {!r}'.format(term, val(term)))
+def dbgline():
+    global PC
+    if DEBUG_MODE=='LINES': print('{}: '.format(PC+1), end='')
+
 def jump_table(lines):
     res = {}
     for lineNum, line in enumerate(lines):
@@ -53,8 +61,9 @@ def jump_table(lines):
 def jump(lbl):
     global PC,jumps
     try:
+        dbgline()
+        dbg("jump({})".format(lbl))
         PC = jumps[lbl]
-        print("jump({})".format(lbl))
     except KeyError:
         print(jumps)
         raise ValueError("label not defined: {}".format(lbl))
@@ -70,87 +79,89 @@ def exec(stmt):
         elif typ==str: res = ''
         elif typ==bool: res=False
         else: raise ValueError("Invalid type: {}".format(typ))
-        symbols[dst]=res; # dbg(dst)
+        symbols[dst]=res; # dbgvar(dst)
     elif cmd=="read":
         dst,typ = args
         typ=t(typ)
         expectType(typ, dst)
+        dbgline()
         resp=input(dst+"> ")
         res=lit(resp)
         typ = type(symbols[dst])
         if type(res)!=typ: raise ValueError("expected {} but got lit {}".format(typ, resp))
-        symbols[dst] = res; dbg(dst)
+        symbols[dst] = res; dbgvar(dst)
     elif cmd=="isub" or cmd=="rsub":
         a,b,dst = args
         if cmd=="isub": expectType(int, a,b,dst)
         elif cmd=="rsub": expectType(float, a,b,dst)
-        symbols[dst] = val(a)-val(b); dbg(dst)
+        symbols[dst] = val(a)-val(b); dbgvar(dst)
     elif cmd=="iadd" or cmd=="radd" or cmd=="concat":
         a,b,dst = args
         if cmd=="iadd": expectType(int, a,b,dst)
         elif cmd=="radd": expectType(float, a,b,dst)
         elif cmd=="concat": expectType(str, a,b,dst)
-        symbols[dst] = val(a)+val(b); dbg(dst)
+        symbols[dst] = val(a)+val(b); dbgvar(dst)
     elif cmd=="imul" or cmd=="rmul":
         a,b,dst = args
         if cmd=="imul": expectType(int, a,b,dst)
         elif cmd=="rmul": expectType(float, a,b,dst)
-        symbols[dst] = val(a)*val(b); dbg(dst)
+        symbols[dst] = val(a)*val(b); dbgvar(dst)
     elif cmd=="idiv" or cmd=="rdiv":
         a,b,dst = args
         if cmd=="idiv": expectType(int, a,b,dst)
         elif cmd=="rdiv": expectType(float, a,b,dst)
-        symbols[dst] = val(a)/val(b) if cmd=="rdiv" else val(a)//val(b); dbg(dst)
+        symbols[dst] = val(a)/val(b) if cmd=="rdiv" else val(a)//val(b); dbgvar(dst)
     elif cmd=="imod":
         a,b,dst = args
         expectType(int, a,b,dst)
-        symbols[dst] = val(a)%val(b); dbg(dst)
+        symbols[dst] = val(a)%val(b); dbgvar(dst)
     elif cmd=="store":
         a,dst = args
         expectType(type(symbols[dst]), a)
-        symbols[dst] = val(a); dbg(dst)
+        symbols[dst] = val(a); dbgvar(dst)
     elif cmd=="write":
         a, = args
-        print("out({}): {!r}".format(a, val(a)))
+        dbgline()
+        print("out({}): {!r}".format(a, val(a)))  # print even in non-debug mode
     elif cmd=="itor":
         a,dst = args
         expectType(int, a); expectType(float, dst)
-        symbols[dst] = float(val(a)); dbg(dst)
+        symbols[dst] = float(val(a)); dbgvar(dst)
     elif cmd=="rtoi":
         a,dst = args
         expectType(float, a); expectType(int, dst)
-        symbols[dst] = int(val(a)); dbg(dst)
+        symbols[dst] = int(val(a)); dbgvar(dst)
     elif cmd=="or":
         a,b,dst = args
         expectType(bool, a,b,dst)
-        symbols[dst] = val(a) or val(b); dbg(dst)
+        symbols[dst] = val(a) or val(b); dbgvar(dst)
     elif cmd=="and":
         a,b,dst = args
         expectType(bool, a,b,dst)
-        symbols[dst] = val(a) and val(b); dbg(dst)
+        symbols[dst] = val(a) and val(b); dbgvar(dst)
     elif cmd=="not":
         a,dst = args
         expectType(bool, a,dst)
-        symbols[dst] = not val(a); dbg(dst)
+        symbols[dst] = not val(a); dbgvar(dst)
     elif cmd=="equ":
         a,b,dst = args
         expectType(bool, dst)
         if type(val(a))!=type(val(b)): raise ValueError("arguments {!r} and {!r} incompatible for {}".format(val(a), val(b), cmd))
-        symbols[dst] = val(a)==val(b); dbg(dst)
+        symbols[dst] = val(a)==val(b); dbgvar(dst)
     elif cmd=="low":
         a,b,dst = args
         expectType(bool, dst)
         if type(val(a))!=type(val(b)): raise ValueError("arguments {!r} and {!r} incompatible for {}".format(val(a), val(b), cmd))
         try: expectType(int, a,b)
         except ValueError: expectType(float, a,b)
-        symbols[dst] = val(a)<val(b); dbg(dst)
+        symbols[dst] = val(a)<val(b); dbgvar(dst)
     elif cmd=="high":
         a,b,dst = args
         expectType(bool, dst)
         if type(val(a))!=type(val(b)): raise ValueError("arguments {!r} and {!r} incompatible for {}".format(val(a), val(b), cmd))
         try: expectType(int, a,b)
         except ValueError: expectType(float, a,b)
-        symbols[dst] = val(a)>val(b); dbg(dst)
+        symbols[dst] = val(a)>val(b); dbgvar(dst)
     elif cmd=="jmp" or cmd=="jmp,":
         lbl, = args
         jump(lbl)

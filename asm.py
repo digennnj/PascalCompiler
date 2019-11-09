@@ -5,11 +5,7 @@ PC=0  # program counter
 symbols = {}
 jumps = {}
 lines = []
-class Char:
-    def __init__(self, c):
-        self.c = c
-    def __str__(self): return str(self.c)
-    def __repr__(self): return repr(self.c)
+class Char(str): pass  # act like a string, but still have a different type
 def parse(line):
     if not line.split(): return ('', [])  # empty command
     cmd, *rest = line.split()

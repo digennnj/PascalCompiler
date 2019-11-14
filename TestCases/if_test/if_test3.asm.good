@@ -1,0 +1,46 @@
+declare in, integer
+read in, integer
+declare &tempi1, integer
+store 1, &tempi1
+declare &tempb1, boolean
+equ &tempi1, in, &tempb1
+declare &tempb2, boolean
+low &tempi1, in, &tempb2
+declare &tempb3, boolean
+or &tempb2, &tempb1, &tempb3
+jf &tempb3, &label1
+declare &tempi2, integer
+store 2, &tempi2
+declare &tempb4, boolean
+equ &tempi2, in, &tempb4
+declare &tempb5, boolean
+low &tempi2, in, &tempb5
+declare &tempb6, boolean
+or &tempb5, &tempb4, &tempb6
+jf &tempb6, &label2
+declare &tempi3, integer
+store 3, &tempi3
+declare &tempb7, boolean
+equ &tempi3, in, &tempb7
+declare &tempb8, boolean
+low &tempi3, in, &tempb8
+declare &tempb9, boolean
+or &tempb8, &tempb7, &tempb9
+jf &tempb9, &label3
+declare &tempi4, integer
+store 4, &tempi4
+declare &tempb10, boolean
+equ &tempi4, in, &tempb10
+declare &tempb11, boolean
+low &tempi4, in, &tempb11
+declare &tempb12, boolean
+or &tempb11, &tempb10, &tempb12
+jf &tempb12, &label4
+declare &temps1, string
+store "Oh no! too far!", &temps1
+write &temps1
+:&label4
+:&label3
+:&label2
+:&label1
+halt

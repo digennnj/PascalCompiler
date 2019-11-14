@@ -1,0 +1,53 @@
+declare in, integer
+read in, integer
+declare &tempi1, integer
+store 5, &tempi1
+declare &tempb1, boolean
+low in, &tempi1, &tempb1
+jf &tempb1, &label1
+declare &tempi2, integer
+store 2, &tempi2
+declare &tempi3, integer
+imod in, &tempi2, &tempi3
+declare &tempi4, integer
+store 0, &tempi4
+declare &tempb2, boolean
+equ &tempi3, &tempi4, &tempb2
+jf &tempb2, &label2
+declare &temps1, string
+store "even small", &temps1
+write &temps1
+jmp &label3
+:&label2
+declare &temps2, string
+store "odd small", &temps2
+write &temps2
+:&label3
+declare &temps3, string
+store "small", &temps3
+write &temps3
+jmp &label4
+:&label1
+declare &tempi5, integer
+store 2, &tempi5
+declare &tempi6, integer
+imod in, &tempi5, &tempi6
+declare &tempi7, integer
+store 0, &tempi7
+declare &tempb3, boolean
+equ &tempi6, &tempi7, &tempb3
+jf &tempb3, &label5
+declare &temps4, string
+store "even big", &temps4
+write &temps4
+jmp &label6
+:&label5
+declare &temps5, string
+store "odd big", &temps5
+write &temps5
+:&label6
+declare &temps6, string
+store "big", &temps6
+write &temps6
+:&label4
+halt

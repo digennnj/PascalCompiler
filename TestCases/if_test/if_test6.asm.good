@@ -1,0 +1,50 @@
+declare in, integer
+read in, integer
+declare &tempi1, integer
+store 1, &tempi1
+declare &tempb1, boolean
+equ &tempi1, in, &tempb1
+jf &tempb1, &label1
+declare &temps1, string
+store "A", &temps1
+write &temps1
+jmp &label2
+:&label1
+declare &tempi2, integer
+store 2, &tempi2
+declare &tempb2, boolean
+equ &tempi2, in, &tempb2
+jf &tempb2, &label3
+declare &temps2, string
+store "B", &temps2
+write &temps2
+jmp &label4
+:&label3
+declare &tempi3, integer
+store 3, &tempi3
+declare &tempb3, boolean
+equ &tempi3, in, &tempb3
+jf &tempb3, &label5
+declare &temps3, string
+store "C", &temps3
+write &temps3
+jmp &label6
+:&label5
+declare &tempi4, integer
+store 4, &tempi4
+declare &tempb4, boolean
+equ &tempi4, in, &tempb4
+jf &tempb4, &label7
+declare &temps4, string
+store "D", &temps4
+write &temps4
+jmp &label8
+:&label7
+declare &temps5, string
+store "E", &temps5
+write &temps5
+:&label8
+:&label6
+:&label4
+:&label2
+halt

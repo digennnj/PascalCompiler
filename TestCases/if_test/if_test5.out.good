@@ -1,0 +1,16 @@
+in> in = 2
+&tempi1 = 1
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+&tempi2 = 2
+&tempb4 = True
+&tempb5 = False
+&tempb6 = True
+&tempi3 = 3
+&tempb7 = False
+&tempb8 = False
+&tempb9 = False
+jump(&label3)
+&temps2 = 'This works though.'
+out(&temps2): 'This works though.'

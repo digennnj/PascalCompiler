@@ -1,0 +1,20 @@
+in> in = 3
+&tempi1 = 1
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+&tempi2 = 2
+&tempb4 = False
+&tempb5 = True
+&tempb6 = True
+&tempi3 = 3
+&tempb7 = True
+&tempb8 = False
+&tempb9 = True
+&tempi4 = 4
+&tempb10 = False
+&tempb11 = False
+&tempb12 = False
+jump(&label4)
+&temps2 = 'Oh no! this might not do what you think it does...'
+out(&temps2): 'Oh no! this might not do what you think it does...'

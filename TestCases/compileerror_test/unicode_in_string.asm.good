@@ -1,0 +1,10 @@
+declare &temps1, string
+store "“ha”", &temps1
+declare bye, string
+store &temps1, bye
+declare &temps2, string
+store "ha", &temps2
+declare &temps3, string
+concat bye, &temps2, &temps3
+store &temps3, bye
+halt

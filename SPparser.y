@@ -204,14 +204,6 @@ int main( int argc, char **argv )
 	}
 }
 
-void error( const char msg[] )
-{
-	std::cout << "LINE " << line_no << " : " << msg << std::endl;
-	exit( -1 );
-}
-void error(const std::string msg) {
-    error(msg.c_str());
-}
 void printSymbolTable() {
     std::cout << "Symbol Table:" << std::endl;
     for (auto it = symbolTable.begin(); it!=symbolTable.end(); it++) {

@@ -40,6 +40,7 @@ char *gen_neg(char []);
 void read_id (char []);
 void write_expr(char []);
 void error(const char []);
+void error(std::string);
 void yyerror(const char []);
 %}
 %union{
@@ -85,28 +86,32 @@ decl_type : INTTYPE {cur_type = INT;}
      | BOOLTYPE {cur_type = BOOL;}
      | STRTYPE  {cur_type = STR;}
      ;
-variables   :	SEMICOLON variables
-		 | SEMICOLON 
-         | decl_type decl_list SEMICOLON variables
-         | decl_type decl_list SEMICOLON 
+variables   :	semicolon variables
+		 | semicolon 
+         | decl_type decl_list semicolon variables
+         | decl_type decl_list semicolon 
 		;
 decl_list : decl
           | decl_list COMMA decl
           ;
 decl : ident {decl_id($1, cur_type);}
-     | ident ASSIGNOP expression {decl_id($1, cur_type);} {assign($1,$3);}
+     | ident assignop expression {decl_id($1, cur_type);} {assign($1,$3);}
      ;
 
+semicolon : SEMICOLON
+          | {error("expected semicolon");}
+assignop  : ASSIGNOP
+          | EQOP {error("expected :=, not =");}
 statement_list  :   statement
                  | statement_list statement
 		;
-statement  : 	ident ASSIGNOP expression {assign($1,$3);} SEMICOLON
+statement  : 	ident assignop expression {assign($1,$3);} semicolon
 		;
-statement  :	READ lparen id_list rparen SEMICOLON
+statement  :	READ lparen id_list rparen semicolon
 		;
-statement  :	WRITE lparen expr_list rparen SEMICOLON
+statement  :	WRITE lparen expr_list rparen semicolon
 		;
-statement  :    SEMICOLON
+statement  :    semicolon
 		;
 statement  :	START statement_list END
 	   	| if

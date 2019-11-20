@@ -1,5 +1,5 @@
 # generates .o files using Makefile implicit rules
-OFILES= assign.o read.o write.o gen_infix.o finish.o declare.o mk_temp.o convert.o symbol_table.o if.o
+OFILES= assign.o read.o write.o gen_infix.o finish.o declare.o mk_temp.o convert.o symbol_table.o if.o loop.o
 pascal: SPparser.tab.c lex.yy.c pascal.tab.h $(OFILES)
 	g++ $(OFILES) SPparser.tab.c lex.yy.c -lfl -o pascal
 declare.o: symbol_table.o

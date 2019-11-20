@@ -32,6 +32,5 @@ char *gen_else(char *elseLbl) {
 	return endIfLbl;
 }
 void gen_endif(char *endIfLbl) {
-	std::cerr << "endif label: '" << endIfLbl << "'" << std::endl;
 	outFile << ":" << endIfLbl << std::endl;
 }

@@ -1,0 +1,13 @@
+in> in = 1
+&tempi1 = 5
+&tempb1 = True
+&tempi2 = 2
+&tempi3 = 1
+&tempi4 = 0
+&tempb2 = False
+jump(&label2)
+&temps2 = 'odd small'
+out(&temps2): 'odd small'
+&temps3 = 'small'
+out(&temps3): 'small'
+jump(&label4)

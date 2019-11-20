@@ -1,0 +1,13 @@
+in> in = 7
+&tempi1 = 5
+&tempb1 = False
+jump(&label1)
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb3 = False
+jump(&label5)
+&temps5 = 'odd big'
+out(&temps5): 'odd big'
+&temps6 = 'big'
+out(&temps6): 'big'

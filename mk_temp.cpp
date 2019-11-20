@@ -46,3 +46,10 @@ char *temp_str() {
     decl_id(tempname, STR);
     return strdup(tempname);
 }
+char *temp_label() {
+    static int max_lbl=0;
+    static char tempname[30];
+    max_lbl++;
+    sprintf(tempname, "&label%d" ,max_lbl);
+    return strdup(tempname);
+}

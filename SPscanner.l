@@ -106,6 +106,7 @@ UTF8        ({UTF8_2}|{UTF8_3}|{UTF8_4})
 <MULTICOMMENT>.                                 {/* ignore comment */}
 <MULTICOMMENT>[\n]                              {line_no++; /* ignore comment */}
 [ \t]+                                          {/* do nothing */}
+[\r]                                            {/* ignore CR */}
 [\n]                                            {line_no++; /* new line*/}
 [Pp][Rr][Oo][Gg][Rr][Aa][Mm]			        {return PROGRAM;}
 [Vv][Aa][Rr]					                {return VAR;}
@@ -121,6 +122,10 @@ UTF8        ({UTF8_2}|{UTF8_3}|{UTF8_4})
 [Ii][Ff]					{return IF;}
 [Tt][Hh][Ee][Nn]				{return THEN;}
 [Ee][Ll][Ss][Ee]				{return ELSE;}
+[Ww][Hh][Ii][Ll][Ee]                            {return WHILE;}
+[Dd][Oo]                                        {return DO;}
+[Rr][Ee][Pp][Ee][Aa][Tt]                        {return REPEAT;}
+[Uu][Nn][Tt][Ii][Ll]                            {return UNTIL;}
 {comma}                                         {return COMMA;}
 {squote}                                        {return SQUOTE;}
 {period}					                    {return PERIOD;}

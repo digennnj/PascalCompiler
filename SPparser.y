@@ -25,6 +25,10 @@ extern char *convert_to_real(const char *val);
 char *gen_else(char[]);
 void gen_endif(char[]);
 char *gen_if(char[]);
+char *gen_begin_loop();
+char *gen_while_loop(char *varName);
+char *gen_while_end(char *startLabel, char *endLabel);
+void gen_repeat(char *varName, char *startLabel);
 char *temp_char();
 char *temp_str();
 char *temp_int();
@@ -47,7 +51,7 @@ void yyerror(const char []);
        int ival;
        char * sval;
        }
-%token PROGRAM VAR START END READ WRITE ASSIGNOP
+%token PROGRAM VAR START END READ WRITE ASSIGNOP WHILE DO REPEAT UNTIL
 %token INTLITERAL REALLITERAL CHARACTER BOOLLITERAL STRLITERAL
 %token INTTYPE REALTYPE CHARTYPE BOOLTYPE STRTYPE
 %token EQOP NEQOP LTOP GTOP LEQOP GEQOP NOTOP
@@ -72,6 +76,9 @@ void yyerror(const char []);
 %type <sval>REALLITERAL
 %type <sval>BOOLLITERAL
 %type <sval>STRLITERAL
+%type <sval>WHILE
+%type <sval>REPEAT
+%type <sval>DO
 
 
 %start system_goal
@@ -115,17 +122,25 @@ statement  :    semicolon
 		;
 statement  :	START statement_list END
 	   	| if
+		| loop
 		;
 if : if_statement {$1=gen_else($1);} else_statement {$$=$1; gen_endif($1);}
    | if_statement {$$=$1; gen_endif($1);}
 // we need to create appropriate functions to handle these
 // but this will handle the grammar and the line numbers
-if_condition: IF expression THEN {$$=gen_if($2);}
-    ;
 if_statement:	if_condition statement {$$=$1;}
 	    	;
+if_condition: IF expression THEN {$$=gen_if($2);}
+    ;
 else_statement: ELSE statement
 	      	;
+loop	:		while_loop
+		|		repeat_loop
+		;
+while_loop	:	WHILE {$1=gen_begin_loop();} expression DO {$4=gen_while_loop($3);}  statement {gen_while_end($1, $4);}
+		;
+repeat_loop	:	REPEAT {$1=gen_begin_loop();} statement UNTIL expression {gen_repeat($5, $1);}
+		;
 id_list    :	ident      {read_id($1);}
   		| id_list COMMA ident {read_id($3);}
 		;

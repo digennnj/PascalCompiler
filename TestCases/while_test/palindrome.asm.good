@@ -1,0 +1,356 @@
+declare a, integer
+declare b, integer
+declare c, integer
+declare d, integer
+declare e, integer
+declare f, integer
+declare n, integer
+:&label1
+read n, integer
+declare &tempi1, integer
+store 0, &tempi1
+declare &tempb1, boolean
+low n, &tempi1, &tempb1
+jf &tempb1, &label2
+declare &temps1, string
+store "number is too small", &temps1
+write &temps1
+jmp &label3
+:&label2
+declare &tempi2, integer
+store 10, &tempi2
+declare &tempb2, boolean
+low n, &tempi2, &tempb2
+jf &tempb2, &label4
+declare &temps2, string
+store "palindrome", &temps2
+write &temps2
+jmp &label5
+:&label4
+declare &tempi3, integer
+store 100, &tempi3
+declare &tempb3, boolean
+low n, &tempi3, &tempb3
+jf &tempb3, &label6
+declare &tempi4, integer
+store 10, &tempi4
+declare &tempi5, integer
+imod n, &tempi4, &tempi5
+store &tempi5, b
+declare &tempi6, integer
+store 10, &tempi6
+declare &tempi7, integer
+idiv n, &tempi6, &tempi7
+store &tempi7, n
+declare &tempi8, integer
+store 10, &tempi8
+declare &tempi9, integer
+imod n, &tempi8, &tempi9
+store &tempi9, a
+declare &tempi10, integer
+store 10, &tempi10
+declare &tempi11, integer
+idiv n, &tempi10, &tempi11
+store &tempi11, n
+declare &tempb4, boolean
+equ a, b, &tempb4
+jf &tempb4, &label7
+declare &temps3, string
+store "palindrome", &temps3
+write &temps3
+jmp &label8
+:&label7
+declare &temps4, string
+store "not a palindrome", &temps4
+write &temps4
+:&label8
+jmp &label9
+:&label6
+declare &tempi12, integer
+store 1000, &tempi12
+declare &tempb5, boolean
+low n, &tempi12, &tempb5
+jf &tempb5, &label10
+declare &tempi13, integer
+store 10, &tempi13
+declare &tempi14, integer
+imod n, &tempi13, &tempi14
+store &tempi14, c
+declare &tempi15, integer
+store 10, &tempi15
+declare &tempi16, integer
+idiv n, &tempi15, &tempi16
+store &tempi16, n
+declare &tempi17, integer
+store 10, &tempi17
+declare &tempi18, integer
+imod n, &tempi17, &tempi18
+store &tempi18, b
+declare &tempi19, integer
+store 10, &tempi19
+declare &tempi20, integer
+idiv n, &tempi19, &tempi20
+store &tempi20, n
+declare &tempi21, integer
+store 10, &tempi21
+declare &tempi22, integer
+imod n, &tempi21, &tempi22
+store &tempi22, a
+declare &tempi23, integer
+store 10, &tempi23
+declare &tempi24, integer
+idiv n, &tempi23, &tempi24
+store &tempi24, n
+declare &tempb6, boolean
+equ a, c, &tempb6
+jf &tempb6, &label11
+declare &temps5, string
+store "palindrome", &temps5
+write &temps5
+jmp &label12
+:&label11
+declare &temps6, string
+store "not a palindrome", &temps6
+write &temps6
+:&label12
+jmp &label13
+:&label10
+declare &tempi25, integer
+store 10000, &tempi25
+declare &tempb7, boolean
+low n, &tempi25, &tempb7
+jf &tempb7, &label14
+declare &tempi26, integer
+store 10, &tempi26
+declare &tempi27, integer
+imod n, &tempi26, &tempi27
+store &tempi27, d
+declare &tempi28, integer
+store 10, &tempi28
+declare &tempi29, integer
+idiv n, &tempi28, &tempi29
+store &tempi29, n
+declare &tempi30, integer
+store 10, &tempi30
+declare &tempi31, integer
+imod n, &tempi30, &tempi31
+store &tempi31, c
+declare &tempi32, integer
+store 10, &tempi32
+declare &tempi33, integer
+idiv n, &tempi32, &tempi33
+store &tempi33, n
+declare &tempi34, integer
+store 10, &tempi34
+declare &tempi35, integer
+imod n, &tempi34, &tempi35
+store &tempi35, b
+declare &tempi36, integer
+store 10, &tempi36
+declare &tempi37, integer
+idiv n, &tempi36, &tempi37
+store &tempi37, n
+declare &tempi38, integer
+store 10, &tempi38
+declare &tempi39, integer
+imod n, &tempi38, &tempi39
+store &tempi39, a
+declare &tempi40, integer
+store 10, &tempi40
+declare &tempi41, integer
+idiv n, &tempi40, &tempi41
+store &tempi41, n
+declare &tempb8, boolean
+equ a, d, &tempb8
+declare &tempb9, boolean
+equ b, c, &tempb9
+declare &tempb10, boolean
+and &tempb8, &tempb9, &tempb10
+jf &tempb10, &label15
+declare &temps7, string
+store "palindrome", &temps7
+write &temps7
+jmp &label16
+:&label15
+declare &temps8, string
+store "not a palindrome", &temps8
+write &temps8
+:&label16
+jmp &label17
+:&label14
+declare &tempi42, integer
+store 100000, &tempi42
+declare &tempb11, boolean
+low n, &tempi42, &tempb11
+jf &tempb11, &label18
+declare &tempi43, integer
+store 10, &tempi43
+declare &tempi44, integer
+imod n, &tempi43, &tempi44
+store &tempi44, e
+declare &tempi45, integer
+store 10, &tempi45
+declare &tempi46, integer
+idiv n, &tempi45, &tempi46
+store &tempi46, n
+declare &tempi47, integer
+store 10, &tempi47
+declare &tempi48, integer
+imod n, &tempi47, &tempi48
+store &tempi48, d
+declare &tempi49, integer
+store 10, &tempi49
+declare &tempi50, integer
+idiv n, &tempi49, &tempi50
+store &tempi50, n
+declare &tempi51, integer
+store 10, &tempi51
+declare &tempi52, integer
+imod n, &tempi51, &tempi52
+store &tempi52, c
+declare &tempi53, integer
+store 10, &tempi53
+declare &tempi54, integer
+idiv n, &tempi53, &tempi54
+store &tempi54, n
+declare &tempi55, integer
+store 10, &tempi55
+declare &tempi56, integer
+imod n, &tempi55, &tempi56
+store &tempi56, b
+declare &tempi57, integer
+store 10, &tempi57
+declare &tempi58, integer
+idiv n, &tempi57, &tempi58
+store &tempi58, n
+declare &tempi59, integer
+store 10, &tempi59
+declare &tempi60, integer
+imod n, &tempi59, &tempi60
+store &tempi60, a
+declare &tempi61, integer
+store 10, &tempi61
+declare &tempi62, integer
+idiv n, &tempi61, &tempi62
+store &tempi62, n
+declare &tempb12, boolean
+equ a, e, &tempb12
+declare &tempb13, boolean
+equ b, d, &tempb13
+declare &tempb14, boolean
+and &tempb12, &tempb13, &tempb14
+jf &tempb14, &label19
+declare &temps9, string
+store "palindrome", &temps9
+write &temps9
+jmp &label20
+:&label19
+declare &temps10, string
+store "not a palindrome", &temps10
+write &temps10
+:&label20
+jmp &label21
+:&label18
+declare &tempi63, integer
+store 1000000, &tempi63
+declare &tempb15, boolean
+low n, &tempi63, &tempb15
+jf &tempb15, &label22
+declare &tempi64, integer
+store 10, &tempi64
+declare &tempi65, integer
+imod n, &tempi64, &tempi65
+store &tempi65, f
+declare &tempi66, integer
+store 10, &tempi66
+declare &tempi67, integer
+idiv n, &tempi66, &tempi67
+store &tempi67, n
+declare &tempi68, integer
+store 10, &tempi68
+declare &tempi69, integer
+imod n, &tempi68, &tempi69
+store &tempi69, e
+declare &tempi70, integer
+store 10, &tempi70
+declare &tempi71, integer
+idiv n, &tempi70, &tempi71
+store &tempi71, n
+declare &tempi72, integer
+store 10, &tempi72
+declare &tempi73, integer
+imod n, &tempi72, &tempi73
+store &tempi73, d
+declare &tempi74, integer
+store 10, &tempi74
+declare &tempi75, integer
+idiv n, &tempi74, &tempi75
+store &tempi75, n
+declare &tempi76, integer
+store 10, &tempi76
+declare &tempi77, integer
+imod n, &tempi76, &tempi77
+store &tempi77, c
+declare &tempi78, integer
+store 10, &tempi78
+declare &tempi79, integer
+idiv n, &tempi78, &tempi79
+store &tempi79, n
+declare &tempi80, integer
+store 10, &tempi80
+declare &tempi81, integer
+imod n, &tempi80, &tempi81
+store &tempi81, b
+declare &tempi82, integer
+store 10, &tempi82
+declare &tempi83, integer
+idiv n, &tempi82, &tempi83
+store &tempi83, n
+declare &tempi84, integer
+store 10, &tempi84
+declare &tempi85, integer
+imod n, &tempi84, &tempi85
+store &tempi85, a
+declare &tempi86, integer
+store 10, &tempi86
+declare &tempi87, integer
+idiv n, &tempi86, &tempi87
+store &tempi87, n
+declare &tempb16, boolean
+equ a, f, &tempb16
+declare &tempb17, boolean
+equ b, e, &tempb17
+declare &tempb18, boolean
+and &tempb16, &tempb17, &tempb18
+declare &tempb19, boolean
+equ c, d, &tempb19
+declare &tempb20, boolean
+and &tempb18, &tempb19, &tempb20
+jf &tempb20, &label23
+declare &temps11, string
+store "palindrome", &temps11
+write &temps11
+jmp &label24
+:&label23
+declare &temps12, string
+store "not a palindrome", &temps12
+write &temps12
+:&label24
+jmp &label25
+:&label22
+declare &temps13, string
+store "number is too big", &temps13
+write &temps13
+:&label25
+:&label21
+:&label17
+:&label13
+:&label9
+:&label5
+:&label3
+declare &tempi88, integer
+store 0, &tempi88
+declare &tempb21, boolean
+low n, &tempi88, &tempb21
+jf &tempb21, &label1
+halt

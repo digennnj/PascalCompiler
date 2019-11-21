@@ -1,0 +1,106 @@
+amax> amax = 2
+bmax> bmax = 4
+&tempi1 = 1
+a = 1
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+&tempi2 = 1
+b = 1
+&tempb4 = False
+&tempb5 = True
+&tempb6 = True
+out(a): 1
+out(b): 1
+&tempi3 = 1
+&tempi4 = 2
+b = 2
+jump(&label3)
+&tempb4 = False
+&tempb5 = True
+&tempb6 = True
+out(a): 1
+out(b): 2
+&tempi3 = 1
+&tempi4 = 3
+b = 3
+jump(&label3)
+&tempb4 = False
+&tempb5 = True
+&tempb6 = True
+out(a): 1
+out(b): 3
+&tempi3 = 1
+&tempi4 = 4
+b = 4
+jump(&label3)
+&tempb4 = True
+&tempb5 = False
+&tempb6 = True
+out(a): 1
+out(b): 4
+&tempi3 = 1
+&tempi4 = 5
+b = 5
+jump(&label3)
+&tempb4 = False
+&tempb5 = False
+&tempb6 = False
+jump(&label4)
+&tempi5 = 1
+&tempi6 = 2
+a = 2
+jump(&label1)
+&tempb1 = True
+&tempb2 = False
+&tempb3 = True
+&tempi2 = 1
+b = 1
+&tempb4 = False
+&tempb5 = True
+&tempb6 = True
+out(a): 2
+out(b): 1
+&tempi3 = 1
+&tempi4 = 2
+b = 2
+jump(&label3)
+&tempb4 = False
+&tempb5 = True
+&tempb6 = True
+out(a): 2
+out(b): 2
+&tempi3 = 1
+&tempi4 = 3
+b = 3
+jump(&label3)
+&tempb4 = False
+&tempb5 = True
+&tempb6 = True
+out(a): 2
+out(b): 3
+&tempi3 = 1
+&tempi4 = 4
+b = 4
+jump(&label3)
+&tempb4 = True
+&tempb5 = False
+&tempb6 = True
+out(a): 2
+out(b): 4
+&tempi3 = 1
+&tempi4 = 5
+b = 5
+jump(&label3)
+&tempb4 = False
+&tempb5 = False
+&tempb6 = False
+jump(&label4)
+&tempi5 = 1
+&tempi6 = 3
+a = 3
+jump(&label1)
+&tempb1 = False
+&tempb2 = False
+&tempb3 = False
+jump(&label2)

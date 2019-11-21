@@ -1,0 +1,734 @@
+n> n = 133
+&tempi1 = 0
+&tempb1 = False
+jump(&label2)
+&tempi2 = 10
+&tempb2 = False
+jump(&label4)
+&tempi3 = 100
+&tempb3 = False
+jump(&label6)
+&tempi12 = 1000
+&tempb5 = True
+&tempi13 = 10
+&tempi14 = 3
+c = 3
+&tempi15 = 10
+&tempi16 = 13
+n = 13
+&tempi17 = 10
+&tempi18 = 3
+b = 3
+&tempi19 = 10
+&tempi20 = 1
+n = 1
+&tempi21 = 10
+&tempi22 = 1
+a = 1
+&tempi23 = 10
+&tempi24 = 0
+n = 0
+&tempb6 = False
+jump(&label11)
+&temps6 = 'not a palindrome'
+out(&temps6): 'not a palindrome'
+jump(&label13)
+&tempi88 = 0
+&tempb21 = False
+jump(&label1)
+n> n = 303
+&tempi1 = 0
+&tempb1 = False
+jump(&label2)
+&tempi2 = 10
+&tempb2 = False
+jump(&label4)
+&tempi3 = 100
+&tempb3 = False
+jump(&label6)
+&tempi12 = 1000
+&tempb5 = True
+&tempi13 = 10
+&tempi14 = 3
+c = 3
+&tempi15 = 10
+&tempi16 = 30
+n = 30
+&tempi17 = 10
+&tempi18 = 0
+b = 0
+&tempi19 = 10
+&tempi20 = 3
+n = 3
+&tempi21 = 10
+&tempi22 = 3
+a = 3
+&tempi23 = 10
+&tempi24 = 0
+n = 0
+&tempb6 = True
+&temps5 = 'palindrome'
+out(&temps5): 'palindrome'
+jump(&label12)
+jump(&label13)
+&tempi88 = 0
+&tempb21 = False
+jump(&label1)
+n> n = 405
+&tempi1 = 0
+&tempb1 = False
+jump(&label2)
+&tempi2 = 10
+&tempb2 = False
+jump(&label4)
+&tempi3 = 100
+&tempb3 = False
+jump(&label6)
+&tempi12 = 1000
+&tempb5 = True
+&tempi13 = 10
+&tempi14 = 5
+c = 5
+&tempi15 = 10
+&tempi16 = 40
+n = 40
+&tempi17 = 10
+&tempi18 = 0
+b = 0
+&tempi19 = 10
+&tempi20 = 4
+n = 4
+&tempi21 = 10
+&tempi22 = 4
+a = 4
+&tempi23 = 10
+&tempi24 = 0
+n = 0
+&tempb6 = False
+jump(&label11)
+&temps6 = 'not a palindrome'
+out(&temps6): 'not a palindrome'
+jump(&label13)
+&tempi88 = 0
+&tempb21 = False
+jump(&label1)
+n> n = 302060203
+&tempi1 = 0
+&tempb1 = False
+jump(&label2)
+&tempi2 = 10
+&tempb2 = False
+jump(&label4)
+&tempi3 = 100
+&tempb3 = False
+jump(&label6)
+&tempi12 = 1000
+&tempb5 = False
+jump(&label10)
+&tempi25 = 10000
+&tempb7 = False
+jump(&label14)
+&tempi42 = 100000
+&tempb11 = False
+jump(&label18)
+&tempi63 = 1000000
+&tempb15 = False
+jump(&label22)
+&temps13 = 'number is too big'
+out(&temps13): 'number is too big'
+&tempi88 = 0
+&tempb21 = False
+jump(&label1)
+n> n = 30203
+&tempi1 = 0
+&tempb1 = False
+jump(&label2)
+&tempi2 = 10
+&tempb2 = False
+jump(&label4)
+&tempi3 = 100
+&tempb3 = False
+jump(&label6)
+&tempi12 = 1000
+&tempb5 = False
+jump(&label10)
+&tempi25 = 10000
+&tempb7 = False
+jump(&label14)
+&tempi42 = 100000
+&tempb11 = True
+&tempi43 = 10
+&tempi44 = 3
+e = 3
+&tempi45 = 10
+&tempi46 = 3020
+n = 3020
+&tempi47 = 10
+&tempi48 = 0
+d = 0
+&tempi49 = 10
+&tempi50 = 302
+n = 302
+&tempi51 = 10
+&tempi52 = 2
+c = 2
+&tempi53 = 10
+&tempi54 = 30
+n = 30
+&tempi55 = 10
+&tempi56 = 0
+b = 0
+&tempi57 = 10
+&tempi58 = 3
+n = 3
+&tempi59 = 10
+&tempi60 = 3
+a = 3
+&tempi61 = 10
+&tempi62 = 0
+n = 0
+&tempb12 = True
+&tempb13 = True
+&tempb14 = True
+&temps9 = 'palindrome'
+out(&temps9): 'palindrome'
+jump(&label20)
+jump(&label21)
+&tempi88 = 0
+&tempb21 = False
+jump(&label1)
+n> n = 3663
+&tempi1 = 0
+&tempb1 = False
+jump(&label2)
+&tempi2 = 10
+&tempb2 = False
+jump(&label4)
+&tempi3 = 100
+&tempb3 = False
+jump(&label6)
+&tempi12 = 1000
+&tempb5 = False
+jump(&label10)
+&tempi25 = 10000
+&tempb7 = True
+&tempi26 = 10
+&tempi27 = 3
+d = 3
+&tempi28 = 10
+&tempi29 = 366
+n = 366
+&tempi30 = 10
+&tempi31 = 6
+c = 6
+&tempi32 = 10
+&tempi33 = 36
+n = 36
+&tempi34 = 10
+&tempi35 = 6
+b = 6
+&tempi36 = 10
+&tempi37 = 3
+n = 3
+&tempi38 = 10
+&tempi39 = 3
+a = 3
+&tempi40 = 10
+&tempi41 = 0
+n = 0
+&tempb8 = True
+&tempb9 = True
+&tempb10 = True
+&temps7 = 'palindrome'
+out(&temps7): 'palindrome'
+jump(&label16)
+jump(&label17)
+&tempi88 = 0
+&tempb21 = False
+jump(&label1)
+n> n = 361163
+&tempi1 = 0
+&tempb1 = False
+jump(&label2)
+&tempi2 = 10
+&tempb2 = False
+jump(&label4)
+&tempi3 = 100
+&tempb3 = False
+jump(&label6)
+&tempi12 = 1000
+&tempb5 = False
+jump(&label10)
+&tempi25 = 10000
+&tempb7 = False
+jump(&label14)
+&tempi42 = 100000
+&tempb11 = False
+jump(&label18)
+&tempi63 = 1000000
+&tempb15 = True
+&tempi64 = 10
+&tempi65 = 3
+f = 3
+&tempi66 = 10
+&tempi67 = 36116
+n = 36116
+&tempi68 = 10
+&tempi69 = 6
+e = 6
+&tempi70 = 10
+&tempi71 = 3611
+n = 3611
+&tempi72 = 10
+&tempi73 = 1
+d = 1
+&tempi74 = 10
+&tempi75 = 361
+n = 361
+&tempi76 = 10
+&tempi77 = 1
+c = 1
+&tempi78 = 10
+&tempi79 = 36
+n = 36
+&tempi80 = 10
+&tempi81 = 6
+b = 6
+&tempi82 = 10
+&tempi83 = 3
+n = 3
+&tempi84 = 10
+&tempi85 = 3
+a = 3
+&tempi86 = 10
+&tempi87 = 0
+n = 0
+&tempb16 = True
+&tempb17 = True
+&tempb18 = True
+&tempb19 = True
+&tempb20 = True
+&temps11 = 'palindrome'
+out(&temps11): 'palindrome'
+jump(&label24)
+jump(&label25)
+&tempi88 = 0
+&tempb21 = False
+jump(&label1)
+n> n = 3612163
+&tempi1 = 0
+&tempb1 = False
+jump(&label2)
+&tempi2 = 10
+&tempb2 = False
+jump(&label4)
+&tempi3 = 100
+&tempb3 = False
+jump(&label6)
+&tempi12 = 1000
+&tempb5 = False
+jump(&label10)
+&tempi25 = 10000
+&tempb7 = False
+jump(&label14)
+&tempi42 = 100000
+&tempb11 = False
+jump(&label18)
+&tempi63 = 1000000
+&tempb15 = False
+jump(&label22)
+&temps13 = 'number is too big'
+out(&temps13): 'number is too big'
+&tempi88 = 0
+&tempb21 = False
+jump(&label1)
+n> n = 1
+&tempi1 = 0
+&tempb1 = False
+jump(&label2)
+&tempi2 = 10
+&tempb2 = True
+&temps2 = 'palindrome'
+out(&temps2): 'palindrome'
+jump(&label5)
+&tempi88 = 0
+&tempb21 = False
+jump(&label1)
+n> n = 22
+&tempi1 = 0
+&tempb1 = False
+jump(&label2)
+&tempi2 = 10
+&tempb2 = False
+jump(&label4)
+&tempi3 = 100
+&tempb3 = True
+&tempi4 = 10
+&tempi5 = 2
+b = 2
+&tempi6 = 10
+&tempi7 = 2
+n = 2
+&tempi8 = 10
+&tempi9 = 2
+a = 2
+&tempi10 = 10
+&tempi11 = 0
+n = 0
+&tempb4 = True
+&temps3 = 'palindrome'
+out(&temps3): 'palindrome'
+jump(&label8)
+jump(&label9)
+&tempi88 = 0
+&tempb21 = False
+jump(&label1)
+n> n = 313
+&tempi1 = 0
+&tempb1 = False
+jump(&label2)
+&tempi2 = 10
+&tempb2 = False
+jump(&label4)
+&tempi3 = 100
+&tempb3 = False
+jump(&label6)
+&tempi12 = 1000
+&tempb5 = True
+&tempi13 = 10
+&tempi14 = 3
+c = 3
+&tempi15 = 10
+&tempi16 = 31
+n = 31
+&tempi17 = 10
+&tempi18 = 1
+b = 1
+&tempi19 = 10
+&tempi20 = 3
+n = 3
+&tempi21 = 10
+&tempi22 = 3
+a = 3
+&tempi23 = 10
+&tempi24 = 0
+n = 0
+&tempb6 = True
+&temps5 = 'palindrome'
+out(&temps5): 'palindrome'
+jump(&label12)
+jump(&label13)
+&tempi88 = 0
+&tempb21 = False
+jump(&label1)
+n> n = 4004
+&tempi1 = 0
+&tempb1 = False
+jump(&label2)
+&tempi2 = 10
+&tempb2 = False
+jump(&label4)
+&tempi3 = 100
+&tempb3 = False
+jump(&label6)
+&tempi12 = 1000
+&tempb5 = False
+jump(&label10)
+&tempi25 = 10000
+&tempb7 = True
+&tempi26 = 10
+&tempi27 = 4
+d = 4
+&tempi28 = 10
+&tempi29 = 400
+n = 400
+&tempi30 = 10
+&tempi31 = 0
+c = 0
+&tempi32 = 10
+&tempi33 = 40
+n = 40
+&tempi34 = 10
+&tempi35 = 0
+b = 0
+&tempi36 = 10
+&tempi37 = 4
+n = 4
+&tempi38 = 10
+&tempi39 = 4
+a = 4
+&tempi40 = 10
+&tempi41 = 0
+n = 0
+&tempb8 = True
+&tempb9 = True
+&tempb10 = True
+&temps7 = 'palindrome'
+out(&temps7): 'palindrome'
+jump(&label16)
+jump(&label17)
+&tempi88 = 0
+&tempb21 = False
+jump(&label1)
+n> n = 53135
+&tempi1 = 0
+&tempb1 = False
+jump(&label2)
+&tempi2 = 10
+&tempb2 = False
+jump(&label4)
+&tempi3 = 100
+&tempb3 = False
+jump(&label6)
+&tempi12 = 1000
+&tempb5 = False
+jump(&label10)
+&tempi25 = 10000
+&tempb7 = False
+jump(&label14)
+&tempi42 = 100000
+&tempb11 = True
+&tempi43 = 10
+&tempi44 = 5
+e = 5
+&tempi45 = 10
+&tempi46 = 5313
+n = 5313
+&tempi47 = 10
+&tempi48 = 3
+d = 3
+&tempi49 = 10
+&tempi50 = 531
+n = 531
+&tempi51 = 10
+&tempi52 = 1
+c = 1
+&tempi53 = 10
+&tempi54 = 53
+n = 53
+&tempi55 = 10
+&tempi56 = 3
+b = 3
+&tempi57 = 10
+&tempi58 = 5
+n = 5
+&tempi59 = 10
+&tempi60 = 5
+a = 5
+&tempi61 = 10
+&tempi62 = 0
+n = 0
+&tempb12 = True
+&tempb13 = True
+&tempb14 = True
+&temps9 = 'palindrome'
+out(&temps9): 'palindrome'
+jump(&label20)
+jump(&label21)
+&tempi88 = 0
+&tempb21 = False
+jump(&label1)
+n> n = 346643
+&tempi1 = 0
+&tempb1 = False
+jump(&label2)
+&tempi2 = 10
+&tempb2 = False
+jump(&label4)
+&tempi3 = 100
+&tempb3 = False
+jump(&label6)
+&tempi12 = 1000
+&tempb5 = False
+jump(&label10)
+&tempi25 = 10000
+&tempb7 = False
+jump(&label14)
+&tempi42 = 100000
+&tempb11 = False
+jump(&label18)
+&tempi63 = 1000000
+&tempb15 = True
+&tempi64 = 10
+&tempi65 = 3
+f = 3
+&tempi66 = 10
+&tempi67 = 34664
+n = 34664
+&tempi68 = 10
+&tempi69 = 4
+e = 4
+&tempi70 = 10
+&tempi71 = 3466
+n = 3466
+&tempi72 = 10
+&tempi73 = 6
+d = 6
+&tempi74 = 10
+&tempi75 = 346
+n = 346
+&tempi76 = 10
+&tempi77 = 6
+c = 6
+&tempi78 = 10
+&tempi79 = 34
+n = 34
+&tempi80 = 10
+&tempi81 = 4
+b = 4
+&tempi82 = 10
+&tempi83 = 3
+n = 3
+&tempi84 = 10
+&tempi85 = 3
+a = 3
+&tempi86 = 10
+&tempi87 = 0
+n = 0
+&tempb16 = True
+&tempb17 = True
+&tempb18 = True
+&tempb19 = True
+&tempb20 = True
+&temps11 = 'palindrome'
+out(&temps11): 'palindrome'
+jump(&label24)
+jump(&label25)
+&tempi88 = 0
+&tempb21 = False
+jump(&label1)
+n> n = 345643
+&tempi1 = 0
+&tempb1 = False
+jump(&label2)
+&tempi2 = 10
+&tempb2 = False
+jump(&label4)
+&tempi3 = 100
+&tempb3 = False
+jump(&label6)
+&tempi12 = 1000
+&tempb5 = False
+jump(&label10)
+&tempi25 = 10000
+&tempb7 = False
+jump(&label14)
+&tempi42 = 100000
+&tempb11 = False
+jump(&label18)
+&tempi63 = 1000000
+&tempb15 = True
+&tempi64 = 10
+&tempi65 = 3
+f = 3
+&tempi66 = 10
+&tempi67 = 34564
+n = 34564
+&tempi68 = 10
+&tempi69 = 4
+e = 4
+&tempi70 = 10
+&tempi71 = 3456
+n = 3456
+&tempi72 = 10
+&tempi73 = 6
+d = 6
+&tempi74 = 10
+&tempi75 = 345
+n = 345
+&tempi76 = 10
+&tempi77 = 5
+c = 5
+&tempi78 = 10
+&tempi79 = 34
+n = 34
+&tempi80 = 10
+&tempi81 = 4
+b = 4
+&tempi82 = 10
+&tempi83 = 3
+n = 3
+&tempi84 = 10
+&tempi85 = 3
+a = 3
+&tempi86 = 10
+&tempi87 = 0
+n = 0
+&tempb16 = True
+&tempb17 = True
+&tempb18 = True
+&tempb19 = False
+&tempb20 = False
+jump(&label23)
+&temps12 = 'not a palindrome'
+out(&temps12): 'not a palindrome'
+jump(&label25)
+&tempi88 = 0
+&tempb21 = False
+jump(&label1)
+n> n = 53025
+&tempi1 = 0
+&tempb1 = False
+jump(&label2)
+&tempi2 = 10
+&tempb2 = False
+jump(&label4)
+&tempi3 = 100
+&tempb3 = False
+jump(&label6)
+&tempi12 = 1000
+&tempb5 = False
+jump(&label10)
+&tempi25 = 10000
+&tempb7 = False
+jump(&label14)
+&tempi42 = 100000
+&tempb11 = True
+&tempi43 = 10
+&tempi44 = 5
+e = 5
+&tempi45 = 10
+&tempi46 = 5302
+n = 5302
+&tempi47 = 10
+&tempi48 = 2
+d = 2
+&tempi49 = 10
+&tempi50 = 530
+n = 530
+&tempi51 = 10
+&tempi52 = 0
+c = 0
+&tempi53 = 10
+&tempi54 = 53
+n = 53
+&tempi55 = 10
+&tempi56 = 3
+b = 3
+&tempi57 = 10
+&tempi58 = 5
+n = 5
+&tempi59 = 10
+&tempi60 = 5
+a = 5
+&tempi61 = 10
+&tempi62 = 0
+n = 0
+&tempb12 = True
+&tempb13 = False
+&tempb14 = False
+jump(&label19)
+&temps10 = 'not a palindrome'
+out(&temps10): 'not a palindrome'
+jump(&label21)
+&tempi88 = 0
+&tempb21 = False
+jump(&label1)
+n> n = -1
+&tempi1 = 0
+&tempb1 = True
+&temps1 = 'number is too small'
+out(&temps1): 'number is too small'
+jump(&label3)
+&tempi88 = 0
+&tempb21 = True

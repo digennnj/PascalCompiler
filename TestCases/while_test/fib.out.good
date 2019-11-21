@@ -1,0 +1,225 @@
+&tempi1 = 0
+prev = 0
+&tempi2 = 1
+cur = 1
+max> max = 50000
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 1
+tmp = 1
+&tempi3 = 1
+cur = 1
+prev = 1
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 1
+tmp = 1
+&tempi3 = 2
+cur = 2
+prev = 1
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 2
+tmp = 2
+&tempi3 = 3
+cur = 3
+prev = 2
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 3
+tmp = 3
+&tempi3 = 5
+cur = 5
+prev = 3
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 5
+tmp = 5
+&tempi3 = 8
+cur = 8
+prev = 5
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 8
+tmp = 8
+&tempi3 = 13
+cur = 13
+prev = 8
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 13
+tmp = 13
+&tempi3 = 21
+cur = 21
+prev = 13
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 21
+tmp = 21
+&tempi3 = 34
+cur = 34
+prev = 21
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 34
+tmp = 34
+&tempi3 = 55
+cur = 55
+prev = 34
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 55
+tmp = 55
+&tempi3 = 89
+cur = 89
+prev = 55
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 89
+tmp = 89
+&tempi3 = 144
+cur = 144
+prev = 89
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 144
+tmp = 144
+&tempi3 = 233
+cur = 233
+prev = 144
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 233
+tmp = 233
+&tempi3 = 377
+cur = 377
+prev = 233
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 377
+tmp = 377
+&tempi3 = 610
+cur = 610
+prev = 377
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 610
+tmp = 610
+&tempi3 = 987
+cur = 987
+prev = 610
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 987
+tmp = 987
+&tempi3 = 1597
+cur = 1597
+prev = 987
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 1597
+tmp = 1597
+&tempi3 = 2584
+cur = 2584
+prev = 1597
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 2584
+tmp = 2584
+&tempi3 = 4181
+cur = 4181
+prev = 2584
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 4181
+tmp = 4181
+&tempi3 = 6765
+cur = 6765
+prev = 4181
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 6765
+tmp = 6765
+&tempi3 = 10946
+cur = 10946
+prev = 6765
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 10946
+tmp = 10946
+&tempi3 = 17711
+cur = 17711
+prev = 10946
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 17711
+tmp = 17711
+&tempi3 = 28657
+cur = 28657
+prev = 17711
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 28657
+tmp = 28657
+&tempi3 = 46368
+cur = 46368
+prev = 28657
+jump(&label1)
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+out(cur): 46368
+tmp = 46368
+&tempi3 = 75025
+cur = 75025
+prev = 46368
+jump(&label1)
+&tempb1 = False
+&tempb2 = False
+&tempb3 = False
+jump(&label2)

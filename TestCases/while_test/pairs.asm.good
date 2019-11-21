@@ -1,0 +1,45 @@
+declare a, integer
+declare b, integer
+declare amax, integer
+declare bmax, integer
+read amax, integer
+read bmax, integer
+declare &tempi1, integer
+store 1, &tempi1
+store &tempi1, a
+:&label1
+declare &tempb1, boolean
+equ a, amax, &tempb1
+declare &tempb2, boolean
+low a, amax, &tempb2
+declare &tempb3, boolean
+or &tempb2, &tempb1, &tempb3
+jf &tempb3, &label2
+declare &tempi2, integer
+store 1, &tempi2
+store &tempi2, b
+:&label3
+declare &tempb4, boolean
+equ b, bmax, &tempb4
+declare &tempb5, boolean
+low b, bmax, &tempb5
+declare &tempb6, boolean
+or &tempb5, &tempb4, &tempb6
+jf &tempb6, &label4
+write a
+write b
+declare &tempi3, integer
+store 1, &tempi3
+declare &tempi4, integer
+iadd b, &tempi3, &tempi4
+store &tempi4, b
+jmp &label3
+:&label4
+declare &tempi5, integer
+store 1, &tempi5
+declare &tempi6, integer
+iadd a, &tempi5, &tempi6
+store &tempi6, a
+jmp &label1
+:&label2
+halt

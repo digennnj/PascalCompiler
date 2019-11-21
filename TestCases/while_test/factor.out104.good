@@ -1,0 +1,156 @@
+n> n = 104
+&tempi1 = 2
+factor = 2
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 0
+&tempi4 = 0
+&tempb2 = True
+&tempi5 = 52
+n = 52
+out(factor): 2
+jump(&label4)
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 0
+&tempi4 = 0
+&tempb2 = True
+&tempi5 = 26
+n = 26
+out(factor): 2
+jump(&label4)
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 0
+&tempi4 = 0
+&tempb2 = True
+&tempi5 = 13
+n = 13
+out(factor): 2
+jump(&label4)
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 1
+&tempi4 = 0
+&tempb2 = False
+jump(&label3)
+&tempi6 = 1
+&tempi7 = 3
+factor = 3
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 1
+&tempi4 = 0
+&tempb2 = False
+jump(&label3)
+&tempi6 = 1
+&tempi7 = 4
+factor = 4
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 1
+&tempi4 = 0
+&tempb2 = False
+jump(&label3)
+&tempi6 = 1
+&tempi7 = 5
+factor = 5
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 3
+&tempi4 = 0
+&tempb2 = False
+jump(&label3)
+&tempi6 = 1
+&tempi7 = 6
+factor = 6
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 1
+&tempi4 = 0
+&tempb2 = False
+jump(&label3)
+&tempi6 = 1
+&tempi7 = 7
+factor = 7
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 6
+&tempi4 = 0
+&tempb2 = False
+jump(&label3)
+&tempi6 = 1
+&tempi7 = 8
+factor = 8
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 5
+&tempi4 = 0
+&tempb2 = False
+jump(&label3)
+&tempi6 = 1
+&tempi7 = 9
+factor = 9
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 4
+&tempi4 = 0
+&tempb2 = False
+jump(&label3)
+&tempi6 = 1
+&tempi7 = 10
+factor = 10
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 3
+&tempi4 = 0
+&tempb2 = False
+jump(&label3)
+&tempi6 = 1
+&tempi7 = 11
+factor = 11
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 2
+&tempi4 = 0
+&tempb2 = False
+jump(&label3)
+&tempi6 = 1
+&tempi7 = 12
+factor = 12
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 1
+&tempi4 = 0
+&tempb2 = False
+jump(&label3)
+&tempi6 = 1
+&tempi7 = 13
+factor = 13
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 0
+&tempi4 = 0
+&tempb2 = True
+&tempi5 = 1
+n = 1
+out(factor): 13
+jump(&label4)
+jump(&label1)
+&tempi2 = 1
+&tempb1 = False
+jump(&label2)

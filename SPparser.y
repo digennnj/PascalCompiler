@@ -22,6 +22,7 @@ extern char *convert_to_int(const char *val);
 extern char *convert_to_real(const char *val);
 
 
+void decl_array(char[], Type, int);
 char *gen_else(char[]);
 void gen_endif(char[]);
 char *gen_if(char[]);
@@ -34,9 +35,9 @@ char *temp_str();
 char *temp_int();
 char *temp_real();
 char *temp_bool();
-void assign_lit(char[], char[]);
-void assign(char[], char[]);
-void decl_id (char[], Type);
+void assign_lit(const char[], const char[]);
+void assign(const char[], const char[]);
+void decl_id (const char[], Type);
 void finish();
 char * gen_infix(char [], const char [], char []);
 char *gen_not(char []);
@@ -56,6 +57,7 @@ void yyerror(const char []);
 %token INTTYPE REALTYPE CHARTYPE BOOLTYPE STRTYPE
 %token EQOP NEQOP LTOP GTOP LEQOP GEQOP NOTOP
 %token LPAREN RPAREN COMMA SQUOTE PERIOD SEMICOLON COLON PLUSOP MINUSOP MULTIPLYOP DIVIDEOP ID MODOP IF THEN ELSE
+%token LSQUARE RSQUARE
 
 %left ANDOP OROP
 %left NOTOP
@@ -68,6 +70,8 @@ void yyerror(const char []);
 %type <sval>if_statement
 %type <sval>if
 %type <sval>ident
+%type <sval>array_ident
+%type <sval>plain_ident
 %type <sval>expression
 %type <sval>expr
 %type <sval>term
@@ -101,8 +105,9 @@ variables   :	semicolon variables
 decl_list : decl
           | decl_list COMMA decl
           ;
-decl : ident {decl_id($1, cur_type);}
-     | ident assignop expression {decl_id($1, cur_type);} {assign($1,$3);}
+decl : plain_ident {decl_id($1, cur_type);}
+     | plain_ident LSQUARE INTLITERAL RSQUARE {decl_array($1, cur_type, std::stoi($3));}
+     | plain_ident assignop expression {decl_id($1, cur_type);} {assign($1,$3);}
      ;
 
 semicolon : SEMICOLON
@@ -112,7 +117,10 @@ assignop  : ASSIGNOP
 statement_list  :   statement
                  | statement_list statement
 		;
-statement  : 	ident assignop expression {assign($1,$3);} semicolon
+statement  : 	plain_ident assignop expression {assign($1,$3);} semicolon
+           |    plain_ident LSQUARE INTLITERAL RSQUARE assignop expression
+                        {std::string elem = std::string($1)+"&"+std::string($3);
+                        assign(elem.c_str(), $6);}
 		;
 statement  :	READ lparen id_list rparen semicolon
 		;
@@ -188,7 +196,14 @@ lparen    :	LPAREN
 rparen    :	RPAREN
 		| {error(") EXPECTED , BUT FOUND");}
 		;
-ident     :	ID {$$=strdup(yylval.sval);}
+ident : plain_ident {$$=$1;}
+      | array_ident {$$=$1;}
+    ;
+plain_ident     :	ID {$$=strdup(yylval.sval);}
+                ;
+array_ident : plain_ident LSQUARE INTLITERAL RSQUARE
+                        { std::string elem = std::string($1)+"&"+std::string($3);
+                            $$ = strdup(elem.c_str());}
 		| {error("IDENTIFIER EXPECTED, BUT FOUND");}
 		;
 system_goal :	program  { finish(); }

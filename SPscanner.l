@@ -148,6 +148,8 @@ UTF8        ({UTF8_2}|{UTF8_3}|{UTF8_4})
 [>]                                             {return GTOP;}
 [<][=]                                          {return LEQOP;}
 [>][=]                                          {return GEQOP;}
+[[]                                             {return LSQUARE;}
+[]]                                             {return RSQUARE;}
 {character}                                     {yylval.sval = strdup(yytext); return CHARACTER;}
 {intliteral}                                    {yylval.sval = strdup(yytext); return INTLITERAL;}
 {realliteral}                                   {yylval.sval = strdup(yytext); return REALLITERAL;}

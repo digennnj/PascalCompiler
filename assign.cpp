@@ -12,11 +12,11 @@ extern void error(const char msg[]);
 extern void error(const std::string);
 extern void printSymbolTable();
 
-void assign_lit(char target[], char source[])
+void assign_lit(const char target[], const char source[])
 {
     outFile << "store " << source << ", " << target << std::endl;
 }
-void assign (char target[], char source[])
+void assign (const char target[], const char source[])
 {
      /* Generate code for assignment. */
      if (symbolTable.find(target)==symbolTable.end()) {printSymbolTable(); error("TARGET SYMBOL NOT DEFINED: "+std::string(target));}

@@ -1,0 +1,34 @@
+declare &tempi1, integer
+store 4, &tempi1
+declare a, integer
+store &tempi1, a
+declare &tempi2, integer
+store 6, &tempi2
+declare &tempi3, integer
+isub 0, &tempi2, &tempi3
+declare &tempi4, integer
+isub a, &tempi3, &tempi4
+declare b, integer
+store &tempi4, b
+declare &tempi5, integer
+isub 0, b, &tempi5
+declare &tempi6, integer
+isub &tempi5, a, &tempi6
+declare c, integer
+store &tempi6, c
+declare &tempi7, integer
+store 3, &tempi7
+declare &tempi8, integer
+isub 0, &tempi7, &tempi8
+declare &tempi9, integer
+isub 0, &tempi8, &tempi9
+declare &tempi10, integer
+isub &tempi9, c, &tempi10
+declare &tempi11, integer
+isub 0, b, &tempi11
+declare &tempi12, integer
+isub 0, &tempi11, &tempi12
+declare &tempi13, integer
+isub &tempi10, &tempi12, &tempi13
+write &tempi13
+halt

@@ -1,0 +1,10 @@
+declare &tempc1, character
+store 'c', &tempc1
+declare a, character
+store &tempc1, a
+declare &tempc2, character
+store 'c', &tempc2
+declare &tempb1, boolean
+equ a, &tempc2, &tempb1
+write &tempb1
+halt

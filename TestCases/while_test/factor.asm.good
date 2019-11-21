@@ -1,0 +1,34 @@
+declare n, integer
+declare factor, integer
+read n, integer
+declare &tempi1, integer
+store 2, &tempi1
+store &tempi1, factor
+:&label1
+declare &tempi2, integer
+store 1, &tempi2
+declare &tempb1, boolean
+high n, &tempi2, &tempb1
+jf &tempb1, &label2
+declare &tempi3, integer
+imod n, factor, &tempi3
+declare &tempi4, integer
+store 0, &tempi4
+declare &tempb2, boolean
+equ &tempi3, &tempi4, &tempb2
+jf &tempb2, &label3
+declare &tempi5, integer
+idiv n, factor, &tempi5
+store &tempi5, n
+write factor
+jmp &label4
+:&label3
+declare &tempi6, integer
+store 1, &tempi6
+declare &tempi7, integer
+iadd factor, &tempi6, &tempi7
+store &tempi7, factor
+:&label4
+jmp &label1
+:&label2
+halt

@@ -25,7 +25,6 @@ char *gen_if(char *varName) {
     }
 }
 char *gen_else(char *elseLbl) {
-	std::cerr << "else label: '" << elseLbl << "'" << std::endl;
 	char *endIfLbl = temp_label();
 	outFile << "jmp " << endIfLbl << std::endl;
 	outFile << ":" << elseLbl << std::endl;

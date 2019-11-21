@@ -106,7 +106,7 @@ UTF8        ({UTF8_2}|{UTF8_3}|{UTF8_4})
 <MULTICOMMENT>.                                 {/* ignore comment */}
 <MULTICOMMENT>[\n]                              {line_no++; /* ignore comment */}
 [ \t]+                                          {/* do nothing */}
-[\r]                                            {/* ignore comment */}
+[\r]                                            {/* ignore CR */}
 [\n]                                            {line_no++; /* new line*/}
 [Pp][Rr][Oo][Gg][Rr][Aa][Mm]			        {return PROGRAM;}
 [Vv][Aa][Rr]					                {return VAR;}

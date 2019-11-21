@@ -1,0 +1,279 @@
+&tempi1 = 0
+stalactite = 0
+&tempi2 = 1
+normal1 = 1
+&tempi3 = 2
+angus = 2
+&tempi4 = 3
+exitsign = 3
+&tempi5 = 4
+normal2 = 4
+&tempi6 = 5
+falsealarm = 5
+&tempi7 = 6
+outside = 6
+&temps1 = 'A drop of water from a stalactite brushes your cheek. It stings a litte.'
+stal_desc = 'A drop of water from a stalactite brushes your cheek. It stings a litte.'
+&temps2 = 'A faint glow alerts you that the end is near at hand.'
+exit_desc = 'A faint glow alerts you that the end is near at hand.'
+&temps3 = 'Curses! It was only a cave sprite.'
+false_desc = 'Curses! It was only a cave sprite.'
+&temps4 = 'You hear the faint skirl of a bagpipe.'
+angus_desc = 'You hear the faint skirl of a bagpipe.'
+&temps5 = 'Your footsteps resound from the cave walls.'
+normal_desc = 'Your footsteps resound from the cave walls.'
+&temps6 = 'Dare you enter the Maze of Doom?'
+sign = 'Dare you enter the Maze of Doom?'
+&temps7 = "You heave a sign and turn back home. It probably wouldn't have been very fun anyway."
+giveup = "You heave a sign and turn back home. It probably wouldn't have been very fun anyway."
+&temps8 = 'With a sickening crunch the door slides down behind you. You are trapped.'
+cavein = 'With a sickening crunch the door slides down behind you. You are trapped.'
+&temps9 = 'You bump into a wall.'
+wrongway = 'You bump into a wall.'
+&temps10 = "You blink the light from your eyes. How many centuries has it been since you've seen the sun? To your south there is a sign. You turn to read it: "
+escape = "You blink the light from your eyes. How many centuries has it been since you've seen the sun? To your south there is a sign. You turn to read it: "
+you = 6
+&tempb1 = True
+out(sign): 'Dare you enter the Maze of Doom?'
+jump(&label2)
+resp> resp = 'y'
+&tempb6 = True
+&tempc1 = 'y'
+&tempb7 = True
+out(cavein): 'With a sickening crunch the door slides down behind you. You are trapped.'
+you = 0
+jump(&label13)
+jump(&label14)
+jump(start)
+&tempb1 = False
+jump(&label1)
+&tempb2 = True
+out(stal_desc): 'A drop of water from a stalactite brushes your cheek. It stings a litte.'
+jump(&label4)
+resp> resp = 'n'
+&tempb6 = False
+jump(&label11)
+&tempb8 = True
+&tempc2 = 'n'
+&tempb9 = True
+you = 4
+jump(&label17)
+jump(&label24)
+jump(start)
+&tempb1 = False
+jump(&label1)
+&tempb2 = False
+jump(&label3)
+&tempb3 = False
+jump(&label5)
+&tempb4 = False
+jump(&label7)
+&tempb5 = False
+jump(&label9)
+out(normal_desc): 'Your footsteps resound from the cave walls.'
+resp> resp = 'n'
+&tempb6 = False
+jump(&label11)
+&tempb8 = False
+jump(&label15)
+&tempb13 = False
+jump(&label25)
+&tempb18 = False
+jump(&label35)
+&tempb23 = False
+jump(&label45)
+&tempb28 = True
+&tempc18 = 'n'
+&tempb29 = True
+you = 2
+jump(&label57)
+jump(&label64)
+jump(start)
+&tempb1 = False
+jump(&label1)
+&tempb2 = False
+jump(&label3)
+&tempb3 = True
+out(angus_desc): 'You hear the faint skirl of a bagpipe.'
+jump(&label6)
+resp> resp = 'n'
+&tempb6 = False
+jump(&label11)
+&tempb8 = False
+jump(&label15)
+&tempb13 = False
+jump(&label25)
+&tempb18 = True
+&tempc10 = 'n'
+&tempb19 = True
+out(wrongway): 'You bump into a wall.'
+jump(&label37)
+jump(&label44)
+jump(start)
+&tempb1 = False
+jump(&label1)
+&tempb2 = False
+jump(&label3)
+&tempb3 = True
+out(angus_desc): 'You hear the faint skirl of a bagpipe.'
+jump(&label6)
+resp> resp = 'w'
+&tempb6 = False
+jump(&label11)
+&tempb8 = False
+jump(&label15)
+&tempb13 = False
+jump(&label25)
+&tempb18 = True
+&tempc10 = 'n'
+&tempb19 = False
+jump(&label36)
+&tempc11 = 'e'
+&tempb20 = False
+jump(&label38)
+&tempc12 = 's'
+&tempb21 = False
+jump(&label40)
+&tempc13 = 'w'
+&tempb22 = True
+out(wrongway): 'You bump into a wall.'
+jump(&label43)
+jump(&label44)
+jump(start)
+&tempb1 = False
+jump(&label1)
+&tempb2 = False
+jump(&label3)
+&tempb3 = True
+out(angus_desc): 'You hear the faint skirl of a bagpipe.'
+jump(&label6)
+resp> resp = 'e'
+&tempb6 = False
+jump(&label11)
+&tempb8 = False
+jump(&label15)
+&tempb13 = False
+jump(&label25)
+&tempb18 = True
+&tempc10 = 'n'
+&tempb19 = False
+jump(&label36)
+&tempc11 = 'e'
+&tempb20 = True
+you = 0
+jump(&label39)
+jump(&label44)
+jump(start)
+&tempb1 = False
+jump(&label1)
+&tempb2 = True
+out(stal_desc): 'A drop of water from a stalactite brushes your cheek. It stings a litte.'
+jump(&label4)
+resp> resp = 'e'
+&tempb6 = False
+jump(&label11)
+&tempb8 = True
+&tempc2 = 'n'
+&tempb9 = False
+jump(&label16)
+&tempc3 = 'e'
+&tempb10 = True
+you = 1
+jump(&label19)
+jump(&label24)
+jump(start)
+&tempb1 = False
+jump(&label1)
+&tempb2 = False
+jump(&label3)
+&tempb3 = False
+jump(&label5)
+&tempb4 = False
+jump(&label7)
+&tempb5 = False
+jump(&label9)
+out(normal_desc): 'Your footsteps resound from the cave walls.'
+resp> resp = 'n'
+&tempb6 = False
+jump(&label11)
+&tempb8 = False
+jump(&label15)
+&tempb13 = True
+&tempc6 = 'n'
+&tempb14 = True
+you = 3
+jump(&label27)
+jump(&label34)
+jump(start)
+&tempb1 = False
+jump(&label1)
+&tempb2 = False
+jump(&label3)
+&tempb3 = False
+jump(&label5)
+&tempb4 = True
+out(exit_desc): 'A faint glow alerts you that the end is near at hand.'
+jump(&label8)
+resp> resp = 'w'
+&tempb6 = False
+jump(&label11)
+&tempb8 = False
+jump(&label15)
+&tempb13 = False
+jump(&label25)
+&tempb18 = False
+jump(&label35)
+&tempb23 = True
+&tempc14 = 'n'
+&tempb24 = False
+jump(&label46)
+&tempc15 = 'e'
+&tempb25 = False
+jump(&label48)
+&tempc16 = 's'
+&tempb26 = False
+jump(&label50)
+&tempc17 = 'w'
+&tempb27 = True
+out(wrongway): 'You bump into a wall.'
+jump(&label53)
+jump(&label54)
+jump(start)
+&tempb1 = False
+jump(&label1)
+&tempb2 = False
+jump(&label3)
+&tempb3 = False
+jump(&label5)
+&tempb4 = True
+out(exit_desc): 'A faint glow alerts you that the end is near at hand.'
+jump(&label8)
+resp> resp = 'e'
+&tempb6 = False
+jump(&label11)
+&tempb8 = False
+jump(&label15)
+&tempb13 = False
+jump(&label25)
+&tempb18 = False
+jump(&label35)
+&tempb23 = True
+&tempc14 = 'n'
+&tempb24 = False
+jump(&label46)
+&tempc15 = 'e'
+&tempb25 = True
+you = 6
+out(escape): "You blink the light from your eyes. How many centuries has it been since you've seen the sun? To your south there is a sign. You turn to read it: "
+jump(&label49)
+jump(&label54)
+jump(start)
+&tempb1 = True
+out(sign): 'Dare you enter the Maze of Doom?'
+jump(&label2)
+resp> resp = 'n'
+&tempb6 = True
+&tempc1 = 'y'
+&tempb7 = False
+jump(&label12)
+out(giveup): "You heave a sign and turn back home. It probably wouldn't have been very fun anyway."

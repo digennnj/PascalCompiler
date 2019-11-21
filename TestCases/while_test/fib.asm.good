@@ -1,0 +1,28 @@
+declare &tempi1, integer
+store 0, &tempi1
+declare prev, integer
+store &tempi1, prev
+declare &tempi2, integer
+store 1, &tempi2
+declare cur, integer
+store &tempi2, cur
+declare tmp, integer
+declare max, integer
+read max, integer
+:&label1
+declare &tempb1, boolean
+equ cur, max, &tempb1
+declare &tempb2, boolean
+low cur, max, &tempb2
+declare &tempb3, boolean
+or &tempb2, &tempb1, &tempb3
+jf &tempb3, &label2
+write cur
+store cur, tmp
+declare &tempi3, integer
+iadd cur, prev, &tempi3
+store &tempi3, cur
+store tmp, prev
+jmp &label1
+:&label2
+halt

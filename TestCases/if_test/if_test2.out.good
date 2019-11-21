@@ -1,0 +1,18 @@
+in> in = 2
+&tempi1 = 1
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+&tempi2 = 2
+&tempb4 = True
+&tempb5 = False
+&tempb6 = True
+&tempi3 = 3
+&tempb7 = False
+&tempb8 = False
+&tempb9 = False
+jump(&label3)
+&temps3 = 'You took a wrong turn at 3...'
+out(&temps3): 'You took a wrong turn at 3...'
+jump(&label7)
+jump(&label8)

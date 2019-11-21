@@ -1,0 +1,13 @@
+in> in = 16
+&tempi1 = 5
+&tempb1 = False
+jump(&label1)
+&tempi5 = 2
+&tempi6 = 0
+&tempi7 = 0
+&tempb3 = True
+&temps4 = 'even big'
+out(&temps4): 'even big'
+jump(&label6)
+&temps6 = 'big'
+out(&temps6): 'big'

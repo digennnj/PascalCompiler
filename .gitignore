@@ -4,5 +4,8 @@ pascal
 *.tab.c
 *.tab.h
 *.asm
-*.out
+*.out*
+*.in*
+!*.in*.good
+!*.out*.good
 *.yy.c

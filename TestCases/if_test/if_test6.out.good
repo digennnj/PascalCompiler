@@ -1,0 +1,9 @@
+in> in = 2
+&tempi1 = 1
+&tempb1 = False
+jump(&label1)
+&tempi2 = 2
+&tempb2 = True
+&temps2 = 'B'
+out(&temps2): 'B'
+jump(&label4)

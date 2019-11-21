@@ -1,0 +1,19 @@
+in> in = 6
+&tempi1 = 1
+&tempb1 = False
+&tempb2 = True
+&tempb3 = True
+&tempi2 = 2
+&tempb4 = False
+&tempb5 = True
+&tempb6 = True
+&tempi3 = 3
+&tempb7 = False
+&tempb8 = True
+&tempb9 = True
+&tempi4 = 4
+&tempb10 = False
+&tempb11 = True
+&tempb12 = True
+&temps1 = 'Oh no! too far!'
+out(&temps1): 'Oh no! too far!'

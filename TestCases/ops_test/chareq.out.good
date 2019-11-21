@@ -1,0 +1,5 @@
+&tempc1 = 'c'
+a = 'c'
+&tempc2 = 'c'
+&tempb1 = True
+out(&tempb1): True

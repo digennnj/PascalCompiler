@@ -1,0 +1,66 @@
+n> n = 108
+&tempi1 = 2
+factor = 2
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 0
+&tempi4 = 0
+&tempb2 = True
+&tempi5 = 54
+n = 54
+out(factor): 2
+jump(&label4)
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 0
+&tempi4 = 0
+&tempb2 = True
+&tempi5 = 27
+n = 27
+out(factor): 2
+jump(&label4)
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 1
+&tempi4 = 0
+&tempb2 = False
+jump(&label3)
+&tempi6 = 1
+&tempi7 = 3
+factor = 3
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 0
+&tempi4 = 0
+&tempb2 = True
+&tempi5 = 9
+n = 9
+out(factor): 3
+jump(&label4)
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 0
+&tempi4 = 0
+&tempb2 = True
+&tempi5 = 3
+n = 3
+out(factor): 3
+jump(&label4)
+jump(&label1)
+&tempi2 = 1
+&tempb1 = True
+&tempi3 = 0
+&tempi4 = 0
+&tempb2 = True
+&tempi5 = 1
+n = 1
+out(factor): 3
+jump(&label4)
+jump(&label1)
+&tempi2 = 1
+&tempb1 = False
+jump(&label2)

@@ -1,0 +1,70 @@
+declare &tempi1, integer
+store 2, &tempi1
+declare n, integer
+store &tempi1, n
+declare max, integer
+declare factor, integer
+declare &tempb1, boolean
+store true, &tempb1
+declare isPrime, boolean
+store &tempb1, isPrime
+read max, integer
+:&label1
+declare &tempb2, boolean
+equ n, max, &tempb2
+declare &tempb3, boolean
+low n, max, &tempb3
+declare &tempb4, boolean
+or &tempb3, &tempb2, &tempb4
+jf &tempb4, &label2
+declare &tempb5, boolean
+store true, &tempb5
+store &tempb5, isPrime
+declare &tempi2, integer
+store 2, &tempi2
+store &tempi2, factor
+:&label3
+declare &tempi3, integer
+store 2, &tempi3
+declare &tempi4, integer
+idiv n, &tempi3, &tempi4
+declare &tempb6, boolean
+equ factor, &tempi4, &tempb6
+declare &tempb7, boolean
+low factor, &tempi4, &tempb7
+declare &tempb8, boolean
+or &tempb7, &tempb6, &tempb8
+declare &tempb9, boolean
+and isPrime, &tempb8, &tempb9
+jf &tempb9, &label4
+declare &tempi5, integer
+imod n, factor, &tempi5
+declare &tempi6, integer
+store 0, &tempi6
+declare &tempb10, boolean
+equ &tempi5, &tempi6, &tempb10
+jf &tempb10, &label5
+declare &tempb11, boolean
+store false, &tempb11
+store &tempb11, isPrime
+jmp &label6
+:&label5
+declare &tempi7, integer
+store 1, &tempi7
+declare &tempi8, integer
+iadd factor, &tempi7, &tempi8
+store &tempi8, factor
+:&label6
+jmp &label3
+:&label4
+jf isPrime, &label7
+write n
+:&label7
+declare &tempi9, integer
+store 1, &tempi9
+declare &tempi10, integer
+iadd n, &tempi9, &tempi10
+store &tempi10, n
+jmp &label1
+:&label2
+halt

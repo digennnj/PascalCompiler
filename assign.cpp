@@ -37,8 +37,8 @@ void assign (char target[], char source[])
                   }
                   else {error("Can't assign value to an int");}
               }
-              else if (symbolTable[target].type == CHAR) {
-                  error("Can't assign value to a char");
+              else {
+                  error("Can't assign value to a "+type_str(symbolTable[target].type));
               }
           } else {
                outFile << "store " << source << ", " << target << std::endl;

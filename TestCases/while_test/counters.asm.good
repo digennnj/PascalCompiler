@@ -1,0 +1,31 @@
+declare &tempi1, integer
+store 0, &tempi1
+declare a, integer
+store &tempi1, a
+:&label1
+declare &tempi2, integer
+store 5, &tempi2
+declare &tempb1, boolean
+low a, &tempi2, &tempb1
+jf &tempb1, &label2
+write a
+declare &tempi3, integer
+store 1, &tempi3
+declare &tempi4, integer
+iadd a, &tempi3, &tempi4
+store &tempi4, a
+jmp &label1
+:&label2
+:&label3
+write a
+declare &tempi5, integer
+store 1, &tempi5
+declare &tempi6, integer
+isub a, &tempi5, &tempi6
+store &tempi6, a
+declare &tempi7, integer
+store 0, &tempi7
+declare &tempb2, boolean
+low a, &tempi7, &tempb2
+jf &tempb2, &label3
+halt

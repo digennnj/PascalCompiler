@@ -51,13 +51,14 @@ void yyerror(const char []);
 %union{
        int ival;
        char * sval;
+        Type typeval;
        }
 %token PROGRAM VAR START END READ WRITE ASSIGNOP WHILE DO REPEAT UNTIL
 %token INTLITERAL REALLITERAL CHARACTER BOOLLITERAL STRLITERAL
 %token INTTYPE REALTYPE CHARTYPE BOOLTYPE STRTYPE
 %token EQOP NEQOP LTOP GTOP LEQOP GEQOP NOTOP
 %token LPAREN RPAREN COMMA SQUOTE PERIOD SEMICOLON COLON PLUSOP MINUSOP MULTIPLYOP DIVIDEOP ID MODOP IF THEN ELSE
-%token LSQUARE RSQUARE
+%token LSQUARE RSQUARE PROCEDURE FUNCTION
 
 %left ANDOP OROP
 %left NOTOP
@@ -83,6 +84,7 @@ void yyerror(const char []);
 %type <sval>WHILE
 %type <sval>REPEAT
 %type <sval>do
+%type <typeval>type
 
 
 %start system_goal
@@ -91,16 +93,27 @@ void yyerror(const char []);
 
 program	    :	 PROGRAM VAR variables START statement_list END PERIOD 
 		;
-decl_type : INTTYPE {cur_type = INT;}
-     | REALTYPE {cur_type = REAL;}
-     | CHARTYPE {cur_type = CHAR;}
-     | BOOLTYPE {cur_type = BOOL;}
-     | STRTYPE  {cur_type = STR;}
+procedure   :   PROCEDURE ident semicolon VAR variables START statement_list END semicolon
+            |   PROCEDURE ident semicolon START statement_list END semicolon
+            ;
+function    :   FUNCTION ident COLON type semicolon VAR variables START statement_list END semicolon
+            |   FUNCTION ident COLON type semicolon START statement_list END semicolon
+            ;
+type : INTTYPE {$$ = INT;}
+     | REALTYPE {$$ = REAL;}
+     | CHARTYPE {$$ = CHAR;}
+     | BOOLTYPE {$$ = BOOL;}
+     | STRTYPE  {$$ = STR;}
      ;
+decl_type : type { cur_type = $1;}
 variables   :	semicolon variables
 		 | semicolon 
          | decl_type decl_list semicolon variables
          | decl_type decl_list semicolon 
+        | procedure variables
+        | procedure 
+        | function variables
+        | function 
 		;
 decl_list : decl
           | decl_list COMMA decl

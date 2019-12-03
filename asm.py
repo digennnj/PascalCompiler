@@ -58,12 +58,16 @@ def jump_table(lines):
             lbl = lbl[1:]
             res[lbl] = lineNum
     return res
-def jump(lbl):
+def jump(lbl, flag=True):
     global PC,jumps
     try:
         dbgline()
-        dbg("jump({})".format(lbl))
-        PC = jumps[lbl]
+        if flag:
+            dbg("jump({})".format(lbl))
+            PC = jumps[lbl]
+        else:
+            if DEBUG_MODE=='LINES':
+                dbg("(no jump)")
     except KeyError:
         print(jumps)
         raise ValueError("label not defined: {}".format(lbl))
@@ -168,11 +172,11 @@ def exec(stmt):
     elif cmd=="jt":
         flag,lbl = args
         expectType(bool, flag)
-        if val(flag)==True: jump(lbl)
+        jump(lbl, val(flag)==True)
     elif cmd=="jf":
         flag,lbl = args
         expectType(bool, flag)
-        if val(flag)==False: jump(lbl)
+        jump(lbl, val(flag)==False)
     elif cmd=="halt":
         exit(0)
     elif not cmd: pass
@@ -181,8 +185,12 @@ def exec(stmt):
     else:
         raise ValueError("statement not recognized: '{}'".format(stmt))
 
+dbg_flags = {'-v':'DBG', '-vv':'LINES', '-q':'OFF'}
+for arg in argv:
+    if arg in dbg_flags: DEBUG_MODE=dbg_flags[arg]
+argv = [arg for arg in argv if arg not in dbg_flags]
 if len(argv)!=2:
-    stderr.write("usage: asm.py foo.asm\n")
+    stderr.write("usage: asm.py [-q|-v|-vv] foo.asm\n")
     exit(1)
 with open(argv[1], "r") as f:
     lines = f.readlines()

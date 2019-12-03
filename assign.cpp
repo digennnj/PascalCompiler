@@ -28,17 +28,17 @@ void assign (const char target[], const char source[])
                     char * temp = convert_to_real(source);
                     outFile << "store " << temp << ", " << target << std::endl;
                   }
-                  else {error("Can't assign value to a real");}
+                  else {error("Can't assign "+type_str(symbolTable[source].type)+" value to a real");}
               }
               else if (symbolTable[target].type == INT) {
                   if (symbolTable[source].type == REAL) {
                     char * temp = convert_to_int(source);
                     outFile << "store " << temp << ", " << target << std::endl;
                   }
-                  else {error("Can't assign value to an int");}
+                  else {error("Can't assign "+type_str(symbolTable[source].type)+" value to a int");}
               }
               else {
-                  error("Can't assign value to a "+type_str(symbolTable[target].type));
+                  error("Can't assign "+type_str(symbolTable[source].type)+" value to a "+type_str(symbolTable[target].type));
               }
           } else {
                outFile << "store " << source << ", " << target << std::endl;

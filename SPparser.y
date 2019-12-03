@@ -82,7 +82,7 @@ void yyerror(const char []);
 %type <sval>STRLITERAL
 %type <sval>WHILE
 %type <sval>REPEAT
-%type <sval>DO
+%type <sval>do
 
 
 %start system_goal
@@ -145,10 +145,16 @@ else_statement: ELSE statement
 loop	:		while_loop
 		|		repeat_loop
 		;
-while_loop	:	WHILE {$1=gen_begin_loop();} expression DO {$4=gen_while_loop($3);}  statement {gen_while_end($1, $4);}
+while_loop	:	WHILE {$1=gen_begin_loop();} expression do {$4=gen_while_loop($3);}  statement {gen_while_end($1, $4);}
 		;
-repeat_loop	:	REPEAT {$1=gen_begin_loop();} statement UNTIL expression {gen_repeat($5, $1);}
+repeat_loop	:	REPEAT {$1=gen_begin_loop();} statement until expression {gen_repeat($5, $1);}
 		;
+do : DO {$$=strdup("do");}
+   | {error("expected DO");}
+    ;
+until : UNTIL
+      | {error("expected UNTIL");}
+    ;
 id_list    :	ident      {read_id($1);}
   		| id_list COMMA ident {read_id($3);}
 		;

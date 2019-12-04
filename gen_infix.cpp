@@ -14,7 +14,7 @@ extern char *convert_to_int(const char *val);
 extern char *convert_to_real(const char *val);
 extern void error(const char msg[]);
 extern void error(const std::string);
-extern std::map<std::string,Variable> symbolTable;
+extern Variable *lookup(const char[]);
 
 char *_do(const char cmd[], const char op1[], const char op2[]) {
     char *res;
@@ -27,7 +27,9 @@ char *_do(const char cmd[], const char op1[], const char op2[]) {
     return res;
 }
 char *gen_neg(char op1[]) {
-    Type t = symbolTable[op1].type;
+    Variable *var1 = lookup(op1);
+    if (var1==NULL) {error("SYMBOL NOT DEFINED: "+std::string(op1));}
+    Type t = var1->type;
     if (t==INT) {
         char *res = temp_int();
         outFile << "isub" << " " << "0" << ", " << op1 << ", " << res << std::endl;
@@ -41,7 +43,9 @@ char *gen_neg(char op1[]) {
     else { error("invalid operand for not: "+std::string(op1));}
 }
 char *gen_not(char op1[]) {
-    Type t = symbolTable[op1].type;
+    Variable *var1 = lookup(op1);
+    if (var1==NULL) {error("SYMBOL NOT DEFINED: "+std::string(op1));}
+    Type t = var1->type;
     if (t==BOOL) {
         char *res = temp_bool();
         outFile << "not" << " " << op1 << ", " << res << std::endl;
@@ -52,9 +56,13 @@ char *gen_not(char op1[]) {
 char * gen_infix(char op1[], const char op[], char op2[])
 {
   char tempop[8];
+    Variable *var1 = lookup(op1);
+    if (var1==NULL) {error("SYMBOL NOT DEFINED: "+std::string(op1));}
+    Type t1 = var1->type;
+    Variable *var2 = lookup(op2);
+    if (var2==NULL) {error("SYMBOL NOT DEFINED: "+std::string(op2));}
+    Type t2 = var2->type;
   
-  Type t1=symbolTable[op1].type, t2=symbolTable[op2].type;
-
   if (t1!=t2) {
       if (t1==INT && t2==REAL) { 
           op1 = convert_to_real(op1);

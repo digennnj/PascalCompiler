@@ -3,11 +3,15 @@
 #include <fstream>
 #include "symbol_table.h"
 extern std::ofstream outFile;
-extern std::map<std::string,Variable> symbolTable;
+extern Variable *lookup(const char[]);
 extern void error(const char msg[]);
+extern void error(std::string);
 
 void read_id (char id_name[])
 {
-     if (symbolTable.find(id_name)==symbolTable.end()) {error("SYMBOL NOT DEFINED");}
-     else {outFile << "read " << id_name << ", " << type_str(symbolTable[id_name].type) << std::endl;}
+    Variable *var = lookup(id_name);
+    if (var==NULL) {
+            error("SYMBOL NOT DEFINED: "+std::string(id_name));
+    }
+    else {outFile << "read " << id_name << ", " << type_str(var->type) << std::endl;}
 }

@@ -8,9 +8,10 @@ extern void error(const char msg[]);
 extern void error(const std::string);
 
 extern std::map<std::string,Variable> symbolTable;
+extern Variable *lookup(const char[]);
 
 void decl_id(const char identifier[], Type type) {
-    if (symbolTable.find(identifier) != symbolTable.end()) {
+    if (lookup(identifier)!=NULL) {
             error("SYMBOL ALREADY DEFINED: "+std::string(identifier));
         }
         else {
@@ -18,6 +19,7 @@ void decl_id(const char identifier[], Type type) {
             outFile << "declare " << identifier << ", " << type_str(type) << std::endl;
         }
 }
+
 
 void decl_array(char identifier[], Type type, int length) {
     if (length<=0) {error("ARRAY LENGTH MUST BE POSITIVE");}
@@ -28,7 +30,7 @@ void decl_array(char identifier[], Type type, int length) {
 }
 
 void decl_function(char identifier[], Type type) {
-    if (symbolTable.find(identifier) != symbolTable.end()) {
+    if (lookup(identifier)!=NULL) {
             error("SYMBOL ALREADY DEFINED: "+std::string(identifier));
     }
     symbolTable[identifier] = {FUNC, 0, type};
@@ -36,7 +38,7 @@ void decl_function(char identifier[], Type type) {
     decl_id(strdup(returnVar.c_str()), type);
 }
 void decl_procedure(char identifier[]) {
-    if (symbolTable.find(identifier) != symbolTable.end()) {
+    if (lookup(identifier)!=NULL) {
             error("SYMBOL ALREADY DEFINED: "+std::string(identifier));
     }
     symbolTable[identifier] = {FUNC, 0, FUNC};

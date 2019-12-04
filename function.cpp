@@ -7,7 +7,7 @@ extern void decl_function(char*, Type);
 extern void decl_procedure(char*);
 extern void error(const char []);
 extern void error(std::string);
-extern std::map<std::string,Variable> symbolTable;
+extern Variable *lookup(const char[]);
 
 char *gen_function(char identifier[], Type type) {
     char *endLbl = temp_label();
@@ -33,10 +33,11 @@ void end_procedure(char *endLbl) {
 }
 
 char *call_function(char identifier[]) {
-    if (symbolTable.find(identifier) == symbolTable.end()) {
+    Variable *func = lookup(identifier);
+    if (func==NULL) {
             error("FUNCTION NOT DEFINED: "+std::string(identifier));
     }
-    else if (symbolTable[identifier].type != FUNC || symbolTable[identifier].sub_type == FUNC) {
+    else if (func->type != FUNC || func->sub_type == FUNC) {
         error("NOT A FUNCTION: "+std::string(identifier));
     }
     outFile << "call " << "#" << identifier << std::endl;
@@ -45,10 +46,11 @@ char *call_function(char identifier[]) {
 }
 
 void call_procedure(char identifier[]) {
-    if (symbolTable.find(identifier) == symbolTable.end()) {
+    Variable *proc = lookup(identifier);
+    if (proc==NULL) {
             error("FUNCTION NOT DEFINED: "+std::string(identifier));
     }
-    else if (symbolTable[identifier].type != FUNC || symbolTable[identifier].sub_type != FUNC) {
+    else if (proc->type != FUNC || proc->sub_type != FUNC) {
         error("NOT A PROCEDURE: "+std::string(identifier));
     }
     outFile << "call " << "#" << identifier << std::endl;

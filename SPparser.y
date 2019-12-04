@@ -50,6 +50,7 @@ void end_function(char *);
 void end_procedure(char *);
 char *call_function(char []);
 void call_procedure(char []);
+Variable *lookup(const char[]);
 void error(const char []);
 void error(std::string);
 void yyerror(const char []);
@@ -139,9 +140,10 @@ statement_list  :   statement
                  | statement_list statement
 		;
 statement  : 	plain_ident assignop expression
-                        {if (symbolTable.find($1)==symbolTable.end()) {error("SYMBOL NOT DEFINED");}
-                         if (symbolTable[$1].type==FUNC) {
-                            if (symbolTable[$1].sub_type==FUNC) {error("can't return from a procedure");}
+                        {Variable *var = lookup($1);
+                         if (var==NULL) {error("SYMBOL NOT DEFINED");}
+                         if (var->type==FUNC) {
+                            if (var->sub_type==FUNC) {error("can't return from a procedure");}
                             std::string returnVar = "&#"+std::string($1);
                             assign(strdup(returnVar.c_str()),$3);}
                          else {assign($1,$3);}}
@@ -221,9 +223,10 @@ term	   : CHARACTER {$$=temp_char(); assign_lit($$, $1);}
         | BOOLLITERAL {$$=temp_bool(); assign_lit($$, $1);}
         | STRLITERAL {$$=temp_str(); assign_lit($$, $1);}
 		;
-term      :	ident      {if (symbolTable.find($1)==symbolTable.end()) {
+term      :	ident      {Variable *var = lookup($1);
+                        if (var==NULL) {
                             error("SYMBOL NOT DEFINED");}
-                        if (symbolTable[$1].type==FUNC && symbolTable[$1].sub_type!=FUNC) {
+                        if (var->type==FUNC && var->sub_type!=FUNC) {
                             $$=call_function($1);}
                         else {$$=strdup($1);}}
 		;

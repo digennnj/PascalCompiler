@@ -10,7 +10,7 @@ extern char *temp_label();
 extern void error(const char msg[]);
 extern void error(const std::string);
 extern std::ofstream outFile;
-extern std::map<std::string,Variable> symbolTable;
+extern Variable *lookup(const char[]);
  
 char *gen_begin_loop() {
     char *begin_label = temp_label();
@@ -19,14 +19,16 @@ char *gen_begin_loop() {
 }
 
 char *gen_while_loop(char *varName) {
-    if (symbolTable.find(varName) == symbolTable.end()) {
+    Variable *var = lookup(varName);
+    if (var==NULL) {
             error("SYMBOL NOT DEFINED: "+std::string(varName));
-    } else {
-        if(symbolTable[varName].type == BOOL) {
-            char *tempLabel = temp_label();
-            outFile << "jf " << varName << ", " << tempLabel << std::endl;;
-            return tempLabel;
-        }
+    }
+    if(var->type == BOOL) {
+        char *tempLabel = temp_label();
+        outFile << "jf " << varName << ", " << tempLabel << std::endl;;
+        return tempLabel;
+    }
+    else {
         error("Expression must evaluate to boolean");
     }
 }
@@ -37,13 +39,13 @@ char *gen_while_end(char *startLabel, char *endLabel) {
 }
 
 void gen_repeat(char *varName, char *startLabel) {
-    if (symbolTable.find(varName) == symbolTable.end()) {
+    Variable *var = lookup(varName);
+    if (var==NULL) {
             error("SYMBOL NOT DEFINED: "+std::string(varName));
+    }
+    if(var->type == BOOL) {
+        outFile << "jf " << varName << ", " << startLabel << std::endl;
     } else {
-        if(symbolTable[varName].type == BOOL) {
-            outFile << "jf " << varName << ", " << startLabel << std::endl;
-        } else {
-            error("Expression must evaluate to boolean");
-        }
+        error("Expression must evaluate to boolean");
     }
 }

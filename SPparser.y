@@ -44,6 +44,10 @@ char *gen_not(char []);
 char *gen_neg(char []);
 void read_id (char []);
 void write_expr(char []);
+char *gen_function(char [], Type);
+char *gen_procedure(char []);
+void end_function(char *);
+void end_procedure(char *);
 void error(const char []);
 void error(std::string);
 void yyerror(const char []);
@@ -85,6 +89,8 @@ void yyerror(const char []);
 %type <sval>REPEAT
 %type <sval>do
 %type <typeval>type
+%type <sval>PROCEDURE
+%type <sval>FUNCTION
 
 
 %start system_goal
@@ -93,11 +99,11 @@ void yyerror(const char []);
 
 program	    :	 PROGRAM VAR variables START statement_list END PERIOD 
 		;
-procedure   :   PROCEDURE ident semicolon VAR variables START statement_list END semicolon
-            |   PROCEDURE ident semicolon START statement_list END semicolon
+procedure   :   PROCEDURE ident semicolon {$1=gen_procedure($2);} VAR variables START statement_list END semicolon {end_procedure($1);}
+            |   PROCEDURE ident semicolon {$1=gen_procedure($2);} START statement_list END semicolon {end_procedure($1);}
             ;
-function    :   FUNCTION ident COLON type semicolon VAR variables START statement_list END semicolon
-            |   FUNCTION ident COLON type semicolon START statement_list END semicolon
+function    :   FUNCTION ident COLON type semicolon {$1=gen_function($2, $4);} VAR variables START statement_list END semicolon {end_function($1);}
+            |   FUNCTION ident COLON type semicolon {$1=gen_function($2, $4);} START statement_list END semicolon {end_function($1);}
             ;
 type : INTTYPE {$$ = INT;}
      | REALTYPE {$$ = REAL;}

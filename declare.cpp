@@ -25,3 +25,17 @@ void decl_array(char identifier[], Type type, int length) {
         decl_id(elemName.c_str(), type);
     }
 }
+
+void decl_function(char identifier[], Type type) {
+    if (symbolTable.find(identifier) != symbolTable.end()) {
+            error("SYMBOL ALREADY DEFINED: "+std::string(identifier));
+    }
+    symbolTable[identifier] = {FUNC, 0, type};
+    outFile << "declare " << identifier << ", " << type_str(type) << std::endl;
+}
+void decl_procedure(char identifier[]) {
+    if (symbolTable.find(identifier) != symbolTable.end()) {
+            error("SYMBOL ALREADY DEFINED: "+std::string(identifier));
+    }
+    symbolTable[identifier] = {FUNC, 0, FUNC};
+}

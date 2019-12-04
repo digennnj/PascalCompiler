@@ -1,0 +1,45 @@
+declare sum, integer
+declare &tempi1, integer
+store 0, &tempi1
+declare i, integer
+store &tempi1, i
+:&label1
+declare &tempi2, integer
+store 3, &tempi2
+declare &tempi3, integer
+imod i, &tempi2, &tempi3
+declare &tempi4, integer
+store 0, &tempi4
+declare &tempb1, boolean
+equ &tempi3, &tempi4, &tempb1
+declare &tempi5, integer
+store 5, &tempi5
+declare &tempi6, integer
+imod i, &tempi5, &tempi6
+declare &tempi7, integer
+store 0, &tempi7
+declare &tempb2, boolean
+equ &tempi6, &tempi7, &tempb2
+declare &tempb3, boolean
+or &tempb1, &tempb2, &tempb3
+jf &tempb3, &label2
+declare &tempi8, integer
+iadd sum, i, &tempi8
+store &tempi8, sum
+:&label2
+declare &tempi9, integer
+store 1, &tempi9
+declare &tempi10, integer
+iadd i, &tempi9, &tempi10
+store &tempi10, i
+declare &tempi11, integer
+store 1000, &tempi11
+declare &tempb4, boolean
+equ i, &tempi11, &tempb4
+declare &tempb5, boolean
+high i, &tempi11, &tempb5
+declare &tempb6, boolean
+or &tempb5, &tempb4, &tempb6
+jf &tempb6, &label1
+write sum
+halt

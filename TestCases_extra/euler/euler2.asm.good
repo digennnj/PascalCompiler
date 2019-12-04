@@ -1,0 +1,41 @@
+declare &tempi1, integer
+store 0, &tempi1
+declare prev, integer
+store &tempi1, prev
+declare &tempi2, integer
+store 1, &tempi2
+declare cur, integer
+store &tempi2, cur
+declare tmp, integer
+declare &tempi3, integer
+store 0, &tempi3
+declare sum, integer
+store &tempi3, sum
+:&label1
+declare &tempi4, integer
+store 4000000, &tempi4
+declare &tempb1, boolean
+low cur, &tempi4, &tempb1
+jf &tempb1, &label2
+declare &tempi5, integer
+store 2, &tempi5
+declare &tempi6, integer
+imod cur, &tempi5, &tempi6
+declare &tempi7, integer
+store 0, &tempi7
+declare &tempb2, boolean
+equ &tempi6, &tempi7, &tempb2
+jf &tempb2, &label3
+declare &tempi8, integer
+iadd sum, cur, &tempi8
+store &tempi8, sum
+:&label3
+store cur, tmp
+declare &tempi9, integer
+iadd cur, prev, &tempi9
+store &tempi9, cur
+store tmp, prev
+jmp &label1
+:&label2
+write sum
+halt

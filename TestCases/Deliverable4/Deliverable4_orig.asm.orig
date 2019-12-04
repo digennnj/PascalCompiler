@@ -1,0 +1,129 @@
+declare less, boolean
+store 1, less
+declare more, boolean
+declare a, character
+declare b, character
+declare c, character
+store 'a', c
+declare x, real
+store 0, x
+declare y, real
+itor 1, &temper
+store &tempr1, y
+declare k, integer
+declare j, integer
+roti 2.5, &tempi2
+store &tempi2, j
+declare m, integer
+declare hello, string
+store "hi!", hello
+declare bye, string
+store "goodbye", bye
+declare no, string
+fadd x, y, &tempr3
+write &temper
+write b
+not less, &tempi4
+write &tempi4
+itor k, &tempr5
+rsub &tempr5, y, &tempr6
+itor j, &tempr7
+radd &tempr6, &tempr7, &tempr8
+store &tempr8, x
+isub j, k, &tempi9
+itor &tempi9, &tempr10
+radd y, &tempr10, &tempr11
+rtoi &tempr11, &tempi12
+store &tempi12, m
+store c, a
+read a, character
+read y, real
+read k, integer
+read no, boolean
+concat hello, bye, &temps13
+store &temps13, bye
+concat bye, “ha”, &temps14
+store &temps14, bye
+store "byebye", bye
+itor k, &tempr15
+rmult &tempr15, x, &tempr16
+itor m, &tempr17
+radd &tempr17, &tempr16, &tempr18
+store &tempr18, x
+idiv k, j, &tempi19
+imod &tempi19, k, &tempi20
+store &tempi20, j
+isub j, m, &tempi21
+itor &tempi21, &tempr22
+low &tempr22, x, &tempi23
+not &tempi23, &tempi24
+store &tempi24, more
+not more, &tempi25
+jf &tempi25, :&label1
+itor j, &tempr26
+rsub y, &tempr26, &tempr27
+rmult x, &tempr27, &tempr28
+itor k, &tempr29
+rdiv &tempr28, &tempr29, &tempr30
+rtoi &tempr30, &tempi31
+store &tempi31, &tempi32
+and less, more, &tempi33
+low x, y, &tempi34
+or &tempi33, &tempi34, &tempi35
+store &tempi35, more
+goto :&label2
+:&label1
+itor k, &tempr36
+rmult &tempr36, x, &tempr37
+itor 3, &tempr38
+radd &tempr37, &tempr38, &tempr39
+store &tempr39, y
+:&label2
+eq less, more, &tempi40
+jf &tempi40, :&label3
+itor m, &tempr41
+high x, &tempr41, &tempi42
+jf &tempi42 :&label4
+imod k, 4, &tempi43
+store &tempi43, j
+jmp :&label4
+:&label3
+store less, no
+:&label4
+:&while1
+rmult x, y, &tempr44
+itor j, &tempr45
+high &tempr44, &tempr45, &tempi46
+not &tempi46, &tempi47
+and more, &tempi47, &tempi48
+jf &tempi48, :&while2
+eq b, a, &tempi49
+or &tempi49, less, &tempi50
+jf :&label5
+:&repeat1
+concat hello, bye, hello
+write hello
+read more, boolean
+eq true, false, &tempi51
+not &tempi51, &tempi52
+jt &tempi52, :&repeat1
+:&label5
+jmp :$while1
+:&while2
+:&repeat2
+low x, y, &tempi53
+jf &tempi53, :&label6
+:&while3
+high j, 2, &temp54
+jt &temp54, :&while4
+read a, real
+read j, integer
+jmp :&while3
+:&while4
+:&label6
+imult k, j, &tempi55
+eq &tempi55, m, &tempi56
+jt &tempi56, :&repeat2
+halt
+
+

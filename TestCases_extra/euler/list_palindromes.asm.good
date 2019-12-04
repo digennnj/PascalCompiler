@@ -1,0 +1,186 @@
+declare a, integer
+declare b, integer
+declare c, integer
+declare d, integer
+declare e, integer
+declare f, integer
+declare &tempi1, integer
+store 999, &tempi1
+declare x, integer
+store &tempi1, x
+declare &tempi2, integer
+store 999, &tempi2
+declare y, integer
+store &tempi2, y
+declare product, integer
+declare digits, integer
+:&label1
+declare &tempi3, integer
+store 999, &tempi3
+store &tempi3, y
+:&label2
+declare &tempi4, integer
+imul x, y, &tempi4
+store &tempi4, product
+store product, digits
+declare &tempi5, integer
+store 100000, &tempi5
+declare &tempb1, boolean
+low product, &tempi5, &tempb1
+jf &tempb1, &label3
+declare &tempi6, integer
+store 10, &tempi6
+declare &tempi7, integer
+imod digits, &tempi6, &tempi7
+store &tempi7, e
+declare &tempi8, integer
+store 10, &tempi8
+declare &tempi9, integer
+idiv digits, &tempi8, &tempi9
+store &tempi9, digits
+declare &tempi10, integer
+store 10, &tempi10
+declare &tempi11, integer
+imod digits, &tempi10, &tempi11
+store &tempi11, d
+declare &tempi12, integer
+store 10, &tempi12
+declare &tempi13, integer
+idiv digits, &tempi12, &tempi13
+store &tempi13, digits
+declare &tempi14, integer
+store 10, &tempi14
+declare &tempi15, integer
+imod digits, &tempi14, &tempi15
+store &tempi15, c
+declare &tempi16, integer
+store 10, &tempi16
+declare &tempi17, integer
+idiv digits, &tempi16, &tempi17
+store &tempi17, digits
+declare &tempi18, integer
+store 10, &tempi18
+declare &tempi19, integer
+imod digits, &tempi18, &tempi19
+store &tempi19, b
+declare &tempi20, integer
+store 10, &tempi20
+declare &tempi21, integer
+idiv digits, &tempi20, &tempi21
+store &tempi21, digits
+declare &tempi22, integer
+store 10, &tempi22
+declare &tempi23, integer
+imod digits, &tempi22, &tempi23
+store &tempi23, a
+declare &tempi24, integer
+store 10, &tempi24
+declare &tempi25, integer
+idiv digits, &tempi24, &tempi25
+store &tempi25, digits
+declare &tempb2, boolean
+equ a, e, &tempb2
+declare &tempb3, boolean
+equ b, d, &tempb3
+declare &tempb4, boolean
+and &tempb2, &tempb3, &tempb4
+jf &tempb4, &label4
+write product
+:&label4
+jmp &label5
+:&label3
+declare &tempi26, integer
+store 10, &tempi26
+declare &tempi27, integer
+imod digits, &tempi26, &tempi27
+store &tempi27, f
+declare &tempi28, integer
+store 10, &tempi28
+declare &tempi29, integer
+idiv digits, &tempi28, &tempi29
+store &tempi29, digits
+declare &tempi30, integer
+store 10, &tempi30
+declare &tempi31, integer
+imod digits, &tempi30, &tempi31
+store &tempi31, e
+declare &tempi32, integer
+store 10, &tempi32
+declare &tempi33, integer
+idiv digits, &tempi32, &tempi33
+store &tempi33, digits
+declare &tempi34, integer
+store 10, &tempi34
+declare &tempi35, integer
+imod digits, &tempi34, &tempi35
+store &tempi35, d
+declare &tempi36, integer
+store 10, &tempi36
+declare &tempi37, integer
+idiv digits, &tempi36, &tempi37
+store &tempi37, digits
+declare &tempi38, integer
+store 10, &tempi38
+declare &tempi39, integer
+imod digits, &tempi38, &tempi39
+store &tempi39, c
+declare &tempi40, integer
+store 10, &tempi40
+declare &tempi41, integer
+idiv digits, &tempi40, &tempi41
+store &tempi41, digits
+declare &tempi42, integer
+store 10, &tempi42
+declare &tempi43, integer
+imod digits, &tempi42, &tempi43
+store &tempi43, b
+declare &tempi44, integer
+store 10, &tempi44
+declare &tempi45, integer
+idiv digits, &tempi44, &tempi45
+store &tempi45, digits
+declare &tempi46, integer
+store 10, &tempi46
+declare &tempi47, integer
+imod digits, &tempi46, &tempi47
+store &tempi47, a
+declare &tempi48, integer
+store 10, &tempi48
+declare &tempi49, integer
+idiv digits, &tempi48, &tempi49
+store &tempi49, digits
+declare &tempb5, boolean
+equ a, f, &tempb5
+declare &tempb6, boolean
+equ b, e, &tempb6
+declare &tempb7, boolean
+and &tempb5, &tempb6, &tempb7
+declare &tempb8, boolean
+equ c, d, &tempb8
+declare &tempb9, boolean
+and &tempb7, &tempb8, &tempb9
+jf &tempb9, &label6
+write product
+:&label6
+:&label5
+declare &tempi50, integer
+store 1, &tempi50
+declare &tempi51, integer
+isub y, &tempi50, &tempi51
+store &tempi51, y
+declare &tempi52, integer
+store 900, &tempi52
+declare &tempb10, boolean
+low y, &tempi52, &tempb10
+jf &tempb10, &label2
+declare &tempi53, integer
+store 1, &tempi53
+declare &tempi54, integer
+isub x, &tempi53, &tempi54
+store &tempi54, x
+declare &tempi55, integer
+store 900, &tempi55
+declare &tempb11, boolean
+low x, &tempi55, &tempb11
+jf &tempb11, &label1
+halt

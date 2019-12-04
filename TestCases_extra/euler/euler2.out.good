@@ -1,0 +1,417 @@
+&tempi1 = 0
+prev = 0
+&tempi2 = 1
+cur = 1
+&tempi3 = 0
+sum = 0
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 1
+&tempi9 = 1
+cur = 1
+prev = 1
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 1
+&tempi9 = 2
+cur = 2
+prev = 1
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 0
+&tempi7 = 0
+&tempb2 = True
+&tempi8 = 2
+sum = 2
+tmp = 2
+&tempi9 = 3
+cur = 3
+prev = 2
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 3
+&tempi9 = 5
+cur = 5
+prev = 3
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 5
+&tempi9 = 8
+cur = 8
+prev = 5
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 0
+&tempi7 = 0
+&tempb2 = True
+&tempi8 = 10
+sum = 10
+tmp = 8
+&tempi9 = 13
+cur = 13
+prev = 8
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 13
+&tempi9 = 21
+cur = 21
+prev = 13
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 21
+&tempi9 = 34
+cur = 34
+prev = 21
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 0
+&tempi7 = 0
+&tempb2 = True
+&tempi8 = 44
+sum = 44
+tmp = 34
+&tempi9 = 55
+cur = 55
+prev = 34
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 55
+&tempi9 = 89
+cur = 89
+prev = 55
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 89
+&tempi9 = 144
+cur = 144
+prev = 89
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 0
+&tempi7 = 0
+&tempb2 = True
+&tempi8 = 188
+sum = 188
+tmp = 144
+&tempi9 = 233
+cur = 233
+prev = 144
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 233
+&tempi9 = 377
+cur = 377
+prev = 233
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 377
+&tempi9 = 610
+cur = 610
+prev = 377
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 0
+&tempi7 = 0
+&tempb2 = True
+&tempi8 = 798
+sum = 798
+tmp = 610
+&tempi9 = 987
+cur = 987
+prev = 610
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 987
+&tempi9 = 1597
+cur = 1597
+prev = 987
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 1597
+&tempi9 = 2584
+cur = 2584
+prev = 1597
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 0
+&tempi7 = 0
+&tempb2 = True
+&tempi8 = 3382
+sum = 3382
+tmp = 2584
+&tempi9 = 4181
+cur = 4181
+prev = 2584
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 4181
+&tempi9 = 6765
+cur = 6765
+prev = 4181
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 6765
+&tempi9 = 10946
+cur = 10946
+prev = 6765
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 0
+&tempi7 = 0
+&tempb2 = True
+&tempi8 = 14328
+sum = 14328
+tmp = 10946
+&tempi9 = 17711
+cur = 17711
+prev = 10946
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 17711
+&tempi9 = 28657
+cur = 28657
+prev = 17711
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 28657
+&tempi9 = 46368
+cur = 46368
+prev = 28657
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 0
+&tempi7 = 0
+&tempb2 = True
+&tempi8 = 60696
+sum = 60696
+tmp = 46368
+&tempi9 = 75025
+cur = 75025
+prev = 46368
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 75025
+&tempi9 = 121393
+cur = 121393
+prev = 75025
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 121393
+&tempi9 = 196418
+cur = 196418
+prev = 121393
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 0
+&tempi7 = 0
+&tempb2 = True
+&tempi8 = 257114
+sum = 257114
+tmp = 196418
+&tempi9 = 317811
+cur = 317811
+prev = 196418
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 317811
+&tempi9 = 514229
+cur = 514229
+prev = 317811
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 514229
+&tempi9 = 832040
+cur = 832040
+prev = 514229
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 0
+&tempi7 = 0
+&tempb2 = True
+&tempi8 = 1089154
+sum = 1089154
+tmp = 832040
+&tempi9 = 1346269
+cur = 1346269
+prev = 832040
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 1346269
+&tempi9 = 2178309
+cur = 2178309
+prev = 1346269
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+tmp = 2178309
+&tempi9 = 3524578
+cur = 3524578
+prev = 2178309
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = True
+&tempi5 = 2
+&tempi6 = 0
+&tempi7 = 0
+&tempb2 = True
+&tempi8 = 4613732
+sum = 4613732
+tmp = 3524578
+&tempi9 = 5702887
+cur = 5702887
+prev = 3524578
+jump(&label1)
+&tempi4 = 4000000
+&tempb1 = False
+jump(&label2)
+out(sum): 4613732

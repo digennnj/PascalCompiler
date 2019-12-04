@@ -1,0 +1,35 @@
+declare sum_of_squares, integer
+declare sum, integer
+declare i, integer
+declare &tempi1, integer
+store 0, &tempi1
+store &tempi1, i
+:&label1
+declare &tempi2, integer
+store 1, &tempi2
+declare &tempi3, integer
+iadd i, &tempi2, &tempi3
+store &tempi3, i
+declare &tempi4, integer
+imul i, i, &tempi4
+declare &tempi5, integer
+iadd sum_of_squares, &tempi4, &tempi5
+store &tempi5, sum_of_squares
+declare &tempi6, integer
+iadd sum, i, &tempi6
+store &tempi6, sum
+declare &tempi7, integer
+store 100, &tempi7
+declare &tempb1, boolean
+equ i, &tempi7, &tempb1
+declare &tempb2, boolean
+high i, &tempi7, &tempb2
+declare &tempb3, boolean
+or &tempb2, &tempb1, &tempb3
+jf &tempb3, &label1
+declare &tempi8, integer
+imul sum, sum, &tempi8
+declare &tempi9, integer
+isub &tempi8, sum_of_squares, &tempi9
+write &tempi9
+halt

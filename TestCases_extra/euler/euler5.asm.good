@@ -1,0 +1,67 @@
+declare &tempi1, integer
+store 1, &tempi1
+declare res, integer
+store &tempi1, res
+declare n, integer
+declare &tempi2, integer
+store 2, &tempi2
+declare i, integer
+store &tempi2, i
+declare factor, integer
+:&label1
+declare &tempi3, integer
+store 2, &tempi3
+store &tempi3, factor
+store i, n
+:&label2
+declare &tempi4, integer
+store 1, &tempi4
+declare &tempb1, boolean
+high n, &tempi4, &tempb1
+jf &tempb1, &label3
+declare &tempi5, integer
+imod n, factor, &tempi5
+declare &tempi6, integer
+store 0, &tempi6
+declare &tempb2, boolean
+equ &tempi5, &tempi6, &tempb2
+jf &tempb2, &label4
+declare &tempi7, integer
+idiv n, factor, &tempi7
+store &tempi7, n
+declare &tempi8, integer
+imod res, factor, &tempi8
+declare &tempi9, integer
+store 0, &tempi9
+declare &tempb3, boolean
+equ &tempi8, &tempi9, &tempb3
+jf &tempb3, &label5
+declare &tempi10, integer
+idiv res, factor, &tempi10
+store &tempi10, res
+:&label5
+jmp &label6
+:&label4
+declare &tempi11, integer
+store 1, &tempi11
+declare &tempi12, integer
+iadd factor, &tempi11, &tempi12
+store &tempi12, factor
+:&label6
+jmp &label2
+:&label3
+declare &tempi13, integer
+imul res, i, &tempi13
+store &tempi13, res
+declare &tempi14, integer
+store 1, &tempi14
+declare &tempi15, integer
+iadd i, &tempi14, &tempi15
+store &tempi15, i
+declare &tempi16, integer
+store 20, &tempi16
+declare &tempb4, boolean
+high i, &tempi16, &tempb4
+jf &tempb4, &label1
+write res
+halt

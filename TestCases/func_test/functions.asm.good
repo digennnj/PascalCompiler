@@ -1,0 +1,30 @@
+declare a, integer
+jmp &label1
+:#bar
+declare &temps1, string
+store "Bye computer", &temps1
+write &temps1
+return
+:&label1
+jmp &label2
+:#foo
+declare &#foo, integer
+declare &temps2, string
+store "Hello world", &temps2
+write &temps2
+declare &tempi1, integer
+store 3, &tempi1
+store &tempi1, &#foo
+return
+:&label2
+call #bar
+call #foo
+write &#foo
+call #foo
+declare &tempi2, integer
+store 2, &tempi2
+declare &tempi3, integer
+iadd &#foo, &tempi2, &tempi3
+store &tempi3, a
+write a
+halt

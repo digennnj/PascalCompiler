@@ -7,6 +7,8 @@ std::string type_str(Type typ) {
         case CHAR: return "character"; break;
         case BOOL: return "boolean"; break;
         case STR: return "string"; break;
-        default: error("invalid type: "+typ); break;
+        case ARRAY: return "array"; break;
+        case FUNC: return "function"; break;
+        default: error("invalid type: "+std::to_string(typ)); break;
     }
 }

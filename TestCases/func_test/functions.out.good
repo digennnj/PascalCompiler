@@ -1,0 +1,23 @@
+jump(&label1)
+jump(&label2)
+call(#bar)
+&temps1 = 'Bye computer'
+out(&temps1): 'Bye computer'
+return
+call(#foo)
+&temps2 = 'Hello world'
+out(&temps2): 'Hello world'
+&tempi1 = 3
+&#foo = 3
+return
+out(&#foo): 3
+call(#foo)
+&temps2 = 'Hello world'
+out(&temps2): 'Hello world'
+&tempi1 = 3
+&#foo = 3
+return
+&tempi2 = 2
+&tempi3 = 5
+a = 5
+out(a): 5

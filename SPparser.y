@@ -48,6 +48,8 @@ char *gen_function(char [], Type);
 char *gen_procedure(char []);
 void end_function(char *);
 void end_procedure(char *);
+char *call_function(char []);
+void call_procedure(char []);
 void error(const char []);
 void error(std::string);
 void yyerror(const char []);
@@ -136,10 +138,18 @@ assignop  : ASSIGNOP
 statement_list  :   statement
                  | statement_list statement
 		;
-statement  : 	plain_ident assignop expression {assign($1,$3);} semicolon
+statement  : 	plain_ident assignop expression
+                        {if (symbolTable.find($1)==symbolTable.end()) {error("SYMBOL NOT DEFINED");}
+                         if (symbolTable[$1].type==FUNC) {
+                            if (symbolTable[$1].sub_type==FUNC) {error("can't return from a procedure");}
+                            std::string returnVar = "&#"+std::string($1);
+                            assign(strdup(returnVar.c_str()),$3);}
+                         else {assign($1,$3);}}
+                    semicolon
            |    plain_ident LSQUARE INTLITERAL RSQUARE assignop expression
                         {std::string elem = std::string($1)+"&"+std::string($3);
                         assign(elem.c_str(), $6);}
+            |   plain_ident semicolon {call_procedure($1);}
 		;
 statement  :	READ lparen id_list rparen semicolon
 		;
@@ -213,6 +223,8 @@ term	   : CHARACTER {$$=temp_char(); assign_lit($$, $1);}
 		;
 term      :	ident      {if (symbolTable.find($1)==symbolTable.end()) {
                             error("SYMBOL NOT DEFINED");}
+                        if (symbolTable[$1].type==FUNC && symbolTable[$1].sub_type!=FUNC) {
+                            $$=call_function($1);}
                         else {$$=strdup($1);}}
 		;
 lparen    :	LPAREN

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <string.h>
 #include "symbol_table.h"
 
 extern std::ofstream outFile;
@@ -31,7 +32,8 @@ void decl_function(char identifier[], Type type) {
             error("SYMBOL ALREADY DEFINED: "+std::string(identifier));
     }
     symbolTable[identifier] = {FUNC, 0, type};
-    outFile << "declare " << identifier << ", " << type_str(type) << std::endl;
+    std::string returnVar = "&#"+std::string(identifier);
+    decl_id(strdup(returnVar.c_str()), type);
 }
 void decl_procedure(char identifier[]) {
     if (symbolTable.find(identifier) != symbolTable.end()) {

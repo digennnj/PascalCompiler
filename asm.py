@@ -6,6 +6,7 @@ PC=0  # program counter
 symbols = {}
 jumps = {}
 lines = []
+return_stack = []
 class Char(str): pass  # act like a string, but still have a different type
 def parse(line):
     if not line.split(): return ('', [])  # empty command
@@ -58,6 +59,23 @@ def jump_table(lines):
             lbl = lbl[1:]
             res[lbl] = lineNum
     return res
+def call(lbl):
+    global PC,jumps
+    try:
+        dbgline()
+        dbg("call({})".format(lbl))
+        return_stack.append(PC)
+        PC = jumps[lbl]
+    except KeyError:
+        print(jumps)
+        raise ValueError("label not defined: {}".format(lbl))
+def ret():
+    global PC
+    dbgline()
+    if not return_stack: raise ValueError("return stack is empty")
+    PC = return_stack.pop()
+    if DEBUG_MODE=='LINES': dbg("return({})".format(PC))
+    else: dbg("return")
 def jump(lbl, flag=True):
     global PC,jumps
     try:
@@ -169,6 +187,11 @@ def exec(stmt):
     elif cmd=="jmp" or cmd=="jmp,":
         lbl, = args
         jump(lbl)
+    elif cmd=="call":
+        lbl, = args
+        call(lbl)
+    elif cmd=="return":
+        ret()
     elif cmd=="jt":
         flag,lbl = args
         expectType(bool, flag)

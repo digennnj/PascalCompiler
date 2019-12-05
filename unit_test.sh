@@ -14,7 +14,7 @@ for test_dir in "${test_dirs[@]}"; do
         testasm_file="${prefix}".asm
 
         if [[ -f "$p_file" && -f "$asm_file" ]]; then
-            ./pascal "$p_file" &>/dev/null
+            ./pascal "$p_file" &>/dev/null &&
             diff "${asm_file}" "${testasm_file}" &>/dev/null && good "asm " || bad "asm "
         fi
 
@@ -25,7 +25,7 @@ for test_dir in "${test_dirs[@]}"; do
             in_file="${prefix}".in"${suffix}".good
             testout_file="${prefix}".out"${suffix}"
             if [[ -f "$asm_file" && -f "$out_file" && -f "$in_file" ]]; then
-                cat "$in_file" | ./asm.py "$asm_file" 2>/dev/null >"${testout_file}"
+                cat "$in_file" | ./asm.py "$asm_file" 2>/dev/null >"${testout_file}" &&
                 diff "${out_file}" "${testout_file}" &>/dev/null && good "out${suffix} " || bad "out${suffix} "
             fi
         done

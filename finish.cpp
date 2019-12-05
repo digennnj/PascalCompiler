@@ -1,7 +1,4 @@
-#include <iostream>
-#include <fstream>
-extern std::ofstream outFile;
-
+#include "pascal.h"
 void finish()
 {
   outFile << "halt" << std::endl;

@@ -1,15 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <string.h>
-#include "symbol_table.h"
-
-extern std::ofstream outFile;
-extern void error(const char msg[]);
-extern void error(const std::string);
-
-extern std::map<std::string,Variable> symbolTable;
-extern Variable *lookup(const char[]);
-
+#include "pascal.h"
 void decl_id(const char identifier[], Type type) {
     if (lookup(identifier)!=NULL) {
             error("SYMBOL ALREADY DEFINED: "+std::string(identifier));

@@ -1,14 +1,4 @@
-#include <fstream>
-#include <string.h>
-#include "symbol_table.h"
-extern char *temp_label();
-extern std::ofstream outFile;
-extern void decl_function(char*, Type);
-extern void decl_procedure(char*);
-extern void error(const char []);
-extern void error(std::string);
-extern Variable *lookup(const char[]);
-
+#include "pascal.h"
 char *gen_function(char identifier[], Type type) {
     char *endLbl = temp_label();
     outFile << "jmp " << endLbl << std::endl;

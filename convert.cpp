@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <iostream>
-#include <fstream>
-#include "symbol_table.h"
-extern std::ofstream outFile;
-extern char *temp_int();
-extern char *temp_real();
-
+#include "pascal.h"
 char *convert_to_int(const char val[]) {
     char *res = temp_int();
     char *temp = temp_real();

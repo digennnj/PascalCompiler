@@ -1,21 +1,4 @@
-
-#include <stdio.h>
-#include <ctype.h>
-#include <string.h>
-#include "symbol_table.h"
-#include <iostream>
-#include <fstream>
-extern std::ofstream outFile;
-extern char *temp_str();
-extern char *temp_int();
-extern char *temp_real();
-extern char *temp_bool();
-extern char *convert_to_int(const char *val);
-extern char *convert_to_real(const char *val);
-extern void error(const char msg[]);
-extern void error(const std::string);
-extern Variable *lookup(const char[]);
-
+#include "pascal.h"
 char *_do(const char cmd[], const char op1[], const char op2[]) {
     char *res;
     if (strcmp(cmd, "iadd")==0 || strcmp(cmd, "isub")==0 || strcmp(cmd, "imul")==0 || strcmp(cmd, "idiv")==0 || strcmp(cmd, "imod")==0) { res = temp_int();}

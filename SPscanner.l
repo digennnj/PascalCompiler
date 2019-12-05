@@ -1,7 +1,5 @@
 %{
-#include <iostream>
-#include <stdlib.h>
-#include "symbol_table.h"
+#include "pascal.h"
 #include "pascal.tab.h"
 extern "C" int yylex();
 int line_no = 1;

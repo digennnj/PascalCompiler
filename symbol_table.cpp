@@ -1,6 +1,4 @@
-#include "symbol_table.h"
-extern void error(std::string);
-extern std::map<std::string,Variable> symbolTable;
+#include "pascal.h"
 std::string type_str(Type typ) {
     switch(typ) {
         case INT: return "integer"; break;
@@ -21,3 +19,4 @@ Variable *lookup(const char identifier[]) {
         return &symbolTable[identifier];
     }
 }
+std::map<std::string,Variable> symbolTable = std::map<std::string,Variable>();

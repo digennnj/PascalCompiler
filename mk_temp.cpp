@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <iostream>
-#include <fstream>
-#include <string.h>
-#include "symbol_table.h"
-extern std::ofstream outFile;
-extern void decl_id(const char[], Type);
-
+#include "pascal.h"
 char *temp_int() {
     static int max_int=0;
     static char tempname[30];

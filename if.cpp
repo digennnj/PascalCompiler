@@ -1,17 +1,4 @@
-#include <stdio.h>
-#include <ctype.h>
-#include <string.h>
-#include "symbol_table.h"
-#include <iostream>
-#include <fstream>
- 
-extern char *temp_label();
- 
-extern void error(const char msg[]);
-extern void error(const std::string);
-extern std::ofstream outFile;
-extern Variable *lookup(const char[]);
- 
+#include "pascal.h"
 char *gen_if(char *varName) {
     Variable *var = lookup(varName);
     if (var==NULL) {error("SYMBOL NOT DEFINED: "+std::string(varName));}

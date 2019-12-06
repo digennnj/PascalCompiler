@@ -25,4 +25,5 @@ write &temps2
 declare &tempi1, integer
 store 3, &tempi1
 store &tempi1, &#foo
+return &#foo
 return

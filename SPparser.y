@@ -103,7 +103,9 @@ statement  : 	plain_ident assignop expression
                             if (var->sub_type==FUNC) {error("can't return from a procedure");}
                             char *returnVar = strdup(std::string("&#"+std::string($1)).c_str());
                             returnVar = full_name(returnVar);
-                            assign(returnVar,$3);}
+                            assign(returnVar,$3);
+                            *cur_out() += std::string("return ") + std::string(returnVar) + "\n";
+                         }
                          else {assign($1,$3);}}
                     semicolon
            |    plain_ident LSQUARE INTLITERAL RSQUARE assignop expression

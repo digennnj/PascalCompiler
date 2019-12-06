@@ -25,6 +25,7 @@ store 1, &tempi1
 declare &tempi2, integer
 iadd foo.a, &tempi1, &tempi2
 store &tempi2, foo.&#qux
+return foo.&#qux
 return
 
 :#foo
@@ -39,4 +40,5 @@ store 2, &tempi3
 declare &tempi4, integer
 imul foo.&#qux, &tempi3, &tempi4
 store &tempi4, &#foo
+return &#foo
 return

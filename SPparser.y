@@ -109,6 +109,20 @@ statement  : 	plain_ident assignop expression
            |    plain_ident LSQUARE INTLITERAL RSQUARE assignop expression
                         {std::string elem = std::string($1)+"&"+std::string($3);
                         assign(elem.c_str(), $6);}
+            |   plain_ident semicolon {
+                    $1=full_name($1);
+                    Variable *var = lookup($1);
+                    if (var->type==FUNC) {
+                        if (var->sub_type==FUNC) {
+                            error("Missing parentheses in procedure call");
+                        }
+                        else {
+                            error("Missing parentheses in function call");
+                        }
+                    }
+                    else {
+                        error("Can't use "+type_str(var->type)+" variable as a statement: "+std::string($1));
+                    }}
             |   plain_ident LPAREN RPAREN semicolon {
                     $1=full_name($1);
                     Variable *var = lookup($1);

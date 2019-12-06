@@ -1,0 +1,81 @@
+&tempi1 = 0
+a = 0
+&tempi2 = 5
+&tempb1 = True
+out(a): 0
+&tempi3 = 1
+&tempi4 = 1
+a = 1
+jump(&label1)
+&tempi2 = 5
+&tempb1 = True
+out(a): 1
+&tempi3 = 1
+&tempi4 = 2
+a = 2
+jump(&label1)
+&tempi2 = 5
+&tempb1 = True
+out(a): 2
+&tempi3 = 1
+&tempi4 = 3
+a = 3
+jump(&label1)
+&tempi2 = 5
+&tempb1 = True
+out(a): 3
+&tempi3 = 1
+&tempi4 = 4
+a = 4
+jump(&label1)
+&tempi2 = 5
+&tempb1 = True
+out(a): 4
+&tempi3 = 1
+&tempi4 = 5
+a = 5
+jump(&label1)
+&tempi2 = 5
+&tempb1 = False
+jump(&label2)
+out(a): 5
+&tempi5 = 1
+&tempi6 = 4
+a = 4
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+out(a): 4
+&tempi5 = 1
+&tempi6 = 3
+a = 3
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+out(a): 3
+&tempi5 = 1
+&tempi6 = 2
+a = 2
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+out(a): 2
+&tempi5 = 1
+&tempi6 = 1
+a = 1
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+out(a): 1
+&tempi5 = 1
+&tempi6 = 0
+a = 0
+&tempi7 = 0
+&tempb2 = False
+jump(&label3)
+out(a): 0
+&tempi5 = 1
+&tempi6 = -1
+a = -1
+&tempi7 = 0
+&tempb2 = True

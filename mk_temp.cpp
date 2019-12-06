@@ -4,7 +4,7 @@
 #include <string.h>
 #include "symbol_table.h"
 extern std::ofstream outFile;
-extern void decl_id(char[], Type);
+extern void decl_id(const char[], Type);
 
 char *temp_int() {
     static int max_int=0;

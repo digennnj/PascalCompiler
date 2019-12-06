@@ -1,6 +1,7 @@
 %{
 #include <iostream>
 #include <stdlib.h>
+#include "symbol_table.h"
 #include "pascal.tab.h"
 extern "C" int yylex();
 int line_no = 1;
@@ -126,6 +127,8 @@ UTF8        ({UTF8_2}|{UTF8_3}|{UTF8_4})
 [Dd][Oo]                                        {return DO;}
 [Rr][Ee][Pp][Ee][Aa][Tt]                        {return REPEAT;}
 [Uu][Nn][Tt][Ii][Ll]                            {return UNTIL;}
+[Ff][Uu][Nn][Cc][Tt][Ii][Oo][Nn]                {return FUNCTION;}
+[Pp][Rr][Oo][Cc][Ee][Dd][Uu][Rr][Ee]            {return PROCEDURE;}
 {comma}                                         {return COMMA;}
 {squote}                                        {return SQUOTE;}
 {period}					                    {return PERIOD;}
@@ -148,6 +151,8 @@ UTF8        ({UTF8_2}|{UTF8_3}|{UTF8_4})
 [>]                                             {return GTOP;}
 [<][=]                                          {return LEQOP;}
 [>][=]                                          {return GEQOP;}
+[[]                                             {return LSQUARE;}
+[]]                                             {return RSQUARE;}
 {character}                                     {yylval.sval = strdup(yytext); return CHARACTER;}
 {intliteral}                                    {yylval.sval = strdup(yytext); return INTLITERAL;}
 {realliteral}                                   {yylval.sval = strdup(yytext); return REALLITERAL;}

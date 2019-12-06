@@ -12,7 +12,7 @@ VAR
         write(person);
     END;
 BEGIN
-    baz;
+    baz();
     write(greeting);
     write(person);
 ;

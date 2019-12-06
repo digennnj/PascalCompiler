@@ -7,7 +7,7 @@ VAR
         bar := c;
     END;
 BEGIN
-    bar;
-    write(bar);
+    bar();
+    write(bar());
 ;
 END.

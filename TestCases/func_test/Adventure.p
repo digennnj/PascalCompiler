@@ -24,7 +24,7 @@ character resp;
     END;
 BEGIN
     REPEAT BEGIN
-        describe;
+        describe();
 
         you_were := you;
         read(resp);

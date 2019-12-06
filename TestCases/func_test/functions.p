@@ -9,9 +9,9 @@ function foo : integer; BEGIN
     foo := 3;
 END;
 BEGIN
-    bar;
-    write(foo);
-    a := foo+2;
+    bar();
+    write(foo());
+    a := foo()+2;
     write(a);
 ;
 END.

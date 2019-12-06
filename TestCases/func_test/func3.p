@@ -10,7 +10,7 @@ VAR
         write(a+b+c);
     END;
 BEGIN
-    bar;
+    bar();
     write(a+b+c);
 ;
 END.

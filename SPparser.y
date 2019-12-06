@@ -109,7 +109,7 @@ statement  : 	plain_ident assignop expression
            |    plain_ident LSQUARE INTLITERAL RSQUARE assignop expression
                         {std::string elem = std::string($1)+"&"+std::string($3);
                         assign(elem.c_str(), $6);}
-            |   plain_ident semicolon {
+            |   plain_ident LPAREN RPAREN semicolon {
                     $1=full_name($1);
                     Variable *var = lookup($1);
                     if (var->type==FUNC) {
@@ -119,6 +119,9 @@ statement  : 	plain_ident assignop expression
                         else {
                             call_function($1);
                         }
+                    }
+                    else {
+                        error("Can't call "+type_str(var->type)+" variable: "+std::string($1));
                     }}
 		;
 statement  :	READ lparen id_list rparen semicolon
@@ -197,13 +200,30 @@ term      :	ident      {char *varName=full_name($1);
                             error("SYMBOL NOT DEFINED");}
                         if (var->type==FUNC) {
                             if (var->sub_type==FUNC) {
+                                error("Can't use procedure as a value: "+std::string(varName));
+                            }
+                            else {
+                                error("Missing parentheses in function call");
+                            }
+                        }
+                        else {$$=varName;}}
+		;
+term      :	ident LPAREN RPAREN     {char *varName=full_name($1);
+                        Variable *var = lookup(varName);
+                        if (var==NULL) {
+                            error("SYMBOL NOT DEFINED");}
+                        if (var->type==FUNC) {
+                            if (var->sub_type==FUNC) {
                                 error("Can't use procedure call as a value: "+std::string(varName));
                             }
                             else {
                                 $$=call_function($1);
                             }
                         }
-                        else {$$=varName;}}
+                        else {
+                            error("Can't call "+type_str(var->type)+" variable: "+std::string($1));
+                        }}
+
 		;
 lparen    :	LPAREN
 		| {error("( EXPECTED , BUT FOUND");}

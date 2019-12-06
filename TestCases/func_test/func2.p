@@ -13,12 +13,12 @@ function qux : integer;
 BEGIN qux := a+1; END;
 BEGIN
     write("Hello world");
-    foo := qux*2;
+    foo := qux()*2;
 END;
 BEGIN
-    bar;
-    write(foo);
-    a := foo+2;
+    bar();
+    write(foo());
+    a := foo()+2;
     write(a);
 ;
 END.

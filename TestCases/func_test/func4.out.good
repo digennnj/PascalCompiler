@@ -1,0 +1,21 @@
+&temps1 = 'Hello'
+greeting = 'Hello'
+&temps2 = 'world'
+person = 'world'
+call(#bar)
+&temps3 = 'Salutations'
+bar.greeting = 'Salutations'
+&tempi1 = 4
+bar.b = 4
+&tempi2 = 5
+bar.c = 5
+&tempi3 = 6
+bar.d = 6
+&temps4 = 'What is your name?>'
+out(&temps4): 'What is your name?>'
+person> person = 'Matthew'
+out(bar.greeting): 'Salutations'
+out(person): 'Matthew'
+return
+out(greeting): 'Hello'
+out(person): 'Matthew'

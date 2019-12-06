@@ -109,7 +109,17 @@ statement  : 	plain_ident assignop expression
            |    plain_ident LSQUARE INTLITERAL RSQUARE assignop expression
                         {std::string elem = std::string($1)+"&"+std::string($3);
                         assign(elem.c_str(), $6);}
-            |   plain_ident semicolon {call_procedure($1);}
+            |   plain_ident semicolon {
+                    $1=full_name($1);
+                    Variable *var = lookup($1);
+                    if (var->type==FUNC) {
+                        if (var->sub_type==FUNC) {
+                            call_procedure($1);
+                        }
+                        else {
+                            call_function($1);
+                        }
+                    }}
 		;
 statement  :	READ lparen id_list rparen semicolon
 		;
@@ -185,8 +195,14 @@ term      :	ident      {char *varName=full_name($1);
                         Variable *var = lookup(varName);
                         if (var==NULL) {
                             error("SYMBOL NOT DEFINED");}
-                        if (var->type==FUNC && var->sub_type!=FUNC) {
-                            $$=call_function($1);}
+                        if (var->type==FUNC) {
+                            if (var->sub_type==FUNC) {
+                                error("Can't use procedure call as a value: "+std::string(varName));
+                            }
+                            else {
+                                $$=call_function($1);
+                            }
+                        }
                         else {$$=varName;}}
 		;
 lparen    :	LPAREN

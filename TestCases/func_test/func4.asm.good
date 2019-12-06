@@ -1,0 +1,37 @@
+declare &temps1, string
+store "Hello", &temps1
+declare greeting, string
+store &temps1, greeting
+declare &temps2, string
+store "world", &temps2
+declare person, string
+store &temps2, person
+call #bar
+write greeting
+write person
+halt
+
+:#bar
+declare &temps3, string
+store "Salutations", &temps3
+declare bar.greeting, string
+store &temps3, bar.greeting
+declare &tempi1, integer
+store 4, &tempi1
+declare bar.b, integer
+store &tempi1, bar.b
+declare &tempi2, integer
+store 5, &tempi2
+declare bar.c, integer
+store &tempi2, bar.c
+declare &tempi3, integer
+store 6, &tempi3
+declare bar.d, integer
+store &tempi3, bar.d
+declare &temps4, string
+store "What is your name?>", &temps4
+write &temps4
+read person, string
+write bar.greeting
+write person
+return

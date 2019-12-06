@@ -1,5 +1,6 @@
 #include "pascal.h"
 char *gen_if(char *varName) {
+    varName = full_name(varName);
     Variable *var = lookup(varName);
     if (var==NULL) {error("SYMBOL NOT DEFINED: "+std::string(varName));}
     if(var->type == BOOL) {

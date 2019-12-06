@@ -1,15 +1,16 @@
 #include "pascal.h"
-char *_do(const char cmd[], const char op1[], const char op2[]) {
+char *_do(const char cmd[], const char full_op1[], const char full_op2[]) {
     char *res;
     if (strcmp(cmd, "iadd")==0 || strcmp(cmd, "isub")==0 || strcmp(cmd, "imul")==0 || strcmp(cmd, "idiv")==0 || strcmp(cmd, "imod")==0) { res = temp_int();}
     else if (strcmp(cmd, "radd")==0 || strcmp(cmd, "rsub")==0 || strcmp(cmd, "rmul")==0 || strcmp(cmd, "rdiv")==0)                      { res = temp_real();}
     else if (strcmp(cmd, "and")==0 || strcmp(cmd, "or")==0 || strcmp(cmd, "equ")==0 || strcmp(cmd, "high")==0 || strcmp(cmd, "low")==0)  { res = temp_bool();}
     else if (strcmp(cmd, "concat")==0)  { res = temp_str();}
     else { error("invalid operation: "+std::string(cmd));}
-    outFile << cmd << " " << op1 << ", " << op2 << ", " << res << std::endl;
+    outFile << cmd << " " << full_op1 << ", " << full_op2 << ", " << res << std::endl;
     return res;
 }
 char *gen_neg(char op1[]) {
+    op1 = full_name(op1);
     Variable *var1 = lookup(op1);
     if (var1==NULL) {error("SYMBOL NOT DEFINED: "+std::string(op1));}
     Type t = var1->type;
@@ -26,6 +27,7 @@ char *gen_neg(char op1[]) {
     else { error("invalid operand for not: "+std::string(op1));}
 }
 char *gen_not(char op1[]) {
+    op1 = full_name(op1);
     Variable *var1 = lookup(op1);
     if (var1==NULL) {error("SYMBOL NOT DEFINED: "+std::string(op1));}
     Type t = var1->type;
@@ -39,6 +41,8 @@ char *gen_not(char op1[]) {
 char * gen_infix(char op1[], const char op[], char op2[])
 {
   char tempop[8];
+  op1 = full_name(op1);
+  op2 = full_name(op2);
     Variable *var1 = lookup(op1);
     if (var1==NULL) {error("SYMBOL NOT DEFINED: "+std::string(op1));}
     Type t1 = var1->type;

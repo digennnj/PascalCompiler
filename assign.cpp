@@ -5,6 +5,8 @@ void assign_lit(const char target[], const char source[])
 }
 void assign (const char target[], const char source[])
 {
+    target = full_name(target);
+    source = full_name(source);
      /* Generate code for assignment. */
     Variable *targetVar = lookup(target);
     Variable *sourceVar = lookup(source);

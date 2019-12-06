@@ -6,6 +6,7 @@ char *gen_begin_loop() {
 }
 
 char *gen_while_loop(char *varName) {
+    varName = full_name(varName);
     Variable *var = lookup(varName);
     if (var==NULL) {
             error("SYMBOL NOT DEFINED: "+std::string(varName));
@@ -26,6 +27,7 @@ char *gen_while_end(char *startLabel, char *endLabel) {
 }
 
 void gen_repeat(char *varName, char *startLabel) {
+    varName = full_name(varName);
     Variable *var = lookup(varName);
     if (var==NULL) {
             error("SYMBOL NOT DEFINED: "+std::string(varName));

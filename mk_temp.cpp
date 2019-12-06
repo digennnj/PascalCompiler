@@ -4,7 +4,7 @@ char *temp_int() {
     static char tempname[30];
     max_int++;
     sprintf(tempname, "&tempi%d" ,max_int);
-    decl_id(tempname, INT);
+    decl_temp(tempname, INT);
     return strdup(tempname);
 }
 char *temp_real() {
@@ -12,7 +12,7 @@ char *temp_real() {
     static char tempname[30];
     max_real++;
     sprintf(tempname, "&tempr%d" ,max_real);
-    decl_id(tempname, REAL);
+    decl_temp(tempname, REAL);
     return strdup(tempname);
 }
 char *temp_char() {
@@ -20,7 +20,7 @@ char *temp_char() {
     static char tempname[30];
     max_char++;
     sprintf(tempname, "&tempc%d" ,max_char);
-    decl_id(tempname, CHAR);
+    decl_temp(tempname, CHAR);
     return strdup(tempname);
 }
 char *temp_bool() {
@@ -28,7 +28,7 @@ char *temp_bool() {
     static char tempname[30];
     max_bool++;
     sprintf(tempname, "&tempb%d" ,max_bool);
-    decl_id(tempname, BOOL);
+    decl_temp(tempname, BOOL);
     return strdup(tempname);
 }
 char *temp_str() {
@@ -36,7 +36,7 @@ char *temp_str() {
     static char tempname[30];
     max_str++;
     sprintf(tempname, "&temps%d" ,max_str);
-    decl_id(tempname, STR);
+    decl_temp(tempname, STR);
     return strdup(tempname);
 }
 char *temp_label() {

@@ -96,12 +96,14 @@ statement_list  :   statement
                  | statement_list statement
 		;
 statement  : 	plain_ident assignop expression
-                        {Variable *var = lookup($1);
+                        {char *varName = full_name($1);
+                         Variable *var = lookup(varName);
                          if (var==NULL) {error("SYMBOL NOT DEFINED");}
                          if (var->type==FUNC) {
                             if (var->sub_type==FUNC) {error("can't return from a procedure");}
-                            std::string returnVar = "&#"+std::string($1);
-                            assign(strdup(returnVar.c_str()),$3);}
+                            char *returnVar = strdup(std::string("&#"+std::string($1)).c_str());
+                            returnVar = full_name(returnVar);
+                            assign(returnVar,$3);}
                          else {assign($1,$3);}}
                     semicolon
            |    plain_ident LSQUARE INTLITERAL RSQUARE assignop expression
@@ -179,12 +181,13 @@ term	   : CHARACTER {$$=temp_char(); assign_lit($$, $1);}
         | BOOLLITERAL {$$=temp_bool(); assign_lit($$, $1);}
         | STRLITERAL {$$=temp_str(); assign_lit($$, $1);}
 		;
-term      :	ident      {Variable *var = lookup($1);
+term      :	ident      {char *varName=full_name($1);
+                        Variable *var = lookup(varName);
                         if (var==NULL) {
                             error("SYMBOL NOT DEFINED");}
                         if (var->type==FUNC && var->sub_type!=FUNC) {
                             $$=call_function($1);}
-                        else {$$=strdup($1);}}
+                        else {$$=varName;}}
 		;
 lparen    :	LPAREN
 		| {error("( EXPECTED , BUT FOUND");}

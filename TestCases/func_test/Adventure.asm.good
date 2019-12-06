@@ -1,0 +1,405 @@
+declare &tempi1, integer
+store 0, &tempi1
+declare stalactite, integer
+store &tempi1, stalactite
+declare &tempi2, integer
+store 1, &tempi2
+declare normal1, integer
+store &tempi2, normal1
+declare &tempi3, integer
+store 2, &tempi3
+declare angus, integer
+store &tempi3, angus
+declare &tempi4, integer
+store 3, &tempi4
+declare exitsign, integer
+store &tempi4, exitsign
+declare &tempi5, integer
+store 4, &tempi5
+declare normal2, integer
+store &tempi5, normal2
+declare &tempi6, integer
+store 5, &tempi6
+declare falsealarm, integer
+store &tempi6, falsealarm
+declare &tempi7, integer
+store 6, &tempi7
+declare outside, integer
+store &tempi7, outside
+declare &temps1, string
+store "A drop of water from a stalactite brushes your cheek. It stings a litte.", &temps1
+declare stal_desc, string
+store &temps1, stal_desc
+declare &temps2, string
+store "A faint glow alerts you that the end is near at hand.", &temps2
+declare exit_desc, string
+store &temps2, exit_desc
+declare &temps3, string
+store "Curses! It was only a cave sprite.", &temps3
+declare false_desc, string
+store &temps3, false_desc
+declare &temps4, string
+store "You hear the faint skirl of a bagpipe.", &temps4
+declare angus_desc, string
+store &temps4, angus_desc
+declare &temps5, string
+store "Your footsteps resound from the cave walls.", &temps5
+declare normal_desc, string
+store &temps5, normal_desc
+declare &temps6, string
+store "Dare you enter the Maze of Doom?", &temps6
+declare sign, string
+store &temps6, sign
+declare &temps7, string
+store "You heave a sign and turn back home. It probably wouldn't have been very fun anyway.", &temps7
+declare giveup, string
+store &temps7, giveup
+declare &temps8, string
+store "With a sickening crunch the door slides down behind you. You are trapped.", &temps8
+declare cavein, string
+store &temps8, cavein
+declare &temps9, string
+store "You bump into a wall.", &temps9
+declare wrongway, string
+store &temps9, wrongway
+declare &temps10, string
+store "You blink the light from your eyes. How many centuries has it been since you've seen the sun? To your south there is a sign. You turn to read it: ", &temps10
+declare escape, string
+store &temps10, escape
+declare you, integer
+store outside, you
+declare you_were, integer
+declare resp, character
+jmp &label1
+:#describe
+declare &tempb1, boolean
+equ you, outside, &tempb1
+jf &tempb1, &label2
+write sign
+jmp &label3
+:&label2
+declare &tempb2, boolean
+equ you, stalactite, &tempb2
+jf &tempb2, &label4
+write stal_desc
+jmp &label5
+:&label4
+declare &tempb3, boolean
+equ you, angus, &tempb3
+jf &tempb3, &label6
+write angus_desc
+jmp &label7
+:&label6
+declare &tempb4, boolean
+equ you, exitsign, &tempb4
+jf &tempb4, &label8
+write exit_desc
+jmp &label9
+:&label8
+declare &tempb5, boolean
+equ you, falsealarm, &tempb5
+jf &tempb5, &label10
+write false_desc
+jmp &label11
+:&label10
+write normal_desc
+:&label11
+:&label9
+:&label7
+:&label5
+:&label3
+return
+:&label1
+:&label12
+call #describe
+store you, you_were
+read resp, character
+declare &tempb6, boolean
+equ you, outside, &tempb6
+jf &tempb6, &label13
+declare &tempc1, character
+store 'y', &tempc1
+declare &tempb7, boolean
+equ resp, &tempc1, &tempb7
+jf &tempb7, &label14
+write cavein
+store stalactite, you
+jmp &label15
+:&label14
+write giveup
+:&label15
+jmp &label16
+:&label13
+declare &tempb8, boolean
+equ you, stalactite, &tempb8
+jf &tempb8, &label17
+declare &tempc2, character
+store 'n', &tempc2
+declare &tempb9, boolean
+equ resp, &tempc2, &tempb9
+jf &tempb9, &label18
+store normal2, you
+jmp &label19
+:&label18
+declare &tempc3, character
+store 'e', &tempc3
+declare &tempb10, boolean
+equ resp, &tempc3, &tempb10
+jf &tempb10, &label20
+store normal1, you
+jmp &label21
+:&label20
+declare &tempc4, character
+store 's', &tempc4
+declare &tempb11, boolean
+equ resp, &tempc4, &tempb11
+jf &tempb11, &label22
+write wrongway
+jmp &label23
+:&label22
+declare &tempc5, character
+store 'w', &tempc5
+declare &tempb12, boolean
+equ resp, &tempc5, &tempb12
+jf &tempb12, &label24
+store angus, you
+jmp &label25
+:&label24
+write wrongway
+:&label25
+:&label23
+:&label21
+:&label19
+jmp &label26
+:&label17
+declare &tempb13, boolean
+equ you, normal1, &tempb13
+jf &tempb13, &label27
+declare &tempc6, character
+store 'n', &tempc6
+declare &tempb14, boolean
+equ resp, &tempc6, &tempb14
+jf &tempb14, &label28
+store exitsign, you
+jmp &label29
+:&label28
+declare &tempc7, character
+store 'e', &tempc7
+declare &tempb15, boolean
+equ resp, &tempc7, &tempb15
+jf &tempb15, &label30
+store normal2, you
+jmp &label31
+:&label30
+declare &tempc8, character
+store 's', &tempc8
+declare &tempb16, boolean
+equ resp, &tempc8, &tempb16
+jf &tempb16, &label32
+write wrongway
+jmp &label33
+:&label32
+declare &tempc9, character
+store 'w', &tempc9
+declare &tempb17, boolean
+equ resp, &tempc9, &tempb17
+jf &tempb17, &label34
+store stalactite, you
+jmp &label35
+:&label34
+write wrongway
+:&label35
+:&label33
+:&label31
+:&label29
+jmp &label36
+:&label27
+declare &tempb18, boolean
+equ you, angus, &tempb18
+jf &tempb18, &label37
+declare &tempc10, character
+store 'n', &tempc10
+declare &tempb19, boolean
+equ resp, &tempc10, &tempb19
+jf &tempb19, &label38
+write wrongway
+jmp &label39
+:&label38
+declare &tempc11, character
+store 'e', &tempc11
+declare &tempb20, boolean
+equ resp, &tempc11, &tempb20
+jf &tempb20, &label40
+store stalactite, you
+jmp &label41
+:&label40
+declare &tempc12, character
+store 's', &tempc12
+declare &tempb21, boolean
+equ resp, &tempc12, &tempb21
+jf &tempb21, &label42
+store normal2, you
+jmp &label43
+:&label42
+declare &tempc13, character
+store 'w', &tempc13
+declare &tempb22, boolean
+equ resp, &tempc13, &tempb22
+jf &tempb22, &label44
+write wrongway
+jmp &label45
+:&label44
+write wrongway
+:&label45
+:&label43
+:&label41
+:&label39
+jmp &label46
+:&label37
+declare &tempb23, boolean
+equ you, exitsign, &tempb23
+jf &tempb23, &label47
+declare &tempc14, character
+store 'n', &tempc14
+declare &tempb24, boolean
+equ resp, &tempc14, &tempb24
+jf &tempb24, &label48
+store falsealarm, you
+jmp &label49
+:&label48
+declare &tempc15, character
+store 'e', &tempc15
+declare &tempb25, boolean
+equ resp, &tempc15, &tempb25
+jf &tempb25, &label50
+store outside, you
+write escape
+jmp &label51
+:&label50
+declare &tempc16, character
+store 's', &tempc16
+declare &tempb26, boolean
+equ resp, &tempc16, &tempb26
+jf &tempb26, &label52
+store normal1, you
+jmp &label53
+:&label52
+declare &tempc17, character
+store 'w', &tempc17
+declare &tempb27, boolean
+equ resp, &tempc17, &tempb27
+jf &tempb27, &label54
+write wrongway
+jmp &label55
+:&label54
+write wrongway
+:&label55
+:&label53
+:&label51
+:&label49
+jmp &label56
+:&label47
+declare &tempb28, boolean
+equ you, normal2, &tempb28
+jf &tempb28, &label57
+declare &tempc18, character
+store 'n', &tempc18
+declare &tempb29, boolean
+equ resp, &tempc18, &tempb29
+jf &tempb29, &label58
+store angus, you
+jmp &label59
+:&label58
+declare &tempc19, character
+store 'e', &tempc19
+declare &tempb30, boolean
+equ resp, &tempc19, &tempb30
+jf &tempb30, &label60
+write wrongway
+jmp &label61
+:&label60
+declare &tempc20, character
+store 's', &tempc20
+declare &tempb31, boolean
+equ resp, &tempc20, &tempb31
+jf &tempb31, &label62
+store stalactite, you
+jmp &label63
+:&label62
+declare &tempc21, character
+store 'w', &tempc21
+declare &tempb32, boolean
+equ resp, &tempc21, &tempb32
+jf &tempb32, &label64
+store normal1, you
+jmp &label65
+:&label64
+write wrongway
+:&label65
+:&label63
+:&label61
+:&label59
+jmp &label66
+:&label57
+declare &tempb33, boolean
+equ you, falsealarm, &tempb33
+jf &tempb33, &label67
+declare &tempc22, character
+store 'n', &tempc22
+declare &tempb34, boolean
+equ resp, &tempc22, &tempb34
+jf &tempb34, &label68
+write wrongway
+jmp &label69
+:&label68
+declare &tempc23, character
+store 'e', &tempc23
+declare &tempb35, boolean
+equ resp, &tempc23, &tempb35
+jf &tempb35, &label70
+write wrongway
+jmp &label71
+:&label70
+declare &tempc24, character
+store 's', &tempc24
+declare &tempb36, boolean
+equ resp, &tempc24, &tempb36
+jf &tempb36, &label72
+store exitsign, you
+jmp &label73
+:&label72
+declare &tempc25, character
+store 'w', &tempc25
+declare &tempb37, boolean
+equ resp, &tempc25, &tempb37
+jf &tempb37, &label74
+write wrongway
+jmp &label75
+:&label74
+write wrongway
+:&label75
+:&label73
+:&label71
+:&label69
+jmp &label76
+:&label67
+declare &temps11, string
+store "how did you get in there?", &temps11
+write &temps11
+:&label76
+:&label66
+:&label56
+:&label46
+:&label36
+:&label26
+:&label16
+declare &tempb38, boolean
+equ you_were, outside, &tempb38
+declare &tempc26, character
+store 'n', &tempc26
+declare &tempb39, boolean
+equ resp, &tempc26, &tempb39
+declare &tempb40, boolean
+and &tempb38, &tempb39, &tempb40
+jf &tempb40, &label12
+halt

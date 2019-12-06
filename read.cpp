@@ -1,6 +1,7 @@
 #include "pascal.h"
 void read_id (char id_name[])
 {
+    id_name = full_name(id_name);
     Variable *var = lookup(id_name);
     if (var==NULL) {
             error("SYMBOL NOT DEFINED: "+std::string(id_name));

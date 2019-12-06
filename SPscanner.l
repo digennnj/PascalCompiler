@@ -57,6 +57,7 @@ std::string dbg_unicode(char *s) {
 }
 void error( const char msg[] )
 {
+    printSymbolTable();
 	std::cout << "LINE " << line_no << " : " << msg << std::endl;
 	exit( -1 );
 }

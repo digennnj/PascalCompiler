@@ -1,0 +1,45 @@
+declare a, integer
+jmp &label1
+:#bar
+declare bar.a, integer
+declare &temps1, string
+store "Bye computer", &temps1
+write &temps1
+return
+:&label1
+jmp &label2
+:#foo
+declare &#foo, integer
+declare foo.a, integer
+jmp &label3
+:#foo.qux
+declare foo.&#qux, integer
+declare &tempi1, integer
+store 1, &tempi1
+declare &tempi2, integer
+iadd foo.a, &tempi1, &tempi2
+store &tempi2, foo.&#qux
+return
+:&label3
+declare &temps2, string
+store "Hello world", &temps2
+write &temps2
+call #foo.qux
+declare &tempi3, integer
+store 2, &tempi3
+declare &tempi4, integer
+imul foo.&#qux, &tempi3, &tempi4
+store &tempi4, &#foo
+return
+:&label2
+call #bar
+call #foo
+write &#foo
+call #foo
+declare &tempi5, integer
+store 2, &tempi5
+declare &tempi6, integer
+iadd &#foo, &tempi5, &tempi6
+store &tempi6, a
+write a
+halt

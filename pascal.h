@@ -30,6 +30,7 @@ char *temp_label();
 void assign_lit(const char[], const char[]);
 void assign(const char[], const char[]);
 void decl_id (const char[], Type);
+void decl_temp (const char[], Type);
 void decl_function(char identifier[], Type type);
 void decl_procedure(char identifier[]);
 void decl_array(char identifier[], Type type, int length);

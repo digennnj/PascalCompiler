@@ -1,0 +1,44 @@
+declare &tempi1, integer
+store 1, &tempi1
+declare a, integer
+store &tempi1, a
+declare &tempi2, integer
+store 2, &tempi2
+declare b, integer
+store &tempi2, b
+declare &tempi3, integer
+store 3, &tempi3
+declare c, integer
+store &tempi3, c
+jmp &label1
+:#bar
+declare &tempi4, integer
+store 4, &tempi4
+declare bar.b, integer
+store &tempi4, bar.b
+declare &tempi5, integer
+store 5, &tempi5
+declare bar.c, integer
+store &tempi5, bar.c
+declare &tempi6, integer
+store 6, &tempi6
+declare bar.d, integer
+store &tempi6, bar.d
+declare &temps1, string
+store "Hello computer", &temps1
+write &temps1
+read bar.c, integer
+declare &tempi7, integer
+iadd a, bar.b, &tempi7
+declare &tempi8, integer
+iadd &tempi7, bar.c, &tempi8
+write &tempi8
+return
+:&label1
+call #bar
+declare &tempi9, integer
+iadd a, b, &tempi9
+declare &tempi10, integer
+iadd &tempi9, c, &tempi10
+write &tempi10
+halt

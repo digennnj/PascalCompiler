@@ -1,0 +1,37 @@
+jump(&label1)
+jump(&label2)
+call(#bar)
+&temps1 = 'Bye computer'
+out(&temps1): 'Bye computer'
+return
+call(#foo)
+jump(&label3)
+&temps2 = 'Hello world'
+out(&temps2): 'Hello world'
+call(#foo.qux)
+&tempi1 = 1
+&tempi2 = 1
+foo.&#qux = 1
+return
+&tempi3 = 2
+&tempi4 = 2
+&#foo = 2
+return
+out(&#foo): 2
+call(#foo)
+jump(&label3)
+&temps2 = 'Hello world'
+out(&temps2): 'Hello world'
+call(#foo.qux)
+&tempi1 = 1
+&tempi2 = 1
+foo.&#qux = 1
+return
+&tempi3 = 2
+&tempi4 = 2
+&#foo = 2
+return
+&tempi5 = 2
+&tempi6 = 4
+a = 4
+out(a): 4

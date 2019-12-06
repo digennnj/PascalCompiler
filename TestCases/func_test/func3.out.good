@@ -1,0 +1,24 @@
+&tempi1 = 1
+a = 1
+&tempi2 = 2
+b = 2
+&tempi3 = 3
+c = 3
+jump(&label1)
+call(#bar)
+&tempi4 = 4
+bar.b = 4
+&tempi5 = 5
+bar.c = 5
+&tempi6 = 6
+bar.d = 6
+&temps1 = 'Hello computer'
+out(&temps1): 'Hello computer'
+bar.c> bar.c = 11
+&tempi7 = 5
+&tempi8 = 16
+out(&tempi8): 16
+return
+&tempi9 = 3
+&tempi10 = 6
+out(&tempi10): 6

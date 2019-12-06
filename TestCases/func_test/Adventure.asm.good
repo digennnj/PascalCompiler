@@ -70,46 +70,6 @@ declare you, integer
 store outside, you
 declare you_were, integer
 declare resp, character
-jmp &label1
-:#describe
-declare &tempb1, boolean
-equ you, outside, &tempb1
-jf &tempb1, &label2
-write sign
-jmp &label3
-:&label2
-declare &tempb2, boolean
-equ you, stalactite, &tempb2
-jf &tempb2, &label4
-write stal_desc
-jmp &label5
-:&label4
-declare &tempb3, boolean
-equ you, angus, &tempb3
-jf &tempb3, &label6
-write angus_desc
-jmp &label7
-:&label6
-declare &tempb4, boolean
-equ you, exitsign, &tempb4
-jf &tempb4, &label8
-write exit_desc
-jmp &label9
-:&label8
-declare &tempb5, boolean
-equ you, falsealarm, &tempb5
-jf &tempb5, &label10
-write false_desc
-jmp &label11
-:&label10
-write normal_desc
-:&label11
-:&label9
-:&label7
-:&label5
-:&label3
-return
-:&label1
 :&label12
 call #describe
 store you, you_were
@@ -403,3 +363,42 @@ declare &tempb40, boolean
 and &tempb38, &tempb39, &tempb40
 jf &tempb40, &label12
 halt
+
+:#describe
+declare &tempb1, boolean
+equ you, outside, &tempb1
+jf &tempb1, &label2
+write sign
+jmp &label3
+:&label2
+declare &tempb2, boolean
+equ you, stalactite, &tempb2
+jf &tempb2, &label4
+write stal_desc
+jmp &label5
+:&label4
+declare &tempb3, boolean
+equ you, angus, &tempb3
+jf &tempb3, &label6
+write angus_desc
+jmp &label7
+:&label6
+declare &tempb4, boolean
+equ you, exitsign, &tempb4
+jf &tempb4, &label8
+write exit_desc
+jmp &label9
+:&label8
+declare &tempb5, boolean
+equ you, falsealarm, &tempb5
+jf &tempb5, &label10
+write false_desc
+jmp &label11
+:&label10
+write normal_desc
+:&label11
+:&label9
+:&label7
+:&label5
+:&label3
+return

@@ -48,3 +48,12 @@ std::string name_for_scope(int lvl) {
 }
 std::map<std::string,Variable> symbolTable = std::map<std::string,Variable>();
 std::list<std::string> scopeNames = {""};
+
+std::list<std::string *> functionsInProgress = {new std::string};
+std::list<std::string *> completedFunctions = {};
+std::string *cur_out() {
+    if (functionsInProgress.empty()) {
+        error("function body stack is empty");
+    }
+    return functionsInProgress.front();
+}

@@ -33,7 +33,6 @@ wrongway = 'You bump into a wall.'
 &temps10 = "You blink the light from your eyes. How many centuries has it been since you've seen the sun? To your south there is a sign. You turn to read it: "
 escape = "You blink the light from your eyes. How many centuries has it been since you've seen the sun? To your south there is a sign. You turn to read it: "
 you = 6
-jump(&label1)
 call(#describe)
 &tempb1 = True
 out(sign): 'Dare you enter the Maze of Doom?'

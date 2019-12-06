@@ -56,7 +56,7 @@ std::ofstream outFile = std::ofstream();
 %%
 
 
-program	    :	 PROGRAM VAR variables START statement_list END PERIOD 
+program	    :	 PROGRAM VAR variables START statement_list END PERIOD  
 		;
 procedure   :   PROCEDURE ident semicolon {$1=gen_procedure($2);} VAR variables START statement_list END semicolon {end_procedure($1);}
             |   PROCEDURE ident semicolon {$1=gen_procedure($2);} START statement_list END semicolon {end_procedure($1);}
@@ -205,7 +205,7 @@ array_ident : plain_ident LSQUARE INTLITERAL RSQUARE
                             $$ = strdup(elem.c_str());}
 		| {error("IDENTIFIER EXPECTED, BUT FOUND");}
 		;
-system_goal :	program  { finish(); }
+system_goal :	program  { finish();}
 		;
 %%
 int main( int argc, char **argv )

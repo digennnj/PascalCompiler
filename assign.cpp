@@ -1,7 +1,8 @@
 #include "pascal.h"
 void assign_lit(const char target[], const char source[])
 {
-    outFile << "store " << source << ", " << target << std::endl;
+    //outFile << "store " << source << ", " << target << std::endl;
+    *cur_out() += "store " + std::string(source) + ", " + std::string(target) + "\n";
 }
 void assign (const char target[], const char source[])
 {
@@ -17,14 +18,16 @@ void assign (const char target[], const char source[])
               if (targetVar->type == REAL) {
                   if (sourceVar->type == INT) {
                     char * temp = convert_to_real(source);
-                    outFile << "store " << temp << ", " << target << std::endl;
+                    //outFile << "store " << temp << ", " << target << std::endl;
+                    *cur_out() += "store " +std::string(temp) + ", " +std::string(target) + "\n";
                   }
                   else {error("Can't assign "+type_str(sourceVar->type)+" value to a real");}
               }
               else if (targetVar->type == INT) {
                   if (sourceVar->type == REAL) {
                     char * temp = convert_to_int(source);
-                    outFile << "store " << temp << ", " << target << std::endl;
+                    //outFile << "store " << temp << ", " << target << std::endl;
+                    *cur_out() += "store " +std::string(temp) + ", " +std::string(target) + "\n";
                   }
                   else {error("Can't assign "+type_str(sourceVar->type)+" value to a int");}
               }
@@ -32,7 +35,8 @@ void assign (const char target[], const char source[])
                   error("Can't assign "+type_str(sourceVar->type)+" value to a "+type_str(targetVar->type));
               }
           } else {
-               outFile << "store " << source << ", " << target << std::endl;
+               //outFile << "store " << source << ", " << target << std::endl;
+               *cur_out() += "store " + std::string(source) + ", " + std::string(target) + "\n";
           }
      }
 }

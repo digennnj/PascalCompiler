@@ -1,11 +1,8 @@
-jump(&label1)
-jump(&label2)
 call(#bar)
 &temps1 = 'Bye computer'
 out(&temps1): 'Bye computer'
 return
 call(#foo)
-jump(&label3)
 &temps2 = 'Hello world'
 out(&temps2): 'Hello world'
 call(#foo.qux)
@@ -19,7 +16,6 @@ return
 return
 out(&#foo): 2
 call(#foo)
-jump(&label3)
 &temps2 = 'Hello world'
 out(&temps2): 'Hello world'
 call(#foo.qux)

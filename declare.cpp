@@ -5,7 +5,8 @@ void decl_temp(const char identifier[], Type type) {
         }
         else {
             symbolTable[identifier] = {type, 0, type};
-            outFile << "declare " << identifier << ", " << type_str(type) << std::endl;
+            //outFile << "declare " << identifier << ", " << type_str(type) << std::endl;
+            *cur_out() += "declare " + std::string(identifier) + ", " + std::string(type_str(type)) + "\n";
         }
 }
 void decl_id(const char identifier[], Type type) {
@@ -15,7 +16,8 @@ void decl_id(const char identifier[], Type type) {
         }
         else {
             symbolTable[identifier] = {type, 0, type};
-            outFile << "declare " << identifier << ", " << type_str(type) << std::endl;
+            //outFile << "declare " << identifier << ", " << type_str(type) << std::endl;
+            *cur_out() += "declare " + std::string(identifier) + ", " + std::string(type_str(type)) + "\n";
         }
 }
 
@@ -32,7 +34,8 @@ void decl_array(char identifier[], Type type, int length) {
 void decl_function(char identifier[], Type type) {
     std::string returnVar = "&#"+std::string(identifier);
     identifier = strdup(scope_concat(cur_scope(), identifier).c_str());
-    outFile << ":" << "#" << identifier << std::endl; // # means function?
+    //outFile << ":" << "#" << identifier << std::endl; // # means function?
+    *cur_out() += std::string(":") + "#" + std::string(identifier) + "\n"; 
     if (lookup(identifier)!=NULL) {
             error("SYMBOL ALREADY DEFINED: "+std::string(identifier));
     }
@@ -41,7 +44,8 @@ void decl_function(char identifier[], Type type) {
 }
 void decl_procedure(char identifier[]) {
     identifier = strdup(scope_concat(cur_scope(), identifier).c_str());
-    outFile << ":" << "#" << identifier << std::endl; // # means function?
+    //outFile << ":" << "#" << identifier << std::endl; // # means function?
+    *cur_out() += std::string(":") + "#" + std::string(identifier) + "\n"; 
     if (lookup(identifier)!=NULL) {
             error("SYMBOL ALREADY DEFINED: "+std::string(identifier));
     }

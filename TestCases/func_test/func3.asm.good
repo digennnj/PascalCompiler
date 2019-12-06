@@ -10,7 +10,14 @@ declare &tempi3, integer
 store 3, &tempi3
 declare c, integer
 store &tempi3, c
-jmp &label1
+call #bar
+declare &tempi9, integer
+iadd a, b, &tempi9
+declare &tempi10, integer
+iadd &tempi9, c, &tempi10
+write &tempi10
+halt
+
 :#bar
 declare &tempi4, integer
 store 4, &tempi4
@@ -34,11 +41,3 @@ declare &tempi8, integer
 iadd &tempi7, bar.c, &tempi8
 write &tempi8
 return
-:&label1
-call #bar
-declare &tempi9, integer
-iadd a, b, &tempi9
-declare &tempi10, integer
-iadd &tempi9, c, &tempi10
-write &tempi10
-halt

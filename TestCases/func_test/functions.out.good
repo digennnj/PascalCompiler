@@ -1,5 +1,3 @@
-jump(&label1)
-jump(&label2)
 call(#bar)
 &temps1 = 'Bye computer'
 out(&temps1): 'Bye computer'

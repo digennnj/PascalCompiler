@@ -6,7 +6,8 @@ char *_do(const char cmd[], const char full_op1[], const char full_op2[]) {
     else if (strcmp(cmd, "and")==0 || strcmp(cmd, "or")==0 || strcmp(cmd, "equ")==0 || strcmp(cmd, "high")==0 || strcmp(cmd, "low")==0)  { res = temp_bool();}
     else if (strcmp(cmd, "concat")==0)  { res = temp_str();}
     else { error("invalid operation: "+std::string(cmd));}
-    outFile << cmd << " " << full_op1 << ", " << full_op2 << ", " << res << std::endl;
+    //outFile << cmd << " " << full_op1 << ", " << full_op2 << ", " << res << std::endl;
+    *cur_out() += std::string(cmd) + std::string(" ") + std::string(full_op1) + ", " + std::string(full_op2) + ", " + std::string(res) + "\n";
     return res;
 }
 char *gen_neg(char op1[]) {
@@ -16,12 +17,14 @@ char *gen_neg(char op1[]) {
     Type t = var1->type;
     if (t==INT) {
         char *res = temp_int();
-        outFile << "isub" << " " << "0" << ", " << op1 << ", " << res << std::endl;
+        //outFile << "isub" << " " << "0" << ", " << op1 << ", " << res << std::endl;
+        *cur_out() += std::string("isub") + " " + "0" + ", " + std::string(op1) + ", " + std::string(res) + "\n";
         return res;
     }
     else if (t==REAL) {
         char *res = temp_real();
-        outFile << "rsub" << " " << "0.0" << ", " << op1 << ", " << res << std::endl;
+        //outFile << "rsub" << " " << "0.0" << ", " << op1 << ", " << res << std::endl;
+        *cur_out() += std::string("rsub") + " " + "0.0" + ", " + std::string(op1) + ", " + std::string(res) + "\n";
         return res;
     }
     else { error("invalid operand for not: "+std::string(op1));}
@@ -33,7 +36,8 @@ char *gen_not(char op1[]) {
     Type t = var1->type;
     if (t==BOOL) {
         char *res = temp_bool();
-        outFile << "not" << " " << op1 << ", " << res << std::endl;
+        //outFile << "not" << " " << op1 << ", " << res << std::endl;
+        *cur_out() += std::string("not") + " " + std::string(op1) + ", " + std::string(res) + "\n";
         return res;
     }
     else { error("invalid operand for not: "+std::string(op1));}

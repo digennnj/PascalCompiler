@@ -4,7 +4,6 @@ a = 1
 b = 2
 &tempi3 = 3
 c = 3
-jump(&label1)
 call(#bar)
 &tempi4 = 4
 bar.b = 4

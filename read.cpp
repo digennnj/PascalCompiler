@@ -6,5 +6,8 @@ void read_id (char id_name[])
     if (var==NULL) {
             error("SYMBOL NOT DEFINED: "+std::string(id_name));
     }
-    else {outFile << "read " << id_name << ", " << type_str(var->type) << std::endl;}
+    else {
+        //outFile << "read " << id_name << ", " << type_str(var->type) << std::endl;
+        *cur_out() += std::string("read ") + std::string(id_name) + ", " + std::string(type_str(var->type)) + "\n";
+    }
 }

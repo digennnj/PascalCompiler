@@ -6,6 +6,9 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <streambuf>
+#include <stack>
+#include <list>
 #include "symbol_table.h"
 
 extern "C" int yylex();
@@ -14,6 +17,13 @@ extern FILE * yyin;
 
 extern int line_no;
 Type cur_type = INT;
+std::stack<std::ofstream*> methodFiles;
+std::ofstream* prodOutFile;
+std::ofstream prodOutFileTemp;
+std::list<std::string> reopenMethodNames;
+std::list<std::string> methodNames;
+std::list<std::ofstream> outFileStreams;
+
 std::ofstream outFile;
 
 std::map<std::string,Variable> symbolTable;
@@ -22,6 +32,8 @@ extern char *convert_to_int(const char *val);
 extern char *convert_to_real(const char *val);
 
 
+void decl_array(char[], Type, int);
+void decl_procedure(char[]);
 char *gen_else(char[]);
 void gen_endif(char[]);
 char *gen_if(char[]);
@@ -34,15 +46,20 @@ char *temp_str();
 char *temp_int();
 char *temp_real();
 char *temp_bool();
-void assign_lit(char[], char[]);
-void assign(char[], char[]);
-void decl_id (char[], Type);
+void assign_lit(const char[], const char[]);
+void assign(const char[], const char[]);
+void decl_id (const char[], Type);
 void finish();
 char * gen_infix(char [], const char [], char []);
 char *gen_not(char []);
 char *gen_neg(char []);
 void read_id (char []);
 void write_expr(char []);
+void write_methods();
+char *gen_function(char [], Type);
+char *gen_procedure(char []);
+void end_function(char *);
+void end_procedure(char *);
 void error(const char []);
 void error(std::string);
 void yyerror(const char []);
@@ -50,12 +67,14 @@ void yyerror(const char []);
 %union{
        int ival;
        char * sval;
+        Type typeval;
        }
 %token PROGRAM VAR START END READ WRITE ASSIGNOP WHILE DO REPEAT UNTIL
 %token INTLITERAL REALLITERAL CHARACTER BOOLLITERAL STRLITERAL
 %token INTTYPE REALTYPE CHARTYPE BOOLTYPE STRTYPE
 %token EQOP NEQOP LTOP GTOP LEQOP GEQOP NOTOP
 %token LPAREN RPAREN COMMA SQUOTE PERIOD SEMICOLON COLON PLUSOP MINUSOP MULTIPLYOP DIVIDEOP ID MODOP IF THEN ELSE
+%token LSQUARE RSQUARE PROCEDURE FUNCTION
 
 %left ANDOP OROP
 %left NOTOP
@@ -68,6 +87,8 @@ void yyerror(const char []);
 %type <sval>if_statement
 %type <sval>if
 %type <sval>ident
+%type <sval>array_ident
+%type <sval>plain_ident
 %type <sval>expression
 %type <sval>expr
 %type <sval>term
@@ -78,31 +99,47 @@ void yyerror(const char []);
 %type <sval>STRLITERAL
 %type <sval>WHILE
 %type <sval>REPEAT
-%type <sval>DO
+%type <sval>do
+%type <typeval>type
+%type <sval>PROCEDURE
+%type <sval>FUNCTION
 
 
 %start system_goal
 %%
 
 
-program	    :	 PROGRAM VAR variables START statement_list END PERIOD 
+program	    :	 PROGRAM VAR variables START statement_list END PERIOD //{ write_methods(); }
 		;
-decl_type : INTTYPE {cur_type = INT;}
-     | REALTYPE {cur_type = REAL;}
-     | CHARTYPE {cur_type = CHAR;}
-     | BOOLTYPE {cur_type = BOOL;}
-     | STRTYPE  {cur_type = STR;}
+procedure   :   PROCEDURE ident semicolon { decl_procedure($2); } VAR variables { prodOutFileTemp.open(std::string($2) + ".asm"); } START statement_list END semicolon { prodOutFileTemp.close(); }
+// { methods.push_front(methodFiles.top()); methodFiles.pop(); }
+            |   PROCEDURE ident semicolon {} START statement_list END semicolon {}
+            ;
+function    :   FUNCTION ident COLON type semicolon {} VAR variables START statement_list END semicolon {}
+            |   FUNCTION ident COLON type semicolon {} START statement_list END semicolon {}
+            ;
+type : INTTYPE {$$ = INT;}
+     | REALTYPE {$$ = REAL;}
+     | CHARTYPE {$$ = CHAR;}
+     | BOOLTYPE {$$ = BOOL;}
+     | STRTYPE  {$$ = STR;}
      ;
+decl_type : type { cur_type = $1;}
 variables   :	semicolon variables
 		 | semicolon 
          | decl_type decl_list semicolon variables
          | decl_type decl_list semicolon 
+        | procedure variables
+        | procedure 
+        | function variables
+        | function 
 		;
 decl_list : decl
           | decl_list COMMA decl
           ;
-decl : ident {decl_id($1, cur_type);}
-     | ident assignop expression {decl_id($1, cur_type);} {assign($1,$3);}
+decl : plain_ident {decl_id($1, cur_type);}
+     | plain_ident LSQUARE INTLITERAL RSQUARE {decl_array($1, cur_type, std::stoi($3));}
+     | plain_ident assignop expression {decl_id($1, cur_type);} {assign($1,$3);}
      ;
 
 semicolon : SEMICOLON
@@ -112,7 +149,10 @@ assignop  : ASSIGNOP
 statement_list  :   statement
                  | statement_list statement
 		;
-statement  : 	ident assignop expression {assign($1,$3);} semicolon
+statement  : 	plain_ident assignop expression {assign($1,$3);} semicolon
+           |    plain_ident LSQUARE INTLITERAL RSQUARE assignop expression
+                        {std::string elem = std::string($1)+"&"+std::string($3);
+                        assign(elem.c_str(), $6);}
 		;
 statement  :	READ lparen id_list rparen semicolon
 		;
@@ -137,10 +177,16 @@ else_statement: ELSE statement
 loop	:		while_loop
 		|		repeat_loop
 		;
-while_loop	:	WHILE {$1=gen_begin_loop();} expression DO {$4=gen_while_loop($3);}  statement {gen_while_end($1, $4);}
+while_loop	:	WHILE {$1=gen_begin_loop();} expression do {$4=gen_while_loop($3);}  statement {gen_while_end($1, $4);}
 		;
-repeat_loop	:	REPEAT {$1=gen_begin_loop();} statement UNTIL expression {gen_repeat($5, $1);}
+repeat_loop	:	REPEAT {$1=gen_begin_loop();} statement_list until expression {gen_repeat($5, $1);}
 		;
+do : DO {$$=strdup("do");}
+   | {error("expected DO");}
+    ;
+until : UNTIL
+      | {error("expected UNTIL");}
+    ;
 id_list    :	ident      {read_id($1);}
   		| id_list COMMA ident {read_id($3);}
 		;
@@ -188,7 +234,14 @@ lparen    :	LPAREN
 rparen    :	RPAREN
 		| {error(") EXPECTED , BUT FOUND");}
 		;
-ident     :	ID {$$=strdup(yylval.sval);}
+ident : plain_ident {$$=$1;}
+      | array_ident {$$=$1;}
+    ;
+plain_ident     :	ID {$$=strdup(yylval.sval);}
+                ;
+array_ident : plain_ident LSQUARE INTLITERAL RSQUARE
+                        { std::string elem = std::string($1)+"&"+std::string($3);
+                            $$ = strdup(elem.c_str());}
 		| {error("IDENTIFIER EXPECTED, BUT FOUND");}
 		;
 system_goal :	program  { finish(); }
@@ -213,10 +266,34 @@ int main( int argc, char **argv )
 		std::string asmFileName = fileName + ".asm";
 
 		outFile.open(asmFileName);
+		std::ofstream* topScope = &outFile;
+		methodFiles.push(topScope);
+
+		
 		yyparse();
 		fclose( yyin );
+		while(methodNames.size() > 0) {
+			std::cout << methodNames.front() << "   " << methodNames.back() << std::endl;
+			char content;
+			std::ifstream currentInput;
+			currentInput.open(methodNames.front());
+			outFile << "#";
+			while(!currentInput.eof()) { currentInput.get(content); outFile << content; }
+			currentInput.close();
+			methodNames.pop_front();
+		}
 		outFile.close();
+		
 	}
+}
+
+void decl_procedure(char identifier[]) {
+    std::string fileName = std::string(identifier);
+    prodOutFileTemp.open(fileName + ".asm");
+    prodOutFile = &prodOutFileTemp;
+	std::cout << "Pushing new outFile" << std::endl;
+    methodFiles.push(prodOutFile);
+	methodNames.push_front(fileName + ".asm");
 }
 
 void printSymbolTable() {
